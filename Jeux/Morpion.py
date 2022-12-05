@@ -331,15 +331,35 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     print("33")
                 
                 elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "6"
-
+                    choice = "5"
+                elif (cases[7-1] == "X"):
+                    if cases[6-1] == "O" and cases[1-1] == ".":
+                        choice = "1"
+                    elif cases[7-1] == "." : choice = "7"
                 elif (cases[1-1] == "X"):
                     if cases[3-1] == ".":
-                        choice = "3"
-                    elif cases[3-1] == "O":
+                        choice = "6"
+                    elif cases[3-1] == "O" and cases[6] == ".":
                         choice = "7"
-                else: 
-                    choice = str(random.randint(1,9))
+                elif cases[0] == ".":
+                    choice = "1"
+                elif cases[1] == ".":
+                    choice = "2"
+                elif cases[2] == ".":
+                    choice = "3"
+                elif cases[3] == ".":
+                    choice = "4"
+                elif cases[4] == ".":
+                    choice = "5"
+                elif cases[5] == ".":
+                    choice = "6"
+                elif cases[6] == ".":
+                    choice = "7"
+                elif cases[7] == ".":
+                    choice = "8"
+                elif cases[8] == ".":
+                    choice = "9"
+                
             #vérifie la valeur de l'utilisateur
             if(not choice.isdigit()):print("Valeur impossible")
             elif(int(choice) < 1 or int(choice) > 9):print("Valeur impossible")
