@@ -3,7 +3,7 @@ import Jeux.Morpion as Morpion
 import Jeux.Allumettes as Allumettes
 import Jeux.P4 as P4
 import Jeux.Devinette as Devinette
-from Classes.Joueur import joueurqdjbnaefb
+from Classes.Joueur import joueur
 
 #----------------------------------------
 #Récupère dans le fichier donné en entrée les joueurs et en fait un liste
