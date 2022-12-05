@@ -242,7 +242,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
             #demande le choix de l'utilisateur
             if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
             else:
-
+                #Lignes 1-2-3
                 if cases[7-1] == cases[4-1] and cases[7-1] != "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
                     choice = "1"
                     print("2bas")
@@ -253,6 +253,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     choice = "3"
                     print("2")
 
+                #Lignes 4-5-6
                 elif cases[7-1] == cases[1-1] and cases[1-1] != "." and cases[4-1] == "." and not cases[4-1] == "X" and not cases[4-1] == "O":
                     choice = "4"
                     print("77")
@@ -263,6 +264,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     choice = "6"
                     print("11")
                 
+                #Lignes 7-8-9
                 elif cases[4-1] == cases[1-1] and cases[1-1] != "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
                     choice = "7"
                     print("99")
@@ -273,6 +275,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     choice = "9"
                     print("33")
 
+                #Colonnes 8-5-2
                 elif cases[7-1] == cases[9-1] and cases[7-1] != "." and cases[8-1] == "." and not cases[8-1] == "X" and not cases[8-1] == "O":
                     choice = "8"
                     print("8")
@@ -283,6 +286,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     choice = "2"
                     print("2")
 
+                #Colonnes 7-4-1
                 elif cases[8-1] == cases[9-1] and cases[9-1] != "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
                     choice = "7"
                     print("77")
@@ -293,6 +297,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     choice = "1"
                     print("11")
                 
+                #Colonnes 9-6-3
                 elif cases[7-1] == cases[8-1] and cases[8-1] != "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
                     choice = "9"
                     print("99")
@@ -303,6 +308,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     choice = "3"
                     print("33")
                 
+                #Diagonales 7-5-3
                 elif cases[7-1] == cases[5-1] and not cases[5-1] == "." and cases[3-1] == "." and not cases[3-1] == "X" and not cases[3-1] == "O":
                     choice = "3"
                     print("33")
@@ -313,7 +319,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                     choice = "7"
                     print("33")
 
-
+                #Diagonales 1-5-9
                 elif cases[9-1] == cases[5-1] and not cases[5-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
                     choice = "1"
                     print("33")
@@ -323,8 +329,10 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                 elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
                     choice = "9"
                     print("33")
+                
                 elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
                     choice = "6"
+
                 elif (cases[1-1] == "X"):
                     if cases[3-1] == ".":
                         choice = "3"
