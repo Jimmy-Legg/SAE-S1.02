@@ -242,8 +242,17 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
             #demande le choix de l'utilisateur
             if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
             else:
+                if cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+                    choice = "7"
+                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+                    choice = "3"
+                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+                    choice = "3"
+                elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+                    choice = "3"
+
                 #Lignes 1-2-3
-                if cases[7-1] == cases[4-1] and cases[7-1] != "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
+                elif cases[7-1] == cases[4-1] and cases[7-1] != "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
                     choice = "1"
                 elif cases[8-1] == cases[5-1] and cases[5-1] != "." and cases[2-1] == "." and not cases[2-1] == "X" and not cases[2-1] == "O":
                     choice = "2"
@@ -306,25 +315,8 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
                 elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
                     choice = "9"
                 
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "." and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "X" and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "X" and cases[8] == ".":
-                    choice = "5"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
-                    choice = "5"
-                
+
+
                 elif cases[0] == "." and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
                     choice = "7"
 
