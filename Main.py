@@ -116,16 +116,17 @@ def getPlayerData()->list[str]:
 def __afficher_menu_1():
 
     os.system("cls")
-    print("---------------------")
-    print("     Bienvenue !     ")
-    print("                     ")
-    print("  1 - Jouer          ")
-    print("  2 - Scores         ")
-    print("  3 - Règles         ")
-    print("                     ")
-    print("  4 - Quitter        ")
-    print("                     ")
-    print("---------------------")
+    print("------------------------")
+    print("     Bienvenue !        ")
+    print("                        ")
+    print("  1 - Jouer             ")
+    print("  2 - Scores            ")
+    print("  3 - Règles            ")
+    print("  4 - Modifier Joueurs  ")
+    print("                        ")
+    print("  5 - Quitter           ")
+    print("                        ")
+    print("------------------------")
 
 #----------------------------------------
 #Affiche le menu numéro 2
@@ -380,7 +381,7 @@ if __name__ == "__main__":
     R  = '\033[91m' # red
     W  = '\033[0m'  # white (normal)
 
-    #demande les noms des joueurs
+    #demande les infos sur les joueurs
     data = getPlayerData()
 
     nb_humans = int(data[0])
@@ -494,6 +495,14 @@ if __name__ == "__main__":
                             os.system("pause")
 
             case "4":
+                data = getPlayerData()
+
+                nb_humans = int(data[0])
+                j1_name = data[1]
+                j2_name = data[2]
+                difficulty = int(data[3])
+
+            case "5":
                 WantToQuit = True
 
             case other:
