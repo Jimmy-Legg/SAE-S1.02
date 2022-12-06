@@ -192,45 +192,18 @@ def __affichageFin(cases : list[str], winType : int):
     print(mot)
 
     print("---------------------------------------------")
-
+def checkifwin(cases : list):
+    choice : str
+    choice = ""
+    
 def bot_difficulte3(cases : list):
     choice : str
     liste = ["1","3","7","9"]
     choice = ""
-    os.system('pause')
     #si joue sur la diagonal op
+    choice = str(checkifwin(cases))
     if cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
         choice = str(random.choice(liste))
-
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
-        choice = "3"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == "X":
-        choice = "3"
-    elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
-        choice = "3"
-
-    elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
-        choice = "9"
-    elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "9"
-    elif cases[0] == "O" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "9"
-
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "O":
-        choice = "1"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
-        choice = "1"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
-        choice = "1"
-
-    elif cases[0] == "X" and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "7"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "7"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
-        choice = "7"
-    
-    
     #Lignes 1-2-3
     if cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
         choice = "1"
@@ -287,6 +260,35 @@ def bot_difficulte3(cases : list):
         choice = "5"
     elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
         choice = "9"
+
+
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
+        choice = "3"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == "X":
+        choice = "3"
+    elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
+        choice = "3"
+
+    elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
+        choice = "9"
+    elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "9"
+    elif cases[0] == "O" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "9"
+
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "O":
+        choice = "1"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
+        choice = "1"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
+        choice = "1"
+
+    elif cases[0] == "X" and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "7"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "7"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+        choice = "7"
     else: choice = str(random.randint(1,9))
     return str(choice)
 def bot_difficulte2(cases : list):
@@ -348,7 +350,8 @@ def bot_difficulte2(cases : list):
         choice = "5"
     elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
         choice = "9"
-    elif cases[0] == ".":
+        
+    if cases[0] == ".":
         choice = "1"
     elif cases[1] == ".":
         choice = "2"
