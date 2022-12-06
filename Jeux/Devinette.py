@@ -51,31 +51,28 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
     temps : float
     tempsTotal : float
     nombre : int
+    choixPrecedents : list[str]
+
+    choixPrecedents = []
 
     tempsTotal = 0
 
     W  = '\033[0m'  # white (normal)
-    R  = '\033[91m' # r
-    O  = '\033[93m' # yellow
-    P  = '\033[95m' # purple
     G  = '\033[92m' # green
 
-    os.system("cls")
-    print(couleur + j_name + " commence a jouer :")
-    time.sleep(1.5)
     os.system("cls")
 
     temps = time.time()
 
-    print("-----------------------------------")
-    print(couleur + j_name + W + " à vous de jouer !")
-    print("-----------------------------------")
+    print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
 
     if(difficulty == 1): time.sleep(random.random() * 3 + 1)
     elif(difficulty == 2): time.sleep(random.random() * 2 + 1)
-    elif(difficulty == 3): time.sleep(random.random() * 1.5 + 1)
+    else: time.sleep(random.random() * 1.5 + 1)
+
     nombre = random.randint(mini, maxi)
     choix = str(nombre)
+    choixPrecedents.append(choix)
 
     if(not int(choix) == nombre_a_trouver):
 
@@ -88,28 +85,28 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
             time.sleep(2)
         temps = time.time()
 
-        os.system("cls")
-        print("-----------------------------------")
-        print(couleur + j_name + W + " à vous de jouer !")
-        print("-----------------------------------")
-
     while nombre != nombre_a_trouver:
 
         if(nombre > nombre_a_trouver):
 
-            print("Nombre entre " + O + str(mini) + W + " et " + P + str(maxi) + W + " : ")
-            print(couleur1 + p_name + W + " dit que c'est un nombre plus " + O + "petit " + W + "que " + G + str(nombre) + W + " : ")
-            print()
-            print(couleur + j_name + W + " est en train de jouer ...")
+            choix = str(random.randint(mini, nombre - 1))
+            while choix in choixPrecedents:
+                choix = str(random.randint(mini, nombre - 1))
+
+            print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
+            time.sleep(random.random() * 4 + 2)
 
         elif(nombre < nombre_a_trouver):
 
-            print("Nombre entre " + O + str(mini) + W + " et " + P + str(maxi) + W + " : ")
-            print(couleur1 + p_name + W + " dit que c'est un nombre plus " + P + "grand " + W + "que " + G + str(nombre) + W + " : ")
-            print()
-            print(couleur + j_name + W + " est en train de jouer ...")
+            choix = str(random.randint(nombre - 1, maxi))
+            while choix in choixPrecedents:
+                choix = str(random.randint(nombre - 1, maxi))
+
+            print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
+            time.sleep(random.random() * 4 + 2)
 
         nombre = int(choix)
+        choixPrecedents.append(choix)
         tempsTotal += time.time() - temps
 
         if playAgainstHuman:
@@ -120,18 +117,13 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
             time.sleep(2)
 
         temps = time.time()
-        if(not int(choix) == nombre_a_trouver):
-            os.system("cls")
-            print("-----------------------------------")
-            print(couleur + j_name + W + " à vous de jouer !")
-            print("-----------------------------------")
-
 
     tempsTotal += time.time() - temps
     if(playAgainstHuman):__AskVerification(3, int(choix))
     else:
         print(couleur1 + p_name + W + " est en train de vérifier la valeur ...")
         time.sleep(2)
+        os.system("cls")
     print("-----------------------------------")
     print(couleur + j_name + W + " à trouvé le nombre " + G + str(nombre_a_trouver) + W + " en " + str(tempsTotal) + " secondes")
     print("-----------------------------------")
@@ -139,7 +131,7 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
 
     return tempsTotal
 
-def __LaunchTurn(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name : str, p_name : str, mini:int, maxi:int)->float:
+def __LaunchTurn(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name : str, p_name : str, mini:int, maxi:int, nb_humans : int)->float:
 
     choix : str
     temps : float
@@ -188,8 +180,9 @@ def __LaunchTurn(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name :
     if(not int(choix) == nombre_a_trouver):
 
         tempsTotal += time.time() - temps
-        if(int(choix) > nombre_a_trouver): __AskVerification(2, int(choix))
-        elif(int(choix) < nombre_a_trouver): __AskVerification(1, int(choix))
+        if(nb_humans == 2):
+            if(int(choix) > nombre_a_trouver): __AskVerification(2, int(choix))
+            elif(int(choix) < nombre_a_trouver): __AskVerification(1, int(choix))
         temps = time.time()
 
         os.system("cls")
@@ -223,8 +216,9 @@ def __LaunchTurn(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name :
             nombre = int(choix)
 
             tempsTotal += time.time() - temps
-            if(int(choix) > nombre_a_trouver): __AskVerification(2, int(choix))
-            elif(int(choix) < nombre_a_trouver): __AskVerification(1, int(choix))
+            if(nb_humans == 2):
+                if(int(choix) > nombre_a_trouver): __AskVerification(2, int(choix))
+                elif(int(choix) < nombre_a_trouver): __AskVerification(1, int(choix))
             temps = time.time()
 
             if(not int(choix) == nombre_a_trouver):
@@ -235,7 +229,8 @@ def __LaunchTurn(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name :
 
 
     tempsTotal += time.time() - temps
-    __AskVerification(3, int(choix))
+    if(nb_humans == 2):__AskVerification(3, int(choix))
+    else: os.system("cls")
     print("-----------------------------------")
     print(G + "Trouvé ! " + W + "Le nombre était bien : " + G + str(nombre_a_trouver) + W)
     print("-----------------------------------")
@@ -445,11 +440,11 @@ def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficu
     if(nb_humans == 2):
         nombre_a_trouver = __askNombreATrouver(B, j1_name, mini, maxi)
 
-        temps2 = __LaunchTurn(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi)
+        temps2 = __LaunchTurn(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, nb_humans)
 
         nombre_a_trouver = __askNombreATrouver(R, j2_name, mini, maxi)
 
-        temps1 = __LaunchTurn(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi)
+        temps1 = __LaunchTurn(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, nb_humans)
 
     elif(nb_humans == 1):
         nombre_a_trouver = __askNombreATrouver(B, j1_name, mini, maxi)
@@ -458,13 +453,14 @@ def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficu
 
         nombre_a_trouver = __askBotNombreATrouver(R, j2_name, mini, maxi)
 
-        temps1 = __LaunchTurnBot(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, difficulty, True)
+        temps1 = __LaunchTurn(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, nb_humans)
     else:
         nombre_a_trouver = __askBotNombreATrouver(B, j1_name, mini, maxi)
 
         temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty, False)
 
         nombre_a_trouver = __askBotNombreATrouver(R, j2_name, mini, maxi)
+
 
         temps1 = __LaunchTurnBot(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, difficulty, False)
 
