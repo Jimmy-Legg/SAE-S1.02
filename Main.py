@@ -414,7 +414,7 @@ if __name__ == "__main__":
                     match choice:
 
                         case "1":
-                            winner = Devinette.LaunchGame_devinettes(j1_name,j2_name)
+                            winner = Devinette.LaunchGame_devinettes(j1_name,j2_name, nb_humans, difficulty)
                             if(not winner == ""): __ajouterScore(winner, "devinette", listJoueurs)
 
                         case "2":
@@ -422,11 +422,13 @@ if __name__ == "__main__":
                             if(not winner == ""): __ajouterScore(winner, "allumettes", listJoueurs)
 
                         case "3":
-                            winner = Morpion.LaunchGame_morpion(j1_name, j2_name, nb_humans)
+                            winner = Morpion.LaunchGame_morpion(j1_name, j2_name)
                             if(not winner == ""): __ajouterScore(winner, "morpion", listJoueurs)
 
                         case "4":
+
                             winner = P4.LaunchGame_puissance4(j1_name, j2_name, nb_humans, difficulty)
+
                             if(not winner == ""): __ajouterScore(winner, "puissance4", listJoueurs)
 
                         case "5":
