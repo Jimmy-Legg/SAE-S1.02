@@ -439,4 +439,3 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int)->str:
 
     #Retour
     return winner
-LaunchGame_morpion("jimmy","Rob",1)
