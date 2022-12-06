@@ -438,6 +438,6 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int)->str:
         winner = j2_name
 
     #Retour
-    if nb_joueurs == 2
+    if nb_joueurs == 2:
         return winner
 LaunchGame_morpion("jimmy","Rob",1)
