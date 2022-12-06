@@ -245,7 +245,7 @@ def bot(j1_name : str,turn : int, cases : list):
         elif cases[0] == "O" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
             choice = "9"
         elif cases[0] == "X" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
-            choice = "9" 
+            choice = "8" 
 
         #joue à coté
         
@@ -438,4 +438,6 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int)->str:
         winner = j2_name
 
     #Retour
-    return winner
+    if nb_joueurs == 2
+        return winner
+LaunchGame_morpion("jimmy","Rob",1)
