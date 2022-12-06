@@ -193,6 +193,155 @@ def __affichageFin(cases : list[str], winType : int):
 
     print("---------------------------------------------")
 
+def bot(j1_name : str,turn : int, cases : list):
+    liste:list
+    choice : str
+
+    W  = '\033[0m'  # white (normal)
+    R  = '\033[91m' # red
+    B  = '\033[94m' # blue
+
+    liste = ["1","3","5","7","9"]
+    if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
+    else:     
+        #si joue sur la diagonal op
+        if cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = str(random.choice(liste))
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
+            choice = "3"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == "X":
+            choice = "3"
+        elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
+            choice = "3"
+        elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
+            choice = "3"
+
+        elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
+            choice = "9"
+        elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "9"
+        elif cases[0] == "O" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "9"
+                    
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "O":
+            choice = "1"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
+                choice = "1"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
+            choice = "1"
+                    
+        elif cases[0] == "X" and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "7"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "7"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+            choice = "7"
+
+        #joue à coté
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "X" and cases[8] == ".":
+            choice = "5"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
+            choice = "5"
+
+        elif cases[0] == "O" and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "5"
+        elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "5"
+        
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "X" and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "5"
+        elif cases[0] == "." and cases[1] == "X" and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "5"
+        
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "X" and cases[8] == "O":
+            choice = "5"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "O":
+            choice = "5"
+        
+        
+
+        #Lignes 1-2-3
+        elif cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
+            choice = "1"
+        elif cases[8-1] == cases[5-1] and not cases[5-1] == "." and cases[2-1] == "." and not cases[2-1] == "X" and not cases[2-1] == "O":
+            choice = "2"
+        elif cases[9-1] == cases[6-1] and not cases[6-1] == "." and cases[3-1] == "." and not cases[3-1] == "X" and not cases[3-1] == "O":
+            choice = "3"
+
+        #Lignes 4-5-6
+        elif cases[7-1] == cases[1-1] and not cases[1-1] == "." and cases[4-1] == "." and not cases[4-1] == "X" and not cases[4-1] == "O":
+            choice = "4"
+        elif cases[8-1] == cases[2-1] and not cases[2-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
+            choice = "5"
+        elif cases[9-1] == cases[3-1] and not cases[3-1] == "." and cases[6-1] == "." and not cases[6-1] == "X" and not cases[6-1] == "O":
+            choice = "6"
+        
+        #Lignes 7-8-9
+        elif cases[4-1] == cases[1-1] and not cases[1-1] == "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
+            choice = "7"
+        elif cases[5-1] == cases[2-1] and not cases[5-1] == "." and cases[8-1] == "." and not cases[8-1] == "X" and not cases[8-1] == "O":
+            choice = "8"
+        elif cases[3-1] == cases[6-1] and not cases[6-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
+            choice = "9"
+
+        #Colonnes 8-5-2
+        elif cases[7-1] == cases[9-1] and not cases[7-1] == "." and cases[8-1] == "." and not cases[8-1] == "X" and not cases[8-1] == "O":
+            choice = "8"
+        elif cases[6-1] == cases[4-1] and not cases[6-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
+            choice = "5"
+        elif cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == "." and not cases[2-1] == "X" and not cases[2-1] == "O":
+            choice = "2"
+
+        #Colonnes 7-4-1
+        elif cases[8-1] == cases[9-1] and not cases[9-1] == "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
+            choice = "7"
+        elif cases[6-1] == cases[5-1] and not cases[5-1] == "." and cases[4-1] == "." and not cases[4-1] == "X" and not cases[4-1] == "O":
+            choice = "4"
+        elif cases[2-1] == cases[3-1] and not cases[2-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
+            choice = "1"
+        
+        #Colonnes 9-6-3
+        elif cases[7-1] == cases[8-1] and not cases[8-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
+            choice = "9"
+        elif cases[4-1] == cases[5-1] and not cases[5-1] == "." and cases[6-1] == "." and not cases[6-1] == "X" and not cases[6-1] == "O":
+            choice = "6"
+        elif cases[1-1] == cases[2-1] and not cases[2-1] == "." and cases[3-1] == "." and not cases[3-1] == "X" and not cases[3-1] == "O":
+            choice = "3"
+        
+        #Diagonales 7-5-3
+        elif cases[7-1] == cases[5-1] and not cases[5-1] == "." and cases[3-1] == "." and not cases[3-1] == "X" and not cases[3-1] == "O":
+            choice = "3"
+        elif cases[7-1] == cases[3-1] and not cases[3-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
+            choice = "5"
+        elif cases[5-1] == cases[3-1] and not cases[3-1] == "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
+            choice = "7"
+
+        #Diagonales 1-5-9
+        elif cases[9-1] == cases[5-1] and not cases[5-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
+            choice = "1"
+        elif cases[9-1] == cases[1-1] and not cases[1-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
+            choice = "5"
+        elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
+            choice = "9"
+        
+
+
+        elif cases[0] == "." and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "7"
+
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+            choice = "4"
+
+        elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+            choice = "3"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "O" and cases[7] == "X" and cases[8] == ".":
+            choice = "1"
+        elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "O" and cases[7] == "X" and cases[8] == ".":
+            choice = "1"
+        else:
+            choice = str(random.randint(1,9))
+    return str(choice)
+
 #----------------------------------------
 #Lance la partie de morpion et retourne le vainqueur de la partie
 #
@@ -200,7 +349,7 @@ def __affichageFin(cases : list[str], winType : int):
 #
 #Sortie : str
 #----------------------------------------
-def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
+def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int)->str:
 
     cases : list[str]
 
@@ -238,152 +387,15 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
 
             #affiche le menu
             __afficherMenu(j1_name, j2_name, cases)
-            liste = ["1","3","7","9"]
+            
             #demande le choix de l'utilisateur
-            if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
-            else:
-                #si joue sur la diagonal op
-                if cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = str(random.choice(liste))
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
-                    choice = "3"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == "X":
-                    choice = "3"
-                elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
-                    choice = "3"
-
-                elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
-                    choice = "9"
-                elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "9"
-                elif cases[0] == "O" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "9"
+            print(nb_joueurs)
+            if nb_joueurs == 2:
+                if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
+                else : choice = str(input(R + j2_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
+            elif nb_joueurs == 1:
+                choice = bot(j1_name,turn,cases)
                 
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "O":
-                    choice = "1"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
-                    choice = "1"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
-                    choice = "1"
-                
-                elif cases[0] == "X" and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "7"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "7"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
-                    choice = "7"
-
-                #joue à coté
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "X" and cases[8] == ".":
-                    choice = "4"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
-                    choice = "8"
-
-                elif cases[0] == "O" and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "4"
-                elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "2"
-                
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "X" and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "2"
-                elif cases[0] == "." and cases[1] == "X" and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "6"
-                
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "X" and cases[8] == "O":
-                    choice = "6"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "O":
-                    choice = "8"
-                
-                #autre joueur
-                elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "2"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "6"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
-                    choice = "8"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
-                    choice = "4"
-
-                #Lignes 1-2-3
-                elif cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
-                    choice = "1"
-                elif cases[8-1] == cases[5-1] and not cases[5-1] == "." and cases[2-1] == "." and not cases[2-1] == "X" and not cases[2-1] == "O":
-                    choice = "2"
-                elif cases[9-1] == cases[6-1] and not cases[6-1] == "." and cases[3-1] == "." and not cases[3-1] == "X" and not cases[3-1] == "O":
-                    choice = "3"
-
-                #Lignes 4-5-6
-                elif cases[7-1] == cases[1-1] and not cases[1-1] == "." and cases[4-1] == "." and not cases[4-1] == "X" and not cases[4-1] == "O":
-                    choice = "4"
-                elif cases[8-1] == cases[2-1] and not cases[2-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
-                    choice = "5"
-                elif cases[9-1] == cases[3-1] and not cases[3-1] == "." and cases[6-1] == "." and not cases[6-1] == "X" and not cases[6-1] == "O":
-                    choice = "6"
-                
-                #Lignes 7-8-9
-                elif cases[4-1] == cases[1-1] and not cases[1-1] == "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
-                    choice = "7"
-                elif cases[5-1] == cases[2-1] and not cases[5-1] == "." and cases[8-1] == "." and not cases[8-1] == "X" and not cases[8-1] == "O":
-                    choice = "8"
-                elif cases[3-1] == cases[6-1] and not cases[6-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
-                    choice = "9"
-
-                #Colonnes 8-5-2
-                elif cases[7-1] == cases[9-1] and not cases[7-1] == "." and cases[8-1] == "." and not cases[8-1] == "X" and not cases[8-1] == "O":
-                    choice = "8"
-                elif cases[6-1] == cases[4-1] and not cases[6-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
-                    choice = "5"
-                elif cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == "." and not cases[2-1] == "X" and not cases[2-1] == "O":
-                    choice = "2"
-
-                #Colonnes 7-4-1
-                elif cases[8-1] == cases[9-1] and not cases[9-1] == "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
-                    choice = "7"
-                elif cases[6-1] == cases[5-1] and not cases[5-1] == "." and cases[4-1] == "." and not cases[4-1] == "X" and not cases[4-1] == "O":
-                    choice = "4"
-                elif cases[2-1] == cases[3-1] and not cases[2-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
-                    choice = "1"
-                
-                #Colonnes 9-6-3
-                elif cases[7-1] == cases[8-1] and not cases[8-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
-                    choice = "9"
-                elif cases[4-1] == cases[5-1] and not cases[5-1] == "." and cases[6-1] == "." and not cases[6-1] == "X" and not cases[6-1] == "O":
-                    choice = "6"
-                elif cases[1-1] == cases[2-1] and not cases[2-1] == "." and cases[3-1] == "." and not cases[3-1] == "X" and not cases[3-1] == "O":
-                    choice = "3"
-                
-                #Diagonales 7-5-3
-                elif cases[7-1] == cases[5-1] and not cases[5-1] == "." and cases[3-1] == "." and not cases[3-1] == "X" and not cases[3-1] == "O":
-                    choice = "3"
-                elif cases[7-1] == cases[3-1] and not cases[3-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
-                    choice = "5"
-                elif cases[5-1] == cases[3-1] and not cases[3-1] == "." and cases[7-1] == "." and not cases[7-1] == "X" and not cases[7-1] == "O":
-                    choice = "7"
-
-                #Diagonales 1-5-9
-                elif cases[9-1] == cases[5-1] and not cases[5-1] == "." and cases[1-1] == "." and not cases[1-1] == "X" and not cases[1-1] == "O":
-                    choice = "1"
-                elif cases[9-1] == cases[1-1] and not cases[1-1] == "." and cases[5-1] == "." and not cases[5-1] == "X" and not cases[5-1] == "O":
-                    choice = "5"
-                elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
-                    choice = "9"
-                
-
-
-                elif cases[0] == "." and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "7"
-
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-                    choice = "4"
-
-                elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
-                    choice = "3"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "O" and cases[7] == "X" and cases[8] == ".":
-                    choice = "1"
-                elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "O" and cases[7] == "X" and cases[8] == ".":
-                    choice = "1"
-                else:
-                    choice = str(random.randint(1,9))
             #vérifie la valeur de l'utilisateur
             if(not choice.isdigit()):print("Valeur impossible")
             elif(int(choice) < 1 or int(choice) > 9):print("Valeur impossible")
@@ -436,4 +448,4 @@ def LaunchGame_morpion(j1_name : str, j2_name : str)->str:
 
     #Retour
     return winner
-LaunchGame_morpion("jimmy","Rob")
+LaunchGame_morpion("jimmy","Rob",2)
