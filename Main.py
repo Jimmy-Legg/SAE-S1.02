@@ -69,14 +69,16 @@ def getPlayerData()->list[str]:
         elif(choice == "2") : data.append("1")
         elif(choice == "3") : data.append("2")
         else:
-            print("Choix impossible !")
+            print(R + "Choix impossible !" + W)
             os.system("pause")
 
+    os.system("cls")
     if(data[0] == "0"): data.append(input("Choisissez le nom du " + B + "premier bot" + W + " : "))
     else: data.append(input("Choisissez le nom du " + B + "joueur 1" + W + " : "))
 
+    os.system("cls")
     if(data[0] == "0"): data.append(input("Choisissez le nom du" + R + " second bot" + W + " : "))
-    elif(data[0] == "0"): data.append(input("Choisissez le nom" + R + " du bot" + W + " : "))
+    elif(data[0] == "1"): data.append(input("Choisissez le nom" + R + " du bot" + W + " : "))
     else: data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
 
     choice = ""
@@ -97,7 +99,7 @@ def getPlayerData()->list[str]:
         elif(choice == "2") : data.append("2")
         elif(choice == "3") : data.append("3")
         else:
-            print("Choix impossible !")
+            print(R + "Choix impossible !" + W)
             os.system("pause")
 
     return data
@@ -120,6 +122,7 @@ def __afficher_menu_1():
     print("  1 - Jouer          ")
     print("  2 - Scores         ")
     print("  3 - Règles         ")
+    print("                     ")
     print("  4 - Quitter        ")
     print("                     ")
     print("---------------------")
@@ -418,11 +421,11 @@ if __name__ == "__main__":
                             if(not winner == ""): __ajouterScore(winner, "allumettes", listJoueurs)
 
                         case "3":
-                            winner = Morpion.LaunchGame_morpion(j1_name, j2_name)
+                            winner = Morpion.LaunchGame_morpion(j1_name, j2_name, nb_humans)
                             if(not winner == ""): __ajouterScore(winner, "morpion", listJoueurs)
 
                         case "4":
-                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, 2)
+                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, nb_humans)
                             if(not winner == ""): __ajouterScore(winner, "puissance4", listJoueurs)
 
                         case "5":
