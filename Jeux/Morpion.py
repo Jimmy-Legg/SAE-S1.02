@@ -213,8 +213,6 @@ def bot(j1_name : str,turn : int, cases : list):
             choice = "3"
         elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
             choice = "3"
-        elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
-            choice = "3"
 
         elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
             choice = "9"
@@ -237,26 +235,19 @@ def bot(j1_name : str,turn : int, cases : list):
         elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
             choice = "7"
 
-        #joue à coté
-        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "X" and cases[8] == ".":
-            choice = "5"
-        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
-            choice = "5"
+        elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+            choice = "2"
 
-        elif cases[0] == "O" and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-            choice = "5"
-        elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-            choice = "5"
-        
-        elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "X" and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-            choice = "5"
-        elif cases[0] == "." and cases[1] == "X" and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-            choice = "5"
-        
-        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "X" and cases[8] == "O":
-            choice = "5"
-        elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "O":
-            choice = "5"
+        elif cases[0] == "X" and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
+            choice = "9"
+        elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == "X":
+            choice = "3"
+        elif cases[0] == "O" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+            choice = "9"
+        elif cases[0] == "X" and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
+            choice = "9" 
+
+        #joue à coté
         
         
 
@@ -448,4 +439,4 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int)->str:
 
     #Retour
     return winner
-LaunchGame_morpion("jimmy","Rob",2)
+LaunchGame_morpion("jimmy","Rob",1)
