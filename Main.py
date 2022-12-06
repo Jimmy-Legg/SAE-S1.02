@@ -422,7 +422,7 @@ if __name__ == "__main__":
                             if(not winner == ""): __ajouterScore(winner, "allumettes", listJoueurs)
 
                         case "3":
-                            winner = Morpion.LaunchGame_morpion(j1_name, j2_name,1,3)
+                            winner = Morpion.LaunchGame_morpion(j1_name, j2_name,nb_humans,difficulty)
                             if(not winner == ""): __ajouterScore(winner, "morpion", listJoueurs)
 
                         case "4":

@@ -350,7 +350,7 @@ def bot_difficulte2(cases : list):
         choice = "5"
     elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." and not cases[9-1] == "X" and not cases[9-1] == "O":
         choice = "9"
-        
+
     if cases[0] == ".":
         choice = "1"
     elif cases[1] == ".":
@@ -492,5 +492,3 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult√
         winner = j2_name
 
     #Retour
-    if nb_joueurs == 2:
-        return winner
