@@ -53,6 +53,7 @@ def __afficher_menu_1():
     print("  4 - Quitter        ")
     print("                     ")
     print("---------------------")
+    print("---------------------")
 
 #----------------------------------------
 #Affiche le menu numéro 2
@@ -345,7 +346,7 @@ if __name__ == "__main__":
                             if(not winner == ""): __ajouterScore(winner, "morpion", listJoueurs)
 
                         case "4":
-                            winner = P4.LaunchGame_puissance4(j1_name, j2_name)
+                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, 2)
                             if(not winner == ""): __ajouterScore(winner, "puissance4", listJoueurs)
 
                         case "5":
