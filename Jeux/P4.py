@@ -575,7 +575,7 @@ def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol 
     if(difficulty == 1):
         choice = completeFourLine(cases, mySymbol)
         if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
-        if(choice == 0): choice = putRandom(cases)
+        if(choice == 0): choice = random.randint(1,7)
 
     if(difficulty == 2):
         choice = completeFourLine(cases, mySymbol)
