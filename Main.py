@@ -55,52 +55,66 @@ def getPlayerData()->list[str]:
     while choice not in ["1","2","3"]:
 
         os.system("cls")
-        print("---------------------")
-        print("     Bienvenue !     ")
-        print("                     ")
-        print("  1 - 2 Bots         ")
-        print("  2 - 1 joueur       ")
-        print("  3 - 2 joueurs      ")
-        print("                     ")
-        print("---------------------")
+        print("-----------------------")
+        print("      Bienvenue !      ")
+        print("                       ")
+        print("  1 - Joueur VS Joueur ")
+        print("  2 - Joueur VS IA     ")
+        print("  3 - IA VS IA         ")
+        print("                       ")
+        print("-----------------------")
         choice = input("Choisissez qui seront les joueurs : ")
 
-        if(choice == "1") : data.append("0")
+        if(choice == "1") : data.append("2")
         elif(choice == "2") : data.append("1")
-        elif(choice == "3") : data.append("2")
+        elif(choice == "3") : data.append("0")
         else:
             print(R + "Choix impossible !" + W)
             os.system("pause")
 
+    if(int(choice) > 1):
+        choice = ""
+        while choice not in ["1","2","3"]:
+
+            os.system("cls")
+            print("---------------------")
+            print("     Difficulté :    ")
+            print("                     ")
+            print("  1 - Facile         ")
+            print("  2 - Moyen          ")
+            print("  3 - Difficile      ")
+            print("                     ")
+            print("---------------------")
+            choice = input("Choisissez la difficulté : ")
+
+            if(choice == "1") : data.append("1")
+            elif(choice == "2") : data.append("2")
+            elif(choice == "3") : data.append("3")
+            else:
+                print(R + "Choix impossible !" + W)
+                os.system("pause")
+
     os.system("cls")
-    if(data[0] == "0"): data.append(input("Choisissez le nom du " + B + "premier bot" + W + " : "))
+    if(data[0] == "0"):
+        if(data[1] == "1"): data.append("Zamite")
+        if(data[1] == "2"): data.append("Rajang")
+        if(data[1] == "3"): data.append("Kirin")
+
+        print("Le bot 1 s'appellera " + B + data[2] + W)
+        os.system("pause")
     else: data.append(input("Choisissez le nom du " + B + "joueur 1" + W + " : "))
 
     os.system("cls")
-    if(data[0] == "0"): data.append(input("Choisissez le nom du" + R + " second bot" + W + " : "))
-    elif(data[0] == "1"): data.append(input("Choisissez le nom" + R + " du bot" + W + " : "))
+    if(data[0] == "0" or data[0] == "1"):
+        if(data[1] == "1"): data.append("Najarala")
+        if(data[1] == "2"): data.append("Akantor")
+        if(data[1] == "3"): data.append("Nerscylla")
+
+        if(data[0] == "0"): print("Le bot 2 s'appellera " + R + data[3] + W)
+        if(data[0] == "1"): print("Le bot s'appellera " + R + data[3] + W)
+        os.system("pause")
+
     else: data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
-
-    choice = ""
-    while choice not in ["1","2","3"]:
-
-        os.system("cls")
-        print("---------------------")
-        print("     Difficulté :    ")
-        print("                     ")
-        print("  1 - Facile         ")
-        print("  2 - Moyen          ")
-        print("  3 - Difficile      ")
-        print("                     ")
-        print("---------------------")
-        choice = input("Choisissez qui seront les joueurs : ")
-
-        if(choice == "1") : data.append("1")
-        elif(choice == "2") : data.append("2")
-        elif(choice == "3") : data.append("3")
-        else:
-            print(R + "Choix impossible !" + W)
-            os.system("pause")
 
     return data
 
@@ -385,9 +399,9 @@ if __name__ == "__main__":
     data = getPlayerData()
 
     nb_humans = int(data[0])
-    j1_name = data[1]
-    j2_name = data[2]
-    difficulty = int(data[3])
+    difficulty = int(data[1])
+    j1_name = data[2]
+    j2_name = data[3]
 
 
     listJoueurs = __getJoueurs("./Scores/playersData.txt")

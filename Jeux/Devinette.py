@@ -59,6 +59,7 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
 
     W  = '\033[0m'  # white (normal)
     G  = '\033[92m' # green
+    O  = '\033[93m' # yellow
 
     os.system("cls")
 
@@ -81,6 +82,8 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
             if(int(choix) > nombre_a_trouver): __AskVerification(2, int(choix))
             elif(int(choix) < nombre_a_trouver): __AskVerification(1, int(choix))
         else:
+            os.system("cls")
+            print(couleur + j_name + W + " propose la valeur : " + O + choix)
             print(couleur1 + p_name + W + " est en train de vérifier la valeur ...")
             time.sleep(2)
         temps = time.time()
@@ -92,7 +95,8 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
             choix = str(random.randint(mini, nombre - 1))
             while choix in choixPrecedents:
                 choix = str(random.randint(mini, nombre - 1))
-
+            os.system("cls")
+            print(couleur1 + p_name + W + " dit que c'est un nombre plus petit que " + O + str(nombre) + W + " : ")
             print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
             time.sleep(random.random() * 4 + 2)
 
@@ -101,7 +105,8 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
             choix = str(random.randint(nombre - 1, maxi))
             while choix in choixPrecedents:
                 choix = str(random.randint(nombre - 1, maxi))
-
+            os.system("cls")
+            print(couleur1 + p_name + W + " dit que c'est un nombre plus grand que " + O + str(nombre) + W + " : ")
             print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
             time.sleep(random.random() * 4 + 2)
 
@@ -113,6 +118,8 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
             if(int(choix) > nombre_a_trouver): __AskVerification(2, int(choix))
             elif(int(choix) < nombre_a_trouver): __AskVerification(1, int(choix))
         else:
+            os.system("cls")
+            print(couleur + j_name + W + " propose la valeur : " + O + choix)
             print(couleur1 + p_name + W + " est en train de vérifier la valeur ...")
             time.sleep(2)
 
@@ -121,6 +128,8 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
     tempsTotal += time.time() - temps
     if(playAgainstHuman):__AskVerification(3, int(choix))
     else:
+        os.system("cls")
+        print(couleur + j_name + W + " propose la valeur : " + O + choix)
         print(couleur1 + p_name + W + " est en train de vérifier la valeur ...")
         time.sleep(2)
         os.system("cls")

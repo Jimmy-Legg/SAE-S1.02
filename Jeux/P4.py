@@ -339,7 +339,7 @@ def makeWinningPatterns(cases : list[list[str]])->int:
 
     return 0
 
-def makeAThreeLine(cases : list[list[str]], symbol : str)->int:
+def makeAThreeLine(cases : list[list[str]], symbol : str, oponentSymbol : str)->int:
 
     for i in range(1,4):
         for j in range(0,7):
@@ -364,7 +364,7 @@ def makeAThreeLine(cases : list[list[str]], symbol : str)->int:
             elif(cases[i+3][j] != "."): isBlocked +=1
             elif(cases[i+3][j] and i+3 == 6 or cases[i+4][j] != "."):canPut += 1
 
-            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, j+1)):
+            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, j+1, oponentSymbol)):
                 return j+1
 
 #check the possibility to win with horizontals lines
@@ -400,7 +400,7 @@ def makeAThreeLine(cases : list[list[str]], symbol : str)->int:
                 canPut += 1
                 choice = j+4
 
-            if(isBlocked == 0 and isPut == 2 and canPut >= 1 and not isASuicideMove(cases, choice)):
+            if(isBlocked == 0 and isPut == 2 and canPut >= 1 and not isASuicideMove(cases, choice, oponentSymbol)):
                 return choice
 
     for i in range(1,4):
@@ -435,7 +435,7 @@ def makeAThreeLine(cases : list[list[str]], symbol : str)->int:
                 canPut += 1
                 choice = j+4
 
-            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, choice)):
+            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, choice, oponentSymbol)):
                 return choice
 
     for i in range(4,7):
@@ -470,12 +470,12 @@ def makeAThreeLine(cases : list[list[str]], symbol : str)->int:
                 canPut += 1
                 choice = j+4
 
-            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, choice)):
+            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, choice, oponentSymbol)):
                 return choice
 
     return 0
 
-def isASuicideMove(cases : list[list[str]], choice : int):
+def isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str):
 
     column = choice - 1
 
@@ -501,13 +501,13 @@ def isASuicideMove(cases : list[list[str]], choice : int):
 
             isPut = 0
 
-            if(line - 1 - j < 7 and column + j >= 0 and cases[line - 1 - j][column + j] == "0"): isPut += 1
+            if(line - 1 - j < 7 and column + j >= 0 and cases[line - 1 - j][column + j] == oponentSymbol): isPut += 1
 
-            if(line - 1 - j - 1 > 0 and line - 1 - j - 1 < 7 and column + j + 1 >= 0 and column + j + 1 < 7 and cases[line - 1 - j - 1][column + j + 1] == "0"): isPut += 1
+            if(line - 1 - j - 1 > 0 and line - 1 - j - 1 < 7 and column + j + 1 >= 0 and column + j + 1 < 7 and cases[line - 1 - j - 1][column + j + 1] == oponentSymbol): isPut += 1
 
-            if(line - 1 - j - 2 > 0 and line - 1 - j - 2 < 7 and column + j + 2 >= 0 and column + j + 2 < 7 and cases[line - 1 - j - 2][column + j + 2] == "0"): isPut += 1
+            if(line - 1 - j - 2 > 0 and line - 1 - j - 2 < 7 and column + j + 2 >= 0 and column + j + 2 < 7 and cases[line - 1 - j - 2][column + j + 2] == oponentSymbol): isPut += 1
 
-            if(line - 1 - j - 3 > 0 and column + j + 3 < 7 and cases[line - 1 - j - 3][column + j + 3] == "0"): isPut += 1
+            if(line - 1 - j - 3 > 0 and column + j + 3 < 7 and cases[line - 1 - j - 3][column + j + 3] == oponentSymbol): isPut += 1
 
             if(isPut == 3):
                 return True
@@ -516,10 +516,10 @@ def isASuicideMove(cases : list[list[str]], choice : int):
         for j in range(-3,1):
             isPut = 0
 
-            if(line - 1 + j > 0 and column + j >= 0 and cases[line - 1 + j][column + j] == "0"): isPut += 1
-            if(line - 1 + j + 1 < 7 and line - 1 + j + 2 > 0 and column + j + 1 >= 0 and column + j + 1 < 7 and cases[line - 1 + j + 1][column + j + 1] == "0"): isPut += 1
-            if(line - 1 + j + 2 < 7 and line - 1 + j + 2 > 0 and column + j + 2 >= 0 and column + j + 2 < 7 and cases[line - 1 + j + 2][column + j + 2] == "0"): isPut += 1
-            if(line - 1 + j + 3 < 7 and column + j + 3 < 7 and cases[line - 1 + j + 3][column + j + 3] == "0"): isPut += 1
+            if(line - 1 + j > 0 and column + j >= 0 and cases[line - 1 + j][column + j] == oponentSymbol): isPut += 1
+            if(line - 1 + j + 1 < 7 and line - 1 + j + 2 > 0 and column + j + 1 >= 0 and column + j + 1 < 7 and cases[line - 1 + j + 1][column + j + 1] == oponentSymbol): isPut += 1
+            if(line - 1 + j + 2 < 7 and line - 1 + j + 2 > 0 and column + j + 2 >= 0 and column + j + 2 < 7 and cases[line - 1 + j + 2][column + j + 2] == oponentSymbol): isPut += 1
+            if(line - 1 + j + 3 < 7 and column + j + 3 < 7 and cases[line - 1 + j + 3][column + j + 3] == oponentSymbol): isPut += 1
 
             if(isPut == 3):
 
@@ -529,13 +529,13 @@ def isASuicideMove(cases : list[list[str]], choice : int):
         for j in range(-3,1):
             isPut = 0
 
-            if(column + j >= 0 and cases[line - 1][column + j] == "0"): isPut += 1
+            if(column + j >= 0 and cases[line - 1][column + j] == oponentSymbol): isPut += 1
 
-            if(column + j + 2 >= 0 and column + j + 1 < 7 and cases[line - 1][column + j + 1] == "0"): isPut += 1
+            if(column + j + 2 >= 0 and column + j + 1 < 7 and cases[line - 1][column + j + 1] == oponentSymbol): isPut += 1
 
-            if(column + j + 2 >= 0 and column + j + 2 < 7 and cases[line - 1][column + j + 2] == "0"): isPut += 1
+            if(column + j + 2 >= 0 and column + j + 2 < 7 and cases[line - 1][column + j + 2] == oponentSymbol): isPut += 1
 
-            if(column + j + 3 < 7 and cases[line - 1][column + j + 3] == "0"): isPut += 1
+            if(column + j + 3 < 7 and cases[line - 1][column + j + 3] == oponentSymbol): isPut += 1
 
 
             if(isPut == 3):
@@ -561,12 +561,12 @@ def isMovePossible(cases : list[list[str]], choice : int):
         else: choiceIsOk = True
     return True
 
-def putRandom(cases : list[list[str]]):
+def putRandom(cases : list[list[str]], oponentSymbol : str):
     choices = [1,2,3,4,5,6,7]
     random.shuffle(choices)
 
     for choice in choices:
-        if(isMovePossible(cases, choice) and not isASuicideMove(cases, choice)): return choice
+        if(isMovePossible(cases, choice) and not isASuicideMove(cases, choice, oponentSymbol)): return choice
 
     return choice
 
@@ -582,7 +582,7 @@ def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol 
         if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
         if(choice == 0): choice = completeWiningMove(cases, mySymbol)
         if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
-        if(choice == 0): choice = putRandom(cases)
+        if(choice == 0): choice = putRandom(cases, oponentSymbol)
 
     if(difficulty == 3):
         choice = completeFourLine(cases, mySymbol)
@@ -591,9 +591,9 @@ def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol 
         if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
         #if(choice == 0): choice = destroyWinningPatterns(cases)
         #if(choice == 0): choice = makeWinningPatterns(cases)
-        if(choice == 0): choice = makeAThreeLine(cases, mySymbol)
-        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol)
-        if(choice == 0): choice = putRandom(cases)
+        if(choice == 0): choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
+        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol, oponentSymbol)
+        if(choice == 0): choice = putRandom(cases, oponentSymbol)
 
     lignes = 6
     choiceIsOk = False
