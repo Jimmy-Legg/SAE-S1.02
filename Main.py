@@ -41,19 +41,92 @@ def __getJoueurs(fichier : str)->list[joueur]:
 #
 #Sortie : affichage
 #----------------------------------------
+def getPlayerData()->list[str]:
+
+    data : list[str]
+    choice : str
+
+    W  = '\033[0m'  # white (normal)
+    B  = '\033[94m' # blue
+    R  = '\033[91m' # red
+
+    data = []
+    choice = ""
+    while choice not in ["1","2","3"]:
+
+        os.system("cls")
+        print("---------------------")
+        print("     Bienvenue !     ")
+        print("                     ")
+        print("  1 - 2 Bots         ")
+        print("  2 - 1 joueur       ")
+        print("  3 - 2 joueurs      ")
+        print("                     ")
+        print("---------------------")
+        choice = input("Choisissez qui seront les joueurs : ")
+
+        if(choice == "1") : data.append("0")
+        elif(choice == "2") : data.append("1")
+        elif(choice == "3") : data.append("2")
+        else:
+            print(R + "Choix impossible !" + W)
+            os.system("pause")
+
+    os.system("cls")
+    if(data[0] == "0"): data.append(input("Choisissez le nom du " + B + "premier bot" + W + " : "))
+    else: data.append(input("Choisissez le nom du " + B + "joueur 1" + W + " : "))
+
+    os.system("cls")
+    if(data[0] == "0"): data.append(input("Choisissez le nom du" + R + " second bot" + W + " : "))
+    elif(data[0] == "1"): data.append(input("Choisissez le nom" + R + " du bot" + W + " : "))
+    else: data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
+
+    choice = ""
+    while choice not in ["1","2","3"]:
+
+        os.system("cls")
+        print("---------------------")
+        print("     Difficulté :    ")
+        print("                     ")
+        print("  1 - Facile         ")
+        print("  2 - Moyen          ")
+        print("  3 - Difficile      ")
+        print("                     ")
+        print("---------------------")
+        choice = input("Choisissez qui seront les joueurs : ")
+
+        if(choice == "1") : data.append("1")
+        elif(choice == "2") : data.append("2")
+        elif(choice == "3") : data.append("3")
+        else:
+            print(R + "Choix impossible !" + W)
+            os.system("pause")
+
+    return data
+
+#----------------------------------------
+#Affiche le menu numéro 1
+#
+#private : variable accessible uniquement dans le script actuel
+#
+#Entrée : aucune
+#
+#Sortie : affichage
+#----------------------------------------
 def __afficher_menu_1():
 
     os.system("cls")
-    print("---------------------")
-    print("     Bienvenue !     ")
-    print("                     ")
-    print("  1 - Jouer          ")
-    print("  2 - Scores         ")
-    print("  3 - Règles         ")
-    print("  4 - Quitter        ")
-    print("                     ")
-    print("---------------------")
-    print("---------------------")
+    print("------------------------")
+    print("     Bienvenue !        ")
+    print("                        ")
+    print("  1 - Jouer             ")
+    print("  2 - Scores            ")
+    print("  3 - Règles            ")
+    print("  4 - Modifier Joueurs  ")
+    print("                        ")
+    print("  5 - Quitter           ")
+    print("                        ")
+    print("------------------------")
 
 #----------------------------------------
 #Affiche le menu numéro 2
@@ -299,16 +372,23 @@ if __name__ == "__main__":
 
     j1_name : str
     j2_name : str
+    data : list[str]
+    nb_humans : int
+    difficulty : int
     WantToQuit : bool
 
     B  = '\033[94m' # blue
     R  = '\033[91m' # red
     W  = '\033[0m'  # white (normal)
 
-    #demande les noms des joueurs
-    os.system("cls")
-    j1_name = str(input(B + "Joueur 1" + W + ", quel est votre nom ? "))
-    j2_name = str(input(R + "Joueur 2" + W + ", quel est votre nom ? "))
+    #demande les infos sur les joueurs
+    data = getPlayerData()
+
+    nb_humans = int(data[0])
+    j1_name = data[1]
+    j2_name = data[2]
+    difficulty = int(data[3])
+
 
     listJoueurs = __getJoueurs("./Scores/playersData.txt")
 
@@ -334,7 +414,7 @@ if __name__ == "__main__":
                     match choice:
 
                         case "1":
-                            winner = Devinette.LaunchGame_devinettes(j1_name,j2_name)
+                            winner = Devinette.LaunchGame_devinettes(j1_name,j2_name, nb_humans, difficulty)
                             if(not winner == ""): __ajouterScore(winner, "devinette", listJoueurs)
 
                         case "2":
@@ -346,7 +426,9 @@ if __name__ == "__main__":
                             if(not winner == ""): __ajouterScore(winner, "morpion", listJoueurs)
 
                         case "4":
-                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, 1)
+
+                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, nb_humans, difficulty)
+
                             if(not winner == ""): __ajouterScore(winner, "puissance4", listJoueurs)
 
                         case "5":
@@ -415,6 +497,14 @@ if __name__ == "__main__":
                             os.system("pause")
 
             case "4":
+                data = getPlayerData()
+
+                nb_humans = int(data[0])
+                j1_name = data[1]
+                j2_name = data[2]
+                difficulty = int(data[3])
+
+            case "5":
                 WantToQuit = True
 
             case other:

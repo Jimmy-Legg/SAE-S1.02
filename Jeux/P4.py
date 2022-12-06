@@ -570,18 +570,30 @@ def putRandom(cases : list[list[str]]):
 
     return choice
 
-def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol : str, oponentSymbol : str)->list[int]:
+def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol : str, oponentSymbol : str, difficulty : int)->list[int]:
 
-    choice = completeFourLine(cases, mySymbol)
-    if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
-    if(choice == 0): choice = completeWiningMove(cases, mySymbol)
-    if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
-    #if(choice == 0): choice = destroyWinningPatterns(cases)
-    #if(choice == 0): choice = makeWinningPatterns(cases)
-    #if(choice == 0): choice = int(input("choix du bot : "))
-    if(choice == 0): choice = makeAThreeLine(cases, mySymbol)
-    if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol)
-    if(choice == 0): choice = putRandom(cases)
+    if(difficulty == 1):
+        choice = completeFourLine(cases, mySymbol)
+        if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
+        if(choice == 0): choice = random.randint(1,7)
+
+    if(difficulty == 2):
+        choice = completeFourLine(cases, mySymbol)
+        if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
+        if(choice == 0): choice = completeWiningMove(cases, mySymbol)
+        if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
+        if(choice == 0): choice = putRandom(cases)
+
+    if(difficulty == 3):
+        choice = completeFourLine(cases, mySymbol)
+        if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
+        if(choice == 0): choice = completeWiningMove(cases, mySymbol)
+        if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
+        #if(choice == 0): choice = destroyWinningPatterns(cases)
+        #if(choice == 0): choice = makeWinningPatterns(cases)
+        if(choice == 0): choice = makeAThreeLine(cases, mySymbol)
+        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol)
+        if(choice == 0): choice = putRandom(cases)
 
     lignes = 6
     choiceIsOk = False
@@ -695,7 +707,7 @@ def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, ca
 #
 #Sortie : str
 #----------------------------------------
-def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int)->str:
+def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficulty : int)->str:
 
     cases : list[list[str]]
 
@@ -745,11 +757,11 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int)->str:
             __afficherMenu(cases, winCases)
 
             if(nb_humans == 0):
-                if(turn == 1): listChoices = listChoices = __askForIAAction(cases, j1_name, B, "0", "O")
-                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0")
+                if(turn == 1): listChoices = listChoices = __askForIAAction(cases, j1_name, B, "0", "O", difficulty)
+                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty)
             elif(nb_humans == 1):
                 if(turn == 1): listChoices = listChoices = __askForPlayerAction(cases, j1_name, B)
-                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0")
+                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty)
             else:
                 if(turn == 1): listChoices = listChoices = __askForPlayerAction(cases, j1_name, B)
                 else:listChoices = __askForPlayerAction(cases, j2_name, R)
