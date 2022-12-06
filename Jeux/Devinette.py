@@ -73,7 +73,7 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
 
     if(difficulty == 1): time.sleep(random.random() * 3 + 1)
     elif(difficulty == 2): time.sleep(random.random() * 2 + 1)
-    else(difficulty == 3): time.sleep(random.random() * 1.5 + 1)
+    else:(difficulty == 3): time.sleep(random.random() * 1.5 + 1)
     nombre = random.randint(mini, maxi)
     choix = str(nombre)
 
