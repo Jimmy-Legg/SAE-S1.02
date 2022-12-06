@@ -491,4 +491,3 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult√
     #Retour
     if nb_joueurs == 2:
         return winner
-LaunchGame_morpion("jimmy","Rob",0,3)

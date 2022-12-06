@@ -346,7 +346,7 @@ if __name__ == "__main__":
                             if(not winner == ""): __ajouterScore(winner, "morpion", listJoueurs)
 
                         case "4":
-                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, 2)
+                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, 1)
                             if(not winner == ""): __ajouterScore(winner, "puissance4", listJoueurs)
 
                         case "5":
