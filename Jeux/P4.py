@@ -714,8 +714,6 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
     turn : int
     winner : str
 
-    bot_name:str
-
     gameFinished : bool
     equality : bool
     lignes : int
@@ -795,7 +793,7 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
 
         #Fin de Partie:
         if(gameFinished):
-            winner = __affichageFin(equality, turn, j1_name, bot_name, cases, winCases)
+            winner = __affichageFin(equality, turn, j1_name, j2_name, cases, winCases)
 
     os.system("pause")
     return winner
