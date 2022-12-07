@@ -52,6 +52,8 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
     tempsTotal : float
     nombre : int
     choixPrecedents : list[str]
+    mini2 : int
+    maxi2: int
 
     choixPrecedents = []
 
@@ -67,10 +69,12 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
 
     print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
 
-    if(difficulty == 1): time.sleep(random.random() * 3 + 1)
-    elif(difficulty == 2): time.sleep(random.random() * 2 + 1)
-    else: time.sleep(random.random() * 1.5 + 1)
+    if(difficulty == 1): time.sleep(random.random() * 4 + 2)
+    elif(difficulty == 2): time.sleep(random.random() * 3.5 + 1.5)
+    else: time.sleep(random.random() * 2 + 1)
 
+    mini2 = mini
+    maxi2 = maxi
     nombre = random.randint(mini, maxi)
     choix = str(nombre)
     choixPrecedents.append(choix)
@@ -91,24 +95,45 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
     while nombre != nombre_a_trouver:
 
         if(nombre > nombre_a_trouver):
-
-            choix = str(random.randint(mini, nombre - 1))
-            while choix in choixPrecedents:
-                choix = str(random.randint(mini, nombre - 1))
+            
             os.system("cls")
             print(couleur1 + p_name + W + " dit que c'est un nombre plus petit que " + O + str(nombre) + W + " : ")
             print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
-            time.sleep(random.random() * 4 + 2)
+
+            if(difficulty == 1):
+                choix = str(random.randint(mini, nombre - 1))
+                while choix in choixPrecedents:
+                    choix = str(random.randint(mini, nombre - 1))
+                time.sleep(random.random() * 4 + 2)
+            elif(difficulty == 2):
+                maxi2 = nombre - 1
+                choix = str(random.randint(mini2, maxi2))
+                time.sleep(random.random() * 3.5 + 1.5)
+            else:
+                maxi2 = nombre - 1
+                choix = str((mini2 + maxi2) // 2)
+                time.sleep(random.random() * 2 + 1)
 
         elif(nombre < nombre_a_trouver):
 
-            choix = str(random.randint(nombre - 1, maxi))
-            while choix in choixPrecedents:
-                choix = str(random.randint(nombre - 1, maxi))
             os.system("cls")
             print(couleur1 + p_name + W + " dit que c'est un nombre plus grand que " + O + str(nombre) + W + " : ")
             print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
-            time.sleep(random.random() * 4 + 2)
+
+            if(difficulty == 1):
+                choix = str(random.randint(nombre + 1, maxi))
+                while choix in choixPrecedents:
+                    choix = str(random.randint(nombre + 1, maxi))
+                time.sleep(random.random() * 4 + 2)
+            elif(difficulty == 2):
+                mini2 = nombre + 1
+                choix = str(random.randint(mini2, maxi2))
+                time.sleep(random.random() * 3.5 + 2)
+            else:
+                mini2 = nombre + 1
+                choix = str((mini2 + maxi2) // 2)
+                time.sleep(random.random() * 2 + 1)
+
 
         nombre = int(choix)
         choixPrecedents.append(choix)
@@ -305,7 +330,7 @@ def __askBotNombreATrouver(couleur : str, j_name : str, mini : int, maxi : int)-
 #
 #Sortie : Gagnant : str
 #----------------------------------------
-def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str)->str:
+def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str, nb_humans : int)->str:
 
     os.system("cls")
 
@@ -325,7 +350,8 @@ def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str)->str:
         print("")
         print("---------------------------")
         os.system("pause")
-        winner = j1_name
+        if(nb_humans > 0): winner = j1_name
+        else: winner = ""
 
     elif temps1 > temps2 :
         print("---------------------------")
@@ -339,7 +365,8 @@ def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str)->str:
         print("")
         print("---------------------------")
         os.system("pause")
-        winner = j2_name
+        if(nb_humans == 2): winner = j2_name
+        else: winner = ""
 
     else:
         print("---------------------------")
@@ -474,4 +501,4 @@ def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficu
         temps1 = __LaunchTurnBot(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, difficulty, False)
 
     #check et retour du vainqueur
-    return __checkWin(temps1, temps2, j1_name, j2_name)
+    return __checkWin(temps1, temps2, j1_name, j2_name, nb_humans)
