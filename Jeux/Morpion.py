@@ -194,17 +194,10 @@ def __affichageFin(cases : list[str], winType : int):
     print("---------------------------------------------")
 
    
-def bot_difficulte3(cases : list, joueur : int):
+def bot_difficulte3(cases : list):
     choice : str
     liste = ["1","3","7","9"]
     choice = ""
-    symboleautre : str
-    symbole : str
-    symboleautre = "X"
-    symbole = "O"
-    if joueur == 2 :
-        symbole = "X"
-        symboleautre = "O"
 
 
     #si joue sur la diagonal op
@@ -236,8 +229,9 @@ def bot_difficulte3(cases : list, joueur : int):
         choice = "8"
     elif cases[6-1] == cases[4-1] and not cases[6-1] == "." and cases[5-1] == "." :
         choice = "5"
-    elif cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == "." :
+    elif cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == ".":
         choice = "2"
+        print("ici")
     #Colonnes 7-4-1
     elif cases[8-1] == cases[9-1] and not cases[9-1] == "." and cases[7-1] == "." :
         choice = "7"
@@ -267,94 +261,24 @@ def bot_difficulte3(cases : list, joueur : int):
     elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." :
         choice = "9"
 
-    
-    elif (cases[0] == symboleautre or cases[0] == symbole) and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "5"
-    elif cases[0] == "." and (cases[1] == symboleautre or cases[1] == symbole) and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "5"
-    elif cases[0] == "." and cases[1] == "." and (cases[2] == symboleautre or cases[2] == symbole) and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "5"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and (cases[3] == symboleautre or cases[3] == symbole) and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "5"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and (cases[5] == symboleautre or cases[5] == symbole) and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "5"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and (cases[6] == symboleautre or cases[6] == symbole) and cases[6] == "." and cases[8] == ".":
-        choice = "5"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and (cases[7] == symboleautre or cases[7] == symbole) and cases[8] == ".":
-        choice = "5"
-    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "."  and cases[7] == "."and (cases[8] == symboleautre or cases[8] == symbole):
-        choice = "5"
-
-
-    elif (cases[0] == symboleautre or cases[0] == symbole) and cases[1] == "." and cases[2] == "." and cases[3] == "." and (cases[4] == symbole or cases[4] == symboleautre ) and cases[5] == "." and cases[6] == "."  and cases[7] == "."and (cases[8] == symboleautre or cases[8] == symbole):
-        choice = "2"
-    elif cases[0] == "." and cases[1] == "." and (cases[2] == symboleautre or cases[2] == symbole) and cases[3] == "." and (cases[4] == symbole or cases[4] == symboleautre ) and cases[5] == "." and (cases[6] == symboleautre or cases[6] == symbole)  and cases[7] == "." and cases[8] == ".":
-        choice = "4"
-
-    else: choice = input("afgag")
+    else: choice = str(random.randint(1,9))
     return str(choice)
-def bot_difficulte2(cases : list,joueur :int):
+def bot_difficulte2(cases : list):
     choice : str
     choice = ""
     #Lignes 1-2-3
-    if cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." :
-        choice = "1"
-    elif cases[8-1] == cases[5-1] and not cases[5-1] == "." and cases[2-1] == ".":
-        choice = "2"
-    elif cases[9-1] == cases[6-1] and not cases[6-1] == "." and cases[3-1] == ".":
-        choice = "3"
-    #Lignes 4-5-6
-    elif cases[7-1] == cases[1-1] and not cases[1-1] == "." and cases[4-1] == ".":
-        choice = "4"
-    elif cases[8-1] == cases[2-1] and not cases[2-1] == "." and cases[5-1] == ".":
-        choice = "5"
-    elif cases[9-1] == cases[3-1] and not cases[3-1] == "." and cases[6-1] == ".":
-        choice = "6"
-    #Lignes 7-8-9
-    elif cases[4-1] == cases[1-1] and not cases[1-1] == "." and cases[7-1] == ".":
-        choice = "7"
-    elif cases[5-1] == cases[2-1] and not cases[5-1] == "." and cases[8-1] == ".":
-        choice = "8"
-    elif cases[3-1] == cases[6-1] and not cases[6-1] == "." and cases[9-1] == ".":
-        choice = "9"
-    #Colonnes 8-5-2
-    elif cases[7-1] == cases[9-1] and not cases[7-1] == "." and cases[8-1] == ".":
-        choice = "8"
-    elif cases[6-1] == cases[4-1] and not cases[6-1] == "." and cases[5-1] == ".":
-        choice = "5"
-    elif cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == ".":
-        choice = "2"
-    #Colonnes 7-4-1
-    elif cases[8-1] == cases[9-1] and not cases[9-1] == "." and cases[7-1] == ".":
-        choice = "7"
-    elif cases[6-1] == cases[5-1] and not cases[5-1] == "." and cases[4-1] == ".":
-        choice = "4"
-    elif cases[2-1] == cases[3-1] and not cases[2-1] == "." and cases[1-1] == ".":
-        choice = "1"
-    #Colonnes 9-6-3
-    elif cases[7-1] == cases[8-1] and not cases[8-1] == "." and cases[9-1] == ".":
-        choice = "9"
-    elif cases[4-1] == cases[5-1] and not cases[5-1] == "." and cases[6-1] == ".":
-        choice = "6"
-    elif cases[1-1] == cases[2-1] and not cases[2-1] == "." and cases[3-1] == ".":
-        choice = "3"
-    #Diagonales 7-5-3
-    elif cases[7-1] == cases[5-1] and not cases[5-1] == "." and cases[3-1] == ".":
-        choice = "3"
-    elif cases[7-1] == cases[3-1] and not cases[3-1] == "." and cases[5-1] == ".":
-        choice = "5"
-    elif cases[5-1] == cases[3-1] and not cases[3-1] == "." and cases[7-1] == ".":
-        choice = "7"
-    #Diagonales 1-5-9
-    elif cases[9-1] == cases[5-1] and not cases[5-1] == "." and cases[1-1] == ".":
-        choice = "1"
-    elif cases[9-1] == cases[1-1] and not cases[1-1] == "." and cases[5-1] == ".":
-        choice = "5"
-    elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == ".":
-        choice = "9"
-
-    else: choice = str(random.randint(1,9))
+    a : int
+    a = random.randint(1,3)
+    if a == 1:
+        choice = str(random.randint(1,9))
+        print("al")
+        os.system('pause')
+    else:
+        choice = str(bot_difficulte3(cases))
+        print("la")
+        os.system('pause')
     return str(choice)
+
 def bot(cases : list, difficulté : int,joueur):
     choice : str
     difficulté : int
@@ -363,9 +287,9 @@ def bot(cases : list, difficulté : int,joueur):
     if difficulté == 1:
         choice = str(random.randint(1,9))
     elif difficulté == 2:
-        choice = bot_difficulte2(cases,joueur)
+        choice = bot_difficulte2(cases)
     elif difficulté == 3:
-        choice = bot_difficulte3(cases,joueur)
+        choice = bot_difficulte3(cases)
     return str(choice)
 
 #----------------------------------------
@@ -474,5 +398,5 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult�
         winner = j1_name
     elif(turn == 1):
         winner = j2_name
+LaunchGame_morpion("jimmy","Rob",1,2)
     #Retour
-    return winner
