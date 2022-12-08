@@ -384,7 +384,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult�
                 print("égalité !")
             elif(turn == 2):
                 print(B + j1_name + W + " a gagné ")
-            elif(turn == 1):
+            elif(turn == 1): 
                 print(R + j2_name + W + " a gagné ")
             print("---------------------------------------------")
 
@@ -398,5 +398,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult�
         winner = j1_name
     elif(turn == 1):
         winner = j2_name
+
+    return winner
 LaunchGame_morpion("jimmy","Rob",1,2)
     #Retour
