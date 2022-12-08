@@ -271,12 +271,8 @@ def bot_difficulte2(cases : list):
     a = random.randint(1,3)
     if a == 1:
         choice = str(random.randint(1,9))
-        print("al")
-        os.system('pause')
     else:
         choice = str(bot_difficulte3(cases))
-        print("la")
-        os.system('pause')
     return str(choice)
 
 def bot(cases : list, difficulté : int,joueur):
