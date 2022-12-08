@@ -1,10 +1,2 @@
-Jeux/__pycache__/Morpion.cpython-310.pyc
-Jeux/__pycache__/P4.cpython-310.pyc
-Jeux/__pycache__/Devinettes.cpython-310.pyc
-Jeux/__pycache__/Allumettes.cpython-310.pyc
-
-Classes/__pycache__/Joueur.cpython-310.pyc
-
-Scores/playerDara.txt
-
-
+*.pyc
+*.txt
