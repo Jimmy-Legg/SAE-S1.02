@@ -543,6 +543,25 @@ def isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str):
 
     return False
 
+def isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symbol : str):
+    for i in range(-1, 2):
+        for j in range(-1, 2):
+            isPut = 0
+            for y in range(1, 4):
+                if(i != 0 or j != 0):
+                    if(line + i*y > 0 and line + i*y < 7 and column + j*y >= 0 and column + j*y < 7):
+                        if(cases[line + i*y][column + j*y] == symbol): isPut += 1
+
+            if(isPut == 3): return True
+    return False
+
+def hasAWinningColumn(cases : list[list[str]], symbol : str):
+    for j in range(0,7):
+        for i in range(6, 1, -1):
+            if(cases[i][j] == "." and isThisCaseWinnable(cases, i, j, symbol) and cases[i+1][j] == "." and isThisCaseWinnable(cases, i+1, j, symbol)):
+                return j+1
+    return 0
+
 def isMovePossible(cases : list[list[str]], choice : int):
 
     column = choice - 1
@@ -572,6 +591,8 @@ def putRandom(cases : list[list[str]], oponentSymbol : str):
 
 def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol : str, oponentSymbol : str, difficulty : int)->list[int]:
 
+    choice:int
+
     if(difficulty == 1):
         choice = completeFourLine(cases, mySymbol)
         if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
@@ -589,11 +610,20 @@ def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol 
         if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
         if(choice == 0): choice = completeWiningMove(cases, mySymbol)
         if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
+        if(choice == 0): choice = hasAWinningColumn(cases, mySymbol)
         #if(choice == 0): choice = destroyWinningPatterns(cases)
         #if(choice == 0): choice = makeWinningPatterns(cases)
         if(choice == 0): choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
-        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol, oponentSymbol)
+        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol, mySymbol)
         if(choice == 0): choice = putRandom(cases, oponentSymbol)
+
+    if(difficulty == 4):
+        choice = completeFourLine(cases, mySymbol)
+        if(choice == 0): 
+            choice = completeFourLine(cases, oponentSymbol)
+        if(choice == 0): choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
+        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol, mySymbol)
+        if(choice == 0): choice = int(input("Choix du bot : "))
 
     lignes = 6
     choiceIsOk = False
@@ -797,3 +827,6 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
 
     os.system("pause")
     return winner
+
+if __name__ == "__main__" :
+    LaunchGame_puissance4("J1", "J2", 1, 4)
