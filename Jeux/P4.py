@@ -718,5 +718,3 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
     os.system("pause")
     return winner
 
-if __name__ == "__main__" :
-    LaunchGame_puissance4("J1", "J2", 1, 3)
