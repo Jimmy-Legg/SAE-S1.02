@@ -331,148 +331,41 @@ def completeWiningMove(cases : list[list[str]], symbol : str)->int:
                 return choice
     return 0
 
-def destroyWinningPatterns(cases : list[list[str]])->int:
+def tryMenace(cases : list[list[str]], line : int, column : int, symbol : str):
 
+    if(cases[line][column]!="."): return 0
+    for i in range(-1, 2):
+        for j in range(-1, 2):
+            isPut = 0
+            canPut = 0
+            for y in range(1, 4):
+                if(i != 0 or j != 0):
+                    if(line + i*y > 0 and line + i*y < 7 and column + j*y >= 0 and column + j*y < 7):
+                        if(cases[line + i*y][column + j*y] == symbol): isPut += 1
+                        elif((line + i*y == 6 or cases[line + i*y + 1][column + j*y] != ".") and cases[line + i*y][column + j*y] == "."):
+                            canPut += 1
+                            choice = column + j*y + 1
+
+            if(isPut == 2 and canPut == 1):
+                return choice
     return 0
 
-def makeWinningPatterns(cases : list[list[str]])->int:
-
+def completeWinningPattern(cases : list[list[str]], mySymbol : str, oponentSymbol : str)->int:
+    choice = 0
+    for i in range(1,7):
+        for j in range(0,7):
+            if(isThisCaseWinnable(cases, i, j, mySymbol)):
+                if(i > 1): choice = tryMenace(cases, i-1, j, mySymbol)
+                if(choice == 0 and i < 6 and cases[i+1][j] == "."): choice = tryMenace(cases, i+1, j, mySymbol)
+                if(choice != 0 and not isASuicideMove(cases, choice, oponentSymbol)): return choice
     return 0
 
 def makeAThreeLine(cases : list[list[str]], symbol : str, oponentSymbol : str)->int:
-
-    for i in range(1,4):
-        for j in range(0,7):
-
-            canPut = 0
-            isPut = 0
-            isBlocked = 0
-
-            if(cases[i][j] == symbol): isPut += 1
-            elif(cases[i][j] != "."): isBlocked +=1
-            elif(cases[i][j] == "." and cases[i+1][j] != "."):canPut += 1
-
-            if(cases[i+1][j] == symbol): isPut += 1
-            elif(cases[i+1][j] != "."): isBlocked +=1
-            elif(cases[i+1][j] == "." and (cases[i+2][j] != ".")):canPut += 1
-
-            if(cases[i+2][j] == symbol): isPut += 1
-            elif(cases[i+2][j] != "."): isBlocked +=1
-            elif(cases[i+2][j] == "." and (cases[i+3][j] != ".")):canPut += 1
-
-            if(cases[i+3][j] == symbol): isPut += 1
-            elif(cases[i+3][j] != "."): isBlocked +=1
-            elif(cases[i+3][j] and i+3 == 6 or cases[i+4][j] != "."):canPut += 1
-
-            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, j+1, oponentSymbol)):
-                return j+1
-
-#check the possibility to win with horizontals lines
+    choice = 0
     for i in range(1,7):
-        for j in range(0,4):
-
-            canPut = 0
-            isPut = 0
-            isBlocked = 0
-            choice = 0
-
-            if(cases[i][j] == symbol): isPut += 1
-            elif(cases[i][j] != "."): isBlocked +=1
-            elif(cases[i][j] == "." and i == 6 or cases[i+1][j] != "."):
-                canPut += 1
-                choice = j+1
-
-            if(cases[i][j+1] == symbol): isPut += 1
-            elif(cases[i][j+1] != "."): isBlocked +=1
-            elif(cases[i][j+1] == "." and i == 6 or cases[i+1][j+1] != "."):
-                canPut += 1
-                choice = j+2
-
-            if(cases[i][j+2] == symbol): isPut += 1
-            elif(cases[i][j+2] != "."): isBlocked +=1
-            elif(cases[i][j+2] == "." and i == 6 or cases[i+1][j+2] != "."):
-                canPut += 1
-                choice = j+3
-
-            if(cases[i][j+3] == symbol): isPut += 1
-            elif(cases[i][j+3] != "."): isBlocked +=1
-            elif(cases[i][j+3] == "." and i == 6 or cases[i+1][j+3] != "."):
-                canPut += 1
-                choice = j+4
-
-            if(isBlocked == 0 and isPut == 2 and canPut >= 1 and not isASuicideMove(cases, choice, oponentSymbol)):
-                return choice
-
-    for i in range(1,4):
-        for j in range(0,4):
-
-            canPut = 0
-            isPut = 0
-            choice = 0
-            isBlocked = 0
-
-            if(cases[i][j] == symbol): isPut += 1
-            elif(cases[i][j] != "."): isBlocked +=1
-            elif(cases[i][j] == "." and cases[i+1][j] != "."):
-                canPut += 1
-                choice = j+1
-
-            if(cases[i+1][j+1] == symbol): isPut += 1
-            elif(cases[i+1][j+1] != "."): isBlocked +=1
-            elif(cases[i+1][j+1] == "." and cases[i+2][j+1] != "."):
-                canPut += 1
-                choice = j+2
-
-            if(cases[i+2][j+2] == symbol): isPut += 1
-            elif(cases[i+2][j+2] != "."): isBlocked +=1
-            elif(cases[i+2][j+2] == "." and (cases[i+3][j+2] != ".")):
-                canPut += 1
-                choice = j+3
-
-            if(cases[i+3][j+3] == symbol): isPut += 1
-            elif(cases[i+3][j+3] != "."): isBlocked +=1
-            elif(cases[i+3][j+3] == "." and i == 3 or cases[i+4][j+3] != "."):
-                canPut += 1
-                choice = j+4
-
-            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, choice, oponentSymbol)):
-                return choice
-
-    for i in range(4,7):
-        for j in range(0,4):
-
-            canPut = 0
-            isPut = 0
-            choice = 0
-            isBlocked = 0
-
-            if(cases[i][j] == symbol): isPut += 1
-            elif(cases[i][j] != "."): isBlocked +=1
-            elif(cases[i][j] == "." and i == 6 or cases[i+1][j] != "."):
-                canPut += 1
-                choice = j+1
-
-            if(cases[i-1][j+1] == symbol): isPut += 1
-            elif(cases[i-1][j+1] != "."): isBlocked +=1
-            elif(cases[i-1][j+1] == "." and cases[i][j+1] != "."):
-                canPut += 1
-                choice = j+2
-
-            if(cases[i-2][j+2] == symbol): isPut += 1
-            elif(cases[i-2][j+2] != "."): isBlocked +=1
-            elif(cases[i-2][j+2] == "." and cases[i-1][j+2] != "."):
-                canPut += 1
-                choice = j+3
-
-            if(cases[i-3][j+3] == symbol): isPut += 1
-            elif(cases[i-3][j+3] != "."): isBlocked +=1
-            elif(cases[i-3][j+3] == "." and cases[i-2][j+3] != "."):
-                canPut += 1
-                choice = j+4
-
-            if(isBlocked == 0 and isPut == 2 and canPut >= 2 and not isASuicideMove(cases, choice, oponentSymbol)):
-                return choice
-
+        for j in range(0,7):
+            choice = tryMenace(cases, i, j, symbol)
+            if(choice != 0 and not isASuicideMove(cases, choice, oponentSymbol)): return choice
     return 0
 
 def isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str):
@@ -544,6 +437,7 @@ def isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str):
     return False
 
 def isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symbol : str):
+    if(cases[line][column] != "."): return 0
     for i in range(-1, 2):
         for j in range(-1, 2):
             isPut = 0
@@ -555,10 +449,10 @@ def isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symbol
             if(isPut == 3): return True
     return False
 
-def hasAWinningColumn(cases : list[list[str]], symbol : str):
+def hasAWinningColumn(cases : list[list[str]], symbol : str, oponentSymbol : str):
     for j in range(0,7):
         for i in range(6, 1, -1):
-            if(cases[i][j] == "." and isThisCaseWinnable(cases, i, j, symbol) and cases[i+1][j] == "." and isThisCaseWinnable(cases, i+1, j, symbol)):
+            if(cases[i][j] == "." and isThisCaseWinnable(cases, i, j, symbol) and cases[i+1][j] == "." and isThisCaseWinnable(cases, i+1, j, symbol) and not isASuicideMove(cases, j, oponentSymbol)):
                 return j+1
     return 0
 
@@ -610,19 +504,15 @@ def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol 
         if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
         if(choice == 0): choice = completeWiningMove(cases, mySymbol)
         if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
-        if(choice == 0): choice = hasAWinningColumn(cases, mySymbol)
-        #if(choice == 0): choice = destroyWinningPatterns(cases)
-        #if(choice == 0): choice = makeWinningPatterns(cases)
+        if(choice == 0): choice = hasAWinningColumn(cases, mySymbol, oponentSymbol)
+        if(choice == 0): choice = completeWinningPattern(cases, oponentSymbol, mySymbol)
+        if(choice == 0): choice = completeWinningPattern(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol, mySymbol)
         if(choice == 0): choice = putRandom(cases, oponentSymbol)
 
     if(difficulty == 4):
-        choice = completeFourLine(cases, mySymbol)
-        if(choice == 0): 
-            choice = completeFourLine(cases, oponentSymbol)
-        if(choice == 0): choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
-        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol, mySymbol)
+        choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = int(input("Choix du bot : "))
 
     lignes = 6
@@ -829,4 +719,4 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
     return winner
 
 if __name__ == "__main__" :
-    LaunchGame_puissance4("J1", "J2", 1, 4)
+    LaunchGame_puissance4("J1", "J2", 0, 3)
