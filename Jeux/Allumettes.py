@@ -1,5 +1,6 @@
 import os
 import random
+import time
 #----------------------------------------
 #Affiche l'ecran de fin de partie
 #
@@ -20,22 +21,97 @@ def __afficherFin(winner : str, couleur : str):
     print("")
     print("---------------------")
 
-def __getAmountbot(table : list[str], dif : list[int]):
-    if dif[0] == 1:
+def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
+    mot : str
+    _i : int
+    choix : int
+    perdu : int
+
+    W  = '\033[0m'  # white (normal)
+
+    mot = ""
+    perdu = 4
+    choix = 1
+
+    os.system("cls")
+    print("---------------------")
+    print("")
+    for _i in range(0, len(table)):
+        if(table[_i] == "|"): mot += " |"
+        else: mot += "  "
+    print(mot)
+    print("")
+    print("---------------------")
+    print("")
+    print(C + bot  + W + " choisi un nombre...")
+    time.sleep(0.5)
+    
+    if dif == 1:
         choix = random.randint(1,3)
-        return choix
-    if dif[0] == 2:
-        if len(table) == 3:
-            choix = 2
-        elif len(table) == 2:
-            choix == 1
-        elif len(table) == 4:
-            choix == 3
-        elif choix == 5:
-            choix == 1
-        else:
+    if dif == 2:
+        perdu = random.randint(1,3)
+        if perdu == 1 or perdu == 2:
             choix = random.randint(1,3)
-        return choix
+        else:
+            if len(table) == 3:
+                choix = 2
+            elif len(table) == 2:
+                choix = 1
+            elif len(table) == 4:
+                choix = 3
+            elif len(table) == 5:
+                choix = 1
+            else:
+                choix = random.randint(1,3)
+    if dif == 3:
+        perdu = random.randint(1,4)
+        if perdu == 1:
+            if len(table) == 2:
+                choix = 1
+            else:
+                choix = random.randint(1,3)
+        else:
+            if len(table) == 2:
+                choix = 1
+            elif len(table) == 3:
+                choix = 2
+            elif len(table) == 4:
+                choix = 3
+            elif len(table) == 5:
+                choix = random.randint(1,3)
+            elif len(table) == 6:
+                choix = 1
+            elif len(table) == 7:
+                choix = 2
+            elif len(table) == 8:
+                choix = 3
+            elif len(table) == 9:
+                choix = random.randint(1,3)
+            elif len(table) == 10:
+                choix = 1
+            elif len(table) == 11:
+                choix = 2
+            elif len(table) == 12:
+                choix = 3
+            elif len(table) == 13:
+                choix = random.randint(1,3)
+            elif len(table) == 14:
+                choix = 1
+            elif len(table) == 15:
+                choix = 2
+            elif len(table) == 16:
+                choix = 3
+            elif len(table) == 17:
+                choix = random.randint(1,3)
+            elif len(table) == 18:
+                choix = 1
+            elif len(table) == 19:
+                choix = 2
+            elif len(table) == 20:
+                choix = 3
+    print("il choisi : " + str(choix))
+    time.sleep(0.65)
+    return int(choix)
 
 #----------------------------------------
 #Affiche a l'utilisateur la partie en cours et lui demande combien il veut enlever d'allumettes. Si le choix est erroné, le redemande
@@ -121,7 +197,7 @@ def LaunchGame_allumettes(j1_name : str, j2_name : str,nb_humans : int, difficul
     table : list[str]
 
     nb_allumettes = 20
-    turn = 1
+    turn = random.randint(1,2)
 
     table = []
 
@@ -137,8 +213,12 @@ def LaunchGame_allumettes(j1_name : str, j2_name : str,nb_humans : int, difficul
             if(turn == 1): amount = __getAmount(table, j1_name, B)
             else: amount = __getAmount(table, j2_name, R)
         elif nb_humans == 1:
+            print("ko")
             if(turn == 1): amount = __getAmount(table, j1_name, B)
-            else: amount = __getAmountbot(table,difficulty[0]) 
+            else: amount = __getAmountbot(j2_name,table,difficulty[0],R) 
+        elif nb_humans == 0:
+            if(turn == 1): amount = __getAmountbot(j1_name,table,int(difficulty[0]),B)
+            else: amount = __getAmountbot(j2_name,table,int(difficulty[1]),R) 
 
         for _i in range(0, amount):
             if(len(table) >= 1):
@@ -165,5 +245,3 @@ def LaunchGame_allumettes(j1_name : str, j2_name : str,nb_humans : int, difficul
     os.system("pause")
 
     return winner
-
-LaunchGame_allumettes("j1_name","j2_name",1,[1])
