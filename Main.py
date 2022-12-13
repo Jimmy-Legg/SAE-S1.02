@@ -72,27 +72,25 @@ def getPlayerData()->list[str]:
             print(R + "Choix impossible !" + W)
             os.system("pause")
 
-    if(int(choice) > 1):
-        choice = ""
-        while choice not in ["1","2","3"]:
+    choice = ""
+    while choice not in ["1","2","3"]:
 
-            os.system("cls")
-            print("---------------------")
-            print("     Difficulté :    ")
-            print("                     ")
-            print("  1 - Facile         ")
-            print("  2 - Moyen          ")
-            print("  3 - Difficile      ")
-            print("                     ")
-            print("---------------------")
-            choice = input("Choisissez la difficulté : ")
-
-            if(choice == "1") : data.append("1")
-            elif(choice == "2") : data.append("2")
-            elif(choice == "3") : data.append("3")
-            else:
-                print(R + "Choix impossible !" + W)
-                os.system("pause")
+        os.system("cls")
+        print("---------------------")
+        print("     Difficulté :    ")
+        print("                     ")
+        print("  1 - Facile         ")
+        print("  2 - Moyen          ")
+        print("  3 - Difficile      ")
+        print("                     ")
+        print("---------------------")
+        choice = input("Choisissez la difficulté : ")
+        if(choice == "1") : data.append("1")
+        elif(choice == "2") : data.append("2")
+        elif(choice == "3") : data.append("3")
+        else:
+            print(R + "Choix impossible !" + W)
+            os.system("pause")
 
     os.system("cls")
     if(data[0] == "0"):
@@ -398,6 +396,8 @@ if __name__ == "__main__":
     #demande les infos sur les joueurs
     data = getPlayerData()
 
+    print("ok", data)
+
     nb_humans = int(data[0])
     difficulty = int(data[1])
     j1_name = data[2]
@@ -514,9 +514,9 @@ if __name__ == "__main__":
                 data = getPlayerData()
 
                 nb_humans = int(data[0])
-                j1_name = data[1]
-                j2_name = data[2]
-                difficulty = int(data[3])
+                difficulty = int(data[1])
+                j1_name = data[2]
+                j2_name = data[3]
 
             case "5":
                 WantToQuit = True
