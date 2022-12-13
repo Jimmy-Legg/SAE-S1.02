@@ -11,7 +11,16 @@ import time
 #Sortie : affichage
 #----------------------------------------
 def __afficherFin(winner : str, couleur : str):
+    """Fonction qui affiche l'ecran de fin
 
+    Arguments :
+        nom du gagnant : str
+        couleur du gagnant : str
+
+    Retour : rien
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     W  = '\033[0m'  # white (normal)
 
     os.system("cls")
@@ -22,6 +31,18 @@ def __afficherFin(winner : str, couleur : str):
     print("---------------------")
 
 def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
+    """Fonction fait jouer les bot en fonction de la difficulté 
+
+    Arguments :
+        nom du bot : str
+        liste des allumettes : list[str]
+        difficulté: int
+        couleur du bot :str
+
+    Retour : le choix du bot
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     mot : str
     _i : int
     choix : int
@@ -113,17 +134,19 @@ def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
     time.sleep(0.65)
     return int(choix)
 
-#----------------------------------------
-#Affiche a l'utilisateur la partie en cours et lui demande combien il veut enlever d'allumettes. Si le choix est erroné, le redemande
-#
-#private : cette fonction n'est utile que pour ce script
-#
-#Entrée : table : list[str], j_name : str, couleur :str
-#
-#Sortie : int (le nombre d'allumettes a enlever)
-#----------------------------------------
-def __getAmount(table : list[str], j_name : str, couleur :str)->int:
 
+def __getAmount(table : list[str], j_name : str, couleur :str)->int:
+    """Fonction qui affiche le jeu et verifie que la valeur entré par l'utilisateur est bonne
+
+    Arguments :
+        table : list[str]
+        nom du joueur : str
+        couleur: str
+
+    Retour : le choix de la personne
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     mot : str
     _i : int
 
@@ -167,29 +190,35 @@ def __getAmount(table : list[str], j_name : str, couleur :str)->int:
 
     return int(choix)
 
-#----------------------------------------
-#Change le tour
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : int
-#
-#Sortie : int
-#----------------------------------------
+
 def __changeTurn(turn : int)->int:
+    """Fonction qui change qui joue
+
+    Arguments :
+        toure 1 ou 2 : int
+
+    Retour : turn : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     if(turn == 1): turn = 2
     else: turn = 1
     return turn
 
-#----------------------------------------
-#Lance la partie d'allumettes et retourne le vainqueur de la partie
-#
-#Entrée : j1_name : str, j2_name : str
-#
-#Sortie : str
-#----------------------------------------
-def LaunchGame_allumettes(j1_name : str, j2_name : str,nb_humans : int, difficulty : list[int]):
 
+def LaunchGame_allumettes(j1_name : str, j2_name : str,nb_humans : int, difficulty : list[int]):
+    """Fonction lance le jeu d'allumette avec le nombre de bot choisi
+
+    Arguments :
+        Nom du joueur 1 : str
+        Nom du joueur 2 : str
+        Nombre d'humains : int
+        difficulté : list[int]
+
+    Retour : personne qui gagne
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     turn : int
     nb_allumettes : int
     amount : int

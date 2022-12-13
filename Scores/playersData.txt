@@ -1,5 +1,5 @@
 Gaetan 0 0 0 1
-Nerscylla 2 0 1 14
+Nerscylla 2 1 16 14
 hfbse 1 0 0 0
 sfdbaze 1 0 0 0
 yfuyf 1 0 0 0
@@ -11,3 +11,4 @@ Théo 0 0 0 1
 Zamite 0 0 0 1
 Akantor 0 0 7 0
 Jimmy 0 0 0 1
+Rajang 0 0 6 0

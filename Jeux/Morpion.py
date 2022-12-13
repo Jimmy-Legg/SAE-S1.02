@@ -275,11 +275,10 @@ def bot_difficulte2(cases : list):
         choice = str(bot_difficulte3(cases))
     return str(choice)
 
-def bot(cases : list, difficulté : int,joueur):
+def bot(cases : list, difficulté : int ,C : str):
     choice : str
     difficulté : int
     W  = '\033[0m'  # white (normal)
-    B  = '\033[94m' # blue
     if difficulté == 1:
         choice = str(random.randint(1,9))
     elif difficulté == 2:
@@ -295,7 +294,7 @@ def bot(cases : list, difficulté : int,joueur):
 #
 #Sortie : str
 #----------------------------------------
-def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulté : int)->str:
+def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulté : list[int])->str:
 
     cases : list[str]
 
@@ -341,10 +340,10 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult�
                 else : choice = str(input(R + j2_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
             elif nb_joueurs == 1:
                 if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
-                else: choice = bot(cases,difficulté,turn)
+                else: choice = bot(cases,int(difficulté[0]),turn)
             elif nb_joueurs == 0:
-                if(turn == 1): choice = bot(cases,difficulté,turn)
-                else: choice = bot(cases,2,turn)
+                if(turn == 1): choice = bot(cases,int(difficulté[0]),R)
+                else: choice = bot(cases,int(difficulté[1]),B)
             #vérifie la valeur de l'utilisateur
             if(not choice.isdigit()):print("Valeur impossible")
             elif(int(choice) < 1 or int(choice) > 9):print("Valeur impossible")
