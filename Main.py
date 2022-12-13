@@ -5,16 +5,16 @@ import Jeux.P4 as P4
 import Jeux.Devinette as Devinette
 from Classes.Joueur import joueur
 
-#----------------------------------------
-#Récupère dans le fichier donné en entrée les joueurs et en fait un liste
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : (fichier) str
-#
-#Sortie : list[joueur]
-#----------------------------------------
 def __getJoueurs(fichier : str)->list[joueur]:
+    """Récupère dans le fichier donné en entrée les joueurs et en fait un liste
+
+    Arguments :
+        Chemin du fichier : str
+
+    Retour : list[joueur]
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     listJoueurs : list[joueur]
 
@@ -32,16 +32,16 @@ def __getJoueurs(fichier : str)->list[joueur]:
 
     return listJoueurs
 
-#----------------------------------------
-#Affiche le menu numéro 1
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
 def getPlayerData()->list[str]:
+    """Demandes les données des joueurs et les retourne sous la forme [nombre de joueurs humains, difficulté du bot 1, nom du bot 1, difficulté du bot 2, nom du bot 2]
+
+    Arguments :
+        Aucuns
+
+    Retour : list[str]
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     data : list[str]
     choice : str
@@ -146,16 +146,16 @@ def getPlayerData()->list[str]:
 
     return data
 
-#----------------------------------------
-#Affiche le menu numéro 1
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_menu_1():
+    """Affiche le menu numéro 1
+
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     os.system("cls")
     print("------------------------")
@@ -170,17 +170,16 @@ def __afficher_menu_1():
     print("                        ")
     print("------------------------")
 
-#----------------------------------------
-#Affiche le menu numéro 2
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_menu_2():
+    """Affiche le menu numéro 2
 
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     os.system("cls")
     print("---------------------")
     print("       Jouer :       ")
@@ -194,16 +193,17 @@ def __afficher_menu_2():
     print("                     ")
     print("---------------------")
 
-#----------------------------------------
-#Affiche le menu numéro 3
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
+
 def __afficher_menu_3():
+    """Affiche le menu numéro 3
+
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     os.system("cls")
     print("---------------------")
@@ -218,16 +218,16 @@ def __afficher_menu_3():
     print("                     ")
     print("---------------------")
 
-#----------------------------------------
-#Affiche le menu numéro 4
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_menu_4():
+    """Affiche le menu numéro 4
+
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     os.system("cls")
     print("---------------------")
@@ -242,17 +242,17 @@ def __afficher_menu_4():
     print("                     ")
     print("---------------------")
 
-#----------------------------------------
-#Affiche les scores d'un jeu pour tout les joueurs, classé dans l'ordre croissant
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : list[joueur], str (le nom du jeu souhaité)
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_scores(listJoueur : list[joueur], nom : str):
+    """Affiche les scores d'un jeu pour tout les joueurs, classé dans l'ordre croissant
 
+    Arguments :
+        Liste des joueurs : list[joueur]
+        Nom du jeu : str
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     os.system("cls")
     print("---------------------")
     print("Scores : " + nom)
@@ -260,7 +260,7 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
 
     scores = {}
 
-    for j in listJoueurs:
+    for j in listJoueur:
         if(nom == "devinette"): scores[j.getName()] = j.getScoreDevinette()
         if(nom == "allumettes"): scores[j.getName()] = j.getScoreAllumettes()
         if(nom == "morpion"): scores[j.getName()] = j.getScoreMorpion()
@@ -277,16 +277,16 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
     print("---------------------")
     os.system("pause")
 
-#----------------------------------------
-#Affiche les règles d'un jeu
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str (le nom du jeu souhaité)
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_regles(nom : str):
+    """Affiche les règles d'un jeu
+
+    Arguments :
+        Nom du jeu : str
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     B  = '\033[94m' # blue
     R  = '\033[91m' # red
@@ -350,17 +350,18 @@ def __afficher_regles(nom : str):
     print("---------------------")
     os.system("pause")
 
-#----------------------------------------
-#Ajoute un point a un joueur souhaité, designé par son nom, dans le jeu souhaité
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str (le nom du joueur), str (le nom du jeu souhaité), list[joueur]
-#
-#Sortie : Modification du fichier texte en ajoutant un point au joueur souhaité
-#----------------------------------------
 def __ajouterScore(winner : str, jeu : str, listJoueur : list[joueur]):
+    """Ajoute un point a un joueur souhaité, designé par son nom, dans le jeu souhaité
 
+    Arguments :
+        Vainqueur : str
+        Nom du jeu : str
+        Liste de joueur : list[joueur]
+
+    Retour : Modification du fichier texte en fonction de la list de joueur
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     playerFound : bool
 
     playerFound = False
@@ -383,16 +384,6 @@ def __ajouterScore(winner : str, jeu : str, listJoueur : list[joueur]):
 
     __writePlayersData(listJoueurs)
 
-
-#----------------------------------------
-#Ecris les données des joueurs dans le fichier ./Scores/playersData.txt
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : list[joueur]
-#
-#Sortie : Modification du fichier texte en fonction de la list de joueur
-#----------------------------------------
 def __writePlayersData(listJoueur : list[joueur]):
     """Ecris les données des joueurs dans le fichier ./Scores/playersData.txt
 
