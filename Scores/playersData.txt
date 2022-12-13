@@ -1,5 +1,5 @@
 Gaetan 0 0 0 1
-Nerscylla 2 0 0 7
+Nerscylla 2 0 0 10
 hfbse 1 0 0 0
 sfdbaze 1 0 0 0
 yfuyf 1 0 0 0
@@ -7,3 +7,4 @@ Nathan 3 0 0 1
 Valentin 1 0 0 0
 Kirin 0 0 0 5
 Najarala 1 0 0 0
+oli 0 0 1 2
