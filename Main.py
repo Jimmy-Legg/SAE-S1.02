@@ -394,7 +394,15 @@ def __ajouterScore(winner : str, jeu : str, listJoueur : list[joueur]):
 #Sortie : Modification du fichier texte en fonction de la list de joueur
 #----------------------------------------
 def __writePlayersData(listJoueur : list[joueur]):
+    """Ecris les données des joueurs dans le fichier ./Scores/playersData.txt
 
+    Arguments :
+        Liste de joueur : lis[joueur]
+
+    Retour : Modification du fichier texte en fonction de la list de joueur
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     _i : int
 
     lines : list[str]
@@ -462,7 +470,7 @@ if __name__ == "__main__":
                             if(not winner == ""): __ajouterScore(winner, "devinette", listJoueurs)
 
                         case "2":
-                            winner = Allumettes.LaunchGame_allumettes(j1_name, j2_name)
+                            winner = Allumettes.LaunchGame_allumettes(j1_name, j2_name, nb_humans, difficulty)
                             if(not winner == ""): __ajouterScore(winner, "allumettes", listJoueurs)
 
                         case "3":
