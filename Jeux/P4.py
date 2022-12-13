@@ -627,7 +627,7 @@ def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, ca
 #
 #Sortie : str
 #----------------------------------------
-def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficulty : int)->str:
+def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficulty : list[int])->str:
 
     cases : list[list[str]]
 
@@ -674,13 +674,13 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
             __afficherMenu(cases, winCases)
 
             if(nb_humans == 0):
-                if(turn == 1): listChoices = listChoices = __askForIAAction(cases, j1_name, B, "0", "O", difficulty)
-                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty)
+                if(turn == 1): listChoices = __askForIAAction(cases, j1_name, B, "0", "O", difficulty[0])
+                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty[1])
             elif(nb_humans == 1):
-                if(turn == 1): listChoices = listChoices = __askForPlayerAction(cases, j1_name, B)
-                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty)
+                if(turn == 1): listChoices = __askForPlayerAction(cases, j1_name, B)
+                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty[1])
             else:
-                if(turn == 1): listChoices = listChoices = __askForPlayerAction(cases, j1_name, B)
+                if(turn == 1): listChoices = __askForPlayerAction(cases, j1_name, B)
                 else:listChoices = __askForPlayerAction(cases, j2_name, R)
 
         choice = listChoices[0]

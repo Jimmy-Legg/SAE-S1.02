@@ -144,9 +144,6 @@ def getPlayerData()->list[str]:
         os.system("cls")
         data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
 
-    print(data)
-    os.system("pause")
-
     return data
 
 #----------------------------------------
@@ -474,7 +471,7 @@ if __name__ == "__main__":
 
                         case "4":
 
-                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, nb_humans, difficulty[0])
+                            winner = P4.LaunchGame_puissance4(j1_name, j2_name, nb_humans, difficulty)
 
                             if(not winner == ""): __ajouterScore(winner, "puissance4", listJoueurs)
 
@@ -547,9 +544,11 @@ if __name__ == "__main__":
                 data = getPlayerData()
 
                 nb_humans = int(data[0])
-                difficulty = int(data[1])
+                difficulty = []
+                difficulty.append(int(data[1]))
+                difficulty.append(int(data[3]))
                 j1_name = data[2]
-                j2_name = data[3]
+                j2_name = data[4]
 
             case "5":
                 WantToQuit = True
