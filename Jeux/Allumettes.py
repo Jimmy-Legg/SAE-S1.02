@@ -1,5 +1,5 @@
 import os
-
+import random
 #----------------------------------------
 #Affiche l'ecran de fin de partie
 #
@@ -19,6 +19,23 @@ def __afficherFin(winner : str, couleur : str):
     print(couleur + winner + W + " a gagné la manche")
     print("")
     print("---------------------")
+
+def __getAmountbot(table : list[str], dif : list[int]):
+    if dif[0] == 1:
+        choix = random.randint(1,3)
+        return choix
+    if dif[0] == 2:
+        if len(table) == 3:
+            choix = 2
+        elif len(table) == 2:
+            choix == 1
+        elif len(table) == 4:
+            choix == 3
+        elif choix == 5:
+            choix == 1
+        else:
+            choix = random.randint(1,3)
+        return choix
 
 #----------------------------------------
 #Affiche a l'utilisateur la partie en cours et lui demande combien il veut enlever d'allumettes. Si le choix est erroné, le redemande
@@ -95,7 +112,7 @@ def __changeTurn(turn : int)->int:
 #
 #Sortie : str
 #----------------------------------------
-def LaunchGame_allumettes(j1_name : str, j2_name : str):
+def LaunchGame_allumettes(j1_name : str, j2_name : str,nb_humans : int, difficulty : list[int]):
 
     turn : int
     nb_allumettes : int
@@ -116,8 +133,12 @@ def LaunchGame_allumettes(j1_name : str, j2_name : str):
 
     while True:
         print("ok")
-        if(turn == 1): amount = __getAmount(table, j1_name, B)
-        else: amount = __getAmount(table, j2_name, R)
+        if nb_humans == 2:
+            if(turn == 1): amount = __getAmount(table, j1_name, B)
+            else: amount = __getAmount(table, j2_name, R)
+        elif nb_humans == 1:
+            if(turn == 1): amount = __getAmount(table, j1_name, B)
+            else: amount = __getAmountbot(table,difficulty[0]) 
 
         for _i in range(0, amount):
             if(len(table) >= 1):
@@ -144,3 +165,5 @@ def LaunchGame_allumettes(j1_name : str, j2_name : str):
     os.system("pause")
 
     return winner
+
+LaunchGame_allumettes("j1_name","j2_name",1,[1])
