@@ -458,7 +458,7 @@ def __askForMini():
 
     return int(mini)
 
-def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficulty : int)->str:
+def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficulty : list[int])->str:
 
     nombre_a_trouver : int
     temps1 : float
@@ -485,7 +485,7 @@ def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficu
     elif(nb_humans == 1):
         nombre_a_trouver = __askNombreATrouver(B, j1_name, mini, maxi)
 
-        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty, True)
+        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty[1], True)
 
         nombre_a_trouver = __askBotNombreATrouver(R, j2_name, mini, maxi)
 
@@ -493,12 +493,12 @@ def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficu
     else:
         nombre_a_trouver = __askBotNombreATrouver(B, j1_name, mini, maxi)
 
-        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty, False)
+        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty[1], False)
 
         nombre_a_trouver = __askBotNombreATrouver(R, j2_name, mini, maxi)
 
 
-        temps1 = __LaunchTurnBot(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, difficulty, False)
+        temps1 = __LaunchTurnBot(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, difficulty[2], False)
 
     #check et retour du vainqueur
     return __checkWin(temps1, temps2, j1_name, j2_name, nb_humans)

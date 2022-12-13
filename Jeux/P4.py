@@ -590,7 +590,7 @@ def __askForPlayerAction(cases : list[list[str]], j_name : str, couleur : str)->
 #
 #Sortie : str
 #----------------------------------------
-def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, cases : list[list[str]], winCases : list[int])->str:
+def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, cases : list[list[str]], winCases : list[int], humans : int)->str:
 
     W  = '\033[0m'  # white (normal)
     R  = '\033[91m' # red
@@ -612,10 +612,12 @@ def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, ca
         winner = ""
     elif(turn == 2 and not equality):
         print(B + j1_name + W + " a gagné ")
-        winner = j1_name
+        if(humans > 0): winner = j1_name
+        else: winner = ""
     elif(turn == 1 and not equality):
         print(R + j2_name + W + " a gagné ")
-        winner = j2_name
+        if(humans == 2): winner = j2_name
+        else: winner = ""
         print("---------------------------------------------")
 
     return winner
@@ -713,7 +715,7 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
 
         #Fin de Partie:
         if(gameFinished):
-            winner = __affichageFin(equality, turn, j1_name, j2_name, cases, winCases)
+            winner = __affichageFin(equality, turn, j1_name, j2_name, cases, winCases, nb_humans)
 
     os.system("pause")
     return winner

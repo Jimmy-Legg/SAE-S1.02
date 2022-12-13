@@ -458,7 +458,7 @@ if __name__ == "__main__":
                     match choice:
 
                         case "1":
-                            winner = Devinette.LaunchGame_devinettes(j1_name,j2_name, nb_humans, difficulty[0])
+                            winner = Devinette.LaunchGame_devinettes(j1_name,j2_name, nb_humans, difficulty)
                             if(not winner == ""): __ajouterScore(winner, "devinette", listJoueurs)
 
                         case "2":
