@@ -1,5 +1,6 @@
 import os
 import random
+import time
 
 #----------------------------------------
 #change le tour
@@ -110,7 +111,16 @@ def __checkWin(cases : list[str])->list[bool | int]:
 #Sortie : affichage
 #----------------------------------------
 def __afficherMenu(j1_name : str, j2_name : str, cases : list[str]):
+    """Affiche l'interface de jeu
 
+    Arguments :
+        grille morpion : list
+        personne qui a gagné : int
+
+    Retour : rien
+
+    Private : variable accessible uniquement dans le script actuel
+    """
     os.system("cls")
     
     N  = '\033[90m' # noir
@@ -130,17 +140,17 @@ def __afficherMenu(j1_name : str, j2_name : str, cases : list[str]):
 
 
 
-#----------------------------------------
-#Affiche la grille finale avec les couleurs de victoire (les cases de victoires sont en vert)
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : list[str], int
-#
-#Sortie : affichage
-#----------------------------------------
 def __affichageFin(cases : list[str], winType : int):
+    """Affiche la grille finale avec les couleurs de victoire (les cases de victoires sont en vert)
 
+    Arguments :
+        grille morpion : list
+        personne qui a gagné : int
+
+    Retour : rien
+
+    Private : variable accessible uniquement dans le script actuel
+    """
     mot : str
 
     W  = '\033[0m'  # white (normal)
@@ -194,21 +204,30 @@ def __affichageFin(cases : list[str], winType : int):
     print("---------------------------------------------")
 
    
-def bot_difficulte3(cases : list):
-    choice : str
-    liste = ["1","3","7","9"]
-    choice = ""
+def __bot_difficulte3(cases : list):
+    """lance le bot difficulté 3
 
+    Arguments :
+        grille morpion : list
+
+    Retour : retourn le choix du bot
+    """
+    bon : bool
+    choice : str
+
+    choice = ""
+    bon = False
 
     #si joue sur la diagonal op
     if cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = str(random.choice(liste))
+        choice = "5"
+    
     #Lignes 1-2-3
     elif cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." :
         choice = "1"
-    elif cases[8-1] == cases[5-1] and not cases[5-1] == "." and cases[2-1] == "." :
+    elif cases[8-1] == cases[5-1] and not cases[8-1] == "." and cases[2-1] == "." :
         choice = "2"
-    elif cases[9-1] == cases[6-1] and not cases[6-1] == "." and cases[3-1] == "." :
+    elif cases[9-1] == cases[6-1] and not cases[9-1] == "." and cases[3-1] == "." :
         choice = "3"
     #Lignes 4-5-6
     elif cases[7-1] == cases[1-1] and not cases[1-1] == "." and cases[4-1] == "." :
@@ -261,41 +280,138 @@ def bot_difficulte3(cases : list):
     elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." :
         choice = "9"
 
-    else: choice = str(random.randint(1,9))
-    return str(choice)
-def bot_difficulte2(cases : list):
-    choice : str
-    choice = ""
-    #Lignes 1-2-3
-    a : int
-    a = random.randint(1,3)
-    if a == 1:
-        choice = str(random.randint(1,9))
+
+    elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "O" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "X" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "O" and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "X" and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "O" and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "X" and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "O" and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "X" and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "O" and cases[7] == "." and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "X" and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "O" and cases[8] == ".":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+        choice = "5"
+    elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
+        choice = "5"
+    elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
+        choice = "2"
+    elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
+        choice = "2"
     else:
-        choice = str(bot_difficulte3(cases))
-    return str(choice)
+        while bon != True:
+            choice = random.randint(1,9)
+            if choice == 1 and cases[0] == ".": bon = True
+            elif choice == 2 and cases[1] == ".": bon = True
+            elif choice == 3 and cases[2] == ".": bon = True
+            elif choice == 4 and cases[3] == ".": bon = True
+            elif choice == 5 and cases[4] == ".": bon = True
+            elif choice == 6 and cases[5] == ".": bon = True
+            elif choice == 7 and cases[6] == ".": bon = True
+            elif choice == 8 and cases[7] == ".": bon = True
+            elif choice == 9 and cases[8] == ".": bon = True
+            
 
-def bot(cases : list, difficulté : int ,C : str):
+    return str(choice)
+def __bot_difficulte2(cases : list):
+    """lance le bot difficulté 2
+
+    Arguments :
+        grille morpion : list
+
+    Retour : retourn le choix du bot
+    """
     choice : str
-    difficulté : int
-    W  = '\033[0m'  # white (normal)
-    if difficulté == 1:
-        choice = str(random.randint(1,9))
-    elif difficulté == 2:
-        choice = bot_difficulte2(cases)
-    elif difficulté == 3:
-        choice = bot_difficulte3(cases)
+    a : int
+    bon : bool
+
+    choice = ""
+    a = random.randint(1,2)
+    if a == 1:
+        bon = False
+        while bon != True:
+            choice = random.randint(1,9)
+            if choice == 1 and cases[0] == ".": bon = True
+            elif choice == 2 and cases[1] == ".": bon = True
+            elif choice == 3 and cases[2] == ".": bon = True
+            elif choice == 4 and cases[3] == ".": bon = True
+            elif choice == 5 and cases[4] == ".": bon = True
+            elif choice == 6 and cases[5] == ".": bon = True
+            elif choice == 7 and cases[6] == ".": bon = True
+            elif choice == 8 and cases[7] == ".": bon = True
+            elif choice == 9 and cases[8] == ".": bon = True
+    else:
+        choice = str(__bot_difficulte3(cases))
     return str(choice)
 
-#----------------------------------------
-#Lance la partie de morpion et retourne le vainqueur de la partie
-#
-#Entrée : j1_name : str, j2_name : str
-#
-#Sortie : str
-#----------------------------------------
-def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulté : list[int])->str:
+def __bot(cases : list, difficulte : int ,player : str,C : str):
+    """lance le bot en fonction de la difficulté
 
+    Arguments :
+        grille morpion : list
+
+    Retour : retourn le choix du bot
+    """
+    bon : bool
+    choice : str
+    difficulte : int
+    W  = '\033[0m'  # white (normal)
+    if difficulte == 1:
+        print(C + player +  W + " choisi une case")
+        time.sleep(0.5)
+        bon = False
+        while bon != True:
+            choice = random.randint(1,9)
+            if choice == 1 and cases[0] == ".": bon = True
+            elif choice == 2 and cases[1] == ".": bon = True
+            elif choice == 3 and cases[2] == ".": bon = True
+            elif choice == 4 and cases[3] == ".": bon = True
+            elif choice == 5 and cases[4] == ".": bon = True
+            elif choice == 6 and cases[5] == ".": bon = True
+            elif choice == 7 and cases[6] == ".": bon = True
+            elif choice == 8 and cases[7] == ".": bon = True
+            elif choice == 9 and cases[8] == ".": bon = True
+    elif difficulte == 2:
+        print(C + player +  W + " choisi une case")
+        time.sleep(0.5)
+        choice = __bot_difficulte2(cases)
+    elif difficulte == 3:
+        print(C + player +  W +" choisi une case")
+        time.sleep(0.5)
+        choice = __bot_difficulte3(cases)
+    return str(choice)
+
+
+def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte : list[int])->str:
+    """Lance la partie de morpion et retourne le vainqueur de la partie
+
+    Arguments :
+        Nom joueur 1 : str
+        Nom du joueur 2 : str
+        Nombre de joueurs : int
+        liste des difficulté : list[difficulté bot1, difficulté bot2]
+
+    Retour : gagnant de la partie sous forme de str
+    """
     cases : list[str]
 
     winner : str
@@ -332,18 +448,17 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult�
 
             #affiche le menu
             __afficherMenu(j1_name, j2_name, cases)
-            
+
             #demande le choix de l'utilisateur
-            print(nb_joueurs)
             if nb_joueurs == 2:
                 if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
                 else : choice = str(input(R + j2_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
             elif nb_joueurs == 1:
                 if(turn == 1): choice = str(input(B + j1_name + W + " choisissez votre case en suivant le schéma ci dessus : "))
-                else: choice = bot(cases,int(difficulté[0]),turn)
+                else: choice = __bot(cases,int(difficulte[0]),j2_name,R)
             elif nb_joueurs == 0:
-                if(turn == 1): choice = bot(cases,int(difficulté[0]),R)
-                else: choice = bot(cases,int(difficulté[1]),B)
+                if(turn == 1): choice = __bot(cases,int(difficulte[0]),j1_name,B)
+                else: choice = __bot(cases,int(difficulte[1]),j2_name,R)
             #vérifie la valeur de l'utilisateur
             if(not choice.isdigit()):print("Valeur impossible")
             elif(int(choice) < 1 or int(choice) > 9):print("Valeur impossible")
@@ -352,8 +467,18 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficult�
 
 
         #ajoute le symbole dans la case souhaité
-        if(turn == 1):cases[int(choice) - 1] = "X"
-        elif(turn == 2):cases[int(choice) - 1] = "O"
+        if(turn == 1):
+            if nb_joueurs == 0:
+                print(B + j1_name +  W + " à choisi la case : " + choice);time.sleep(0.5)
+            cases[int(choice) - 1] = "X"
+            
+        elif(turn == 2):
+            if nb_joueurs == 0:
+                print(R + j2_name +  W + " à choisi la case : " + choice);time.sleep(0.5)
+            elif nb_joueurs == 1:
+                print(R + j2_name +  W + " à choisi la case : " + choice);time.sleep(0.5)
+            cases[int(choice) - 1] = "O"
+    
 
         #Vérification de victoire :
         result_checkWin = __checkWin(cases)
