@@ -10,6 +10,6 @@ Najarala 1 0 0 0
 Théo 0 0 0 1
 Zamite 0 0 0 1
 Akantor 0 0 8 0
-Jimmy 0 0 0 1
+Jimmy 0 1 0 1
 Rajang 0 0 6 0
 Elora 0 1 0 0
