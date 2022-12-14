@@ -31,7 +31,7 @@ def __afficherFin(winner : str, couleur : str):
     print("---------------------")
 
 def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
-    """Fonction fait jouer les bot en fonction de la difficulté 
+    """Fonction fait jouer les bot en fonction de la difficulté
 
     Arguments :
         nom du bot : str
