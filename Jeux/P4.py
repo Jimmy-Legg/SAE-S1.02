@@ -8,7 +8,7 @@ def __couleur(symbole : str, index : int, winCases: list[int])->str:
 
     Arguments :
         Symbole : str
-        Index : int
+        Index : int (numéro de la case)
         Cases gagnantes : list[int]
 
     Retour : Code couleur associé : str
@@ -30,9 +30,9 @@ def __changeTurn(turn : int)->int:
     """Fonction qui va regarder le tour actuel et retourner la valeur du tour suivant
 
     Arguments :
-        Tour : int
+        Tour : int (soit 1 soit 2)
 
-    Retour : Tour suivant : int
+    Retour : Tour suivant : int (soit 1 soit 2)
 
     Private : Cette fonction n'est utile que pour ce script
     """
@@ -378,8 +378,8 @@ def __tryMenace(cases : list[list[str]], line : int, column : int, symbol : str)
 
     Arguments :
         Cases : list[int]
-        Ligne : int
-        Colonne : int
+        Ligne : int (entre 1 et 6, 6 étant celle du bas)
+        Colonne : int (entre 0 et 6, 6 étant celle de droite)
         Symbole du joueur : str
 
     Retour : choix : int
@@ -526,11 +526,11 @@ def __isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symb
 
     Arguments :
         Cases : list[int]
-        Ligne : int
-        Colonne : int
+        Ligne : int (entre 1 et 6, 6 étant celle du bas)
+        Colonne : int (entre 0 et 6, 6 étant celle du droite)
         Symbole du joueur : str
 
-    Retour : colonne : int
+    Retour : Case gagnante : bool
 
     Private : Cette fonction n'est utile que pour ce script
     """
@@ -554,7 +554,7 @@ def __hasAWinningColumn(cases : list[list[str]], symbol : str, oponentSymbol : s
         Symbole du joueur : str
         Symbole de l'adversaire : str
 
-    Retour : colonne : int
+    Retour : colonne : int (entre 1 et 7, 7 étant celle du droite)
 
     Private : Cette fonction n'est utile que pour ce script
     """
@@ -598,7 +598,7 @@ def __putRandom(cases : list[list[str]], oponentSymbol : str)->int:
         Cases : list[int]
         Symbole de l'adversaire
 
-    Retour : choix : int
+    Retour : choix : int (entre 1 et 7)
 
     Private : Cette fonction n'est utile que pour ce script
     """
@@ -619,7 +619,7 @@ def __askForIAAction(cases : list[list[str]], mySymbol : str, oponentSymbol : st
         Symbole de l'adversaire : str
         Difficulté du bot : int
 
-    Retour : choix du joueur sous forme [colonne, ligne] : list[int]
+    Retour : choix du joueur (sous forme [colonne, ligne], avec colonne entre 1 et 6 et ligne entre 1 et 7) : list[int]
 
     Private : Cette fonction n'est utile que pour ce script
     """
@@ -676,7 +676,7 @@ def __askForPlayerAction(cases : list[list[str]], j_name : str, couleur : str)->
         Nom du joueur : str
         Code couleur associé au joueur : str
 
-    Retour : choix du joueur sous forme [colonne, ligne] : list[int]
+    Retour : choix du joueur sous forme (sous forme [colonne, ligne], avec colonne entre 1 et 6 et ligne entre 1 et 7) : list[int]
 
     Private : Cette fonction n'est utile que pour ce script
     """
