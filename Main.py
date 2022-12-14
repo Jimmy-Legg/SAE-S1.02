@@ -153,6 +153,9 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
     Arguments :
         Nom du joueur 1 : str
         Nom du joueur 2 : str
+        Nombre de joueur humains : int (entre 0 et 2)
+        Liste des joueurs : list[joueur]
+        Difficulté : list[int] (en position 0 celle du joueur 1 et en position 1 celle du joueur 2)
 
     Retour : affichage
 
@@ -174,40 +177,23 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
             if(listJoueurs[i].getName() == j2_name): j2 = listJoueurs[i]
             i += 1
 
-        if(j1 != None and j2 != None):
-            print("--------------------------------------------------------------------")
-            print("                             Profils :                              ")
-            print("             Bot 1 :                             Bot 2 :            ")
-            print(35 * " " + "|  " + 35 * " ")
-            print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name + (35 - len(j1_name)) * " ")
-            print(35 * " " + "|  " + 35 * " ")
-            print("Scores :" + 27 * " " + "|  " + "Difficulté : " + str(difficulty[1]) + (22 - len(str(difficulty[1]))) * " ")
-            print(35 * " " + "|  " + 35 * " ")
-            print("Devinettes :  " + str(j1.getScoreDevinette()) + (21 - len(str(j1.getScoreDevinette()))) * " " + "|  " + "Devinettes :  " + str(j1.getScoreDevinette()) + (21 - len(str(j1.getScoreDevinette()))) * " ")
-            print("Allumettes :  " + str(j1.getScoreAllumettes()) + (21 - len(str(j1.getScoreAllumettes()))) * " " + "|  " + "Allumettes :  " + str(j1.getScoreAllumettes()) + (21 - len(str(j1.getScoreAllumettes()))) * " ")
-            print("Morpion :     " + str(j1.getScoreMorpion()) + (21 - len(str(j1.getScoreMorpion()))) * " " + "|  " + "Morpion :     " + str(j1.getScoreMorpion()) + (21 - len(str(j1.getScoreMorpion()))) * " ")
-            print("Puissance 4 : " + str(j1.getScorePuissance4()) + (21 - len(str(j1.getScorePuissance4()))) * " " + "|  " + "Puissance 4 : " + str(j1.getScorePuissance4()) + (21 - len(str(j1.getScorePuissance4()))) * " ")
-            print(35 * " " + "|  " + 35 * " ")
-            print("--------------------------------------------------------------------")
-        elif(j1 != None and j2 == None):
-            print("--------------------------------------------------------------------")
-        elif(j1 == None and j2 != None):
-            print("--------------------------------------------------------------------")
-        else:
-            print("--------------------------------------------------------------------")
-            print("                             Profils :                              ")
-            print("          Joueur 1 :                             Bot 2 :            ")
-            print(35 * " " + "|  " + 35 * " ")
-            print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name + (35 - len(j1_name)) * " ")
-            print(35 * " " + "|  " + 35 * " ")
-            print("Scores :" + 27 * " " + "|  " + "Difficulté : " + str(difficulty[1]) + (22 - len(str(difficulty[1]))) * " ")
-            print(35 * " " + "|  " + 35 * " ")
-            print("Devinettes :  0" + 20 * " " + "|  " + "Devinettes :  0" + 20 * " ")
-            print("Allumettes :  0" + 20 * " " + "|  " + "Allumettes :  0" + 20 * " ")
-            print("Morpion :     0" + 20 * " " + "|  " + "Morpion :     0" + 20 * " ")
-            print("Puissance 4 : 0" + 20 * " " + "|  " + "Puissance 4 : 0" + 20 * " ")
-            print(35 * " " + "|  " + 35 * " ")
-            print("--------------------------------------------------------------------")
+        if(j1 == None): j1 = joueur(j1_name, 0, 0, 0, 0)
+        if(j2 == None): j2 = joueur(j2_name, 0, 0, 0, 0)
+
+        print("--------------------------------------------------------------------")
+        print("                             Profils :                              ")
+        print("          Joueur 1 :                          Joueur 2 :            ")
+        print(35 * " " + "|  " + 35 * " ")
+        print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name + (35 - len(j1_name)) * " ")
+        print(35 * " " + "|  " + 35 * " ")
+        print("Scores :" + 27 * " " + "|  " + "Scores :" + 27 * " ")
+        print(35 * " " + "|  " + 35 * " ")
+        print("Devinettes :  " + str(j1.getScoreDevinette()) + (21 - len(str(j1.getScoreDevinette()))) * " " + "|  " + "Devinettes :  " + str(j2.getScoreDevinette()) + (21 - len(str(j2.getScoreDevinette()))) * " ")
+        print("Allumettes :  " + str(j1.getScoreAllumettes()) + (21 - len(str(j1.getScoreAllumettes()))) * " " + "|  " + "Allumettes :  " + str(j2.getScoreAllumettes()) + (21 - len(str(j2.getScoreAllumettes()))) * " ")
+        print("Morpion :     " + str(j1.getScoreMorpion()) + (21 - len(str(j1.getScoreMorpion()))) * " " + "|  " + "Morpion :     " + str(j2.getScoreMorpion()) + (21 - len(str(j2.getScoreMorpion()))) * " ")
+        print("Puissance 4 : " + str(j1.getScorePuissance4()) + (21 - len(str(j1.getScorePuissance4()))) * " " + "|  " + "Puissance 4 : " + str(j2.getScorePuissance4()) + (21 - len(str(j2.getScorePuissance4()))) * " ")
+        print(35 * " " + "|  " + 35 * " ")
+        print("--------------------------------------------------------------------")
 
     if(nb_humans == 1):
         i = 0
@@ -246,7 +232,7 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
             print("Puissance 4 : 0" + 20 * " " + "|  " + 35 * " ")
             print(35 * " " + "|  " + 35 * " ")
             print("--------------------------------------------------------------------")
-    
+
     if(nb_humans == 0):
         print("--------------------------------------------------------------------")
         print("                             Profils :                              ")
