@@ -385,16 +385,16 @@ def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str, nb_human
     return winner
 
 
-#----------------------------------------
-# Demande le nombre Max que les joueurs vont pouvoir entrer
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : None
-#
-#Sortie : Max : int
-#----------------------------------------
 def __askForMaxi(mini : int):
+    """Fonction qui demande le nombre maximum que les joueurs vont pouvoir entrer, forcément supérieur a la Borne minimum
+
+    Arguments :
+        Borne minimum : int
+
+    Retour : Borne max : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     maxi : str
     maxi_ok : bool
@@ -427,17 +427,16 @@ def __askForMaxi(mini : int):
     return int(maxi)
 
 
-#----------------------------------------
-# Demande le nombre Min que les joueurs vont pouvoir entrer
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : None
-#
-#Sortie : Max : int
-#----------------------------------------
 def __askForMini():
+    """Fonction qui demande le nombre minimum que les joueurs vont pouvoir entrer
 
+    Arguments :
+        Aucun
+
+    Retour : Borne max : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     mini : str
 
     W  = '\033[0m'  # white (normal)
