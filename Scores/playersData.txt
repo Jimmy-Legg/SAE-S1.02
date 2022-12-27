@@ -10,10 +10,10 @@ Najarala 1 0 0 0
 Théo 0 0 0 1
 Zamite 0 0 0 1
 Akantor 0 0 8 0
-Jimmy 0 1 0 2
+Jimmy 0 1 0 3
 Rajang 0 0 6 0
 Elora 0 1 0 0
 Papa 0 2 0 0
 MP 4 2 0 0
 jimmy 0 1 0 0
-Céline 0 0 0 2
+Céline 0 0 0 3
