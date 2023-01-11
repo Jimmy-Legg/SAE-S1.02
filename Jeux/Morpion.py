@@ -251,7 +251,6 @@ def __bot_difficulte3(cases : list,turn : int):
         choice = "5"
     elif cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == ".":
         choice = "2"
-        print("ici")
     #Colonnes 7-4-1
     elif cases[8-1] == cases[9-1] and not cases[9-1] == "." and cases[7-1] == "." :
         choice = "7"
@@ -319,28 +318,28 @@ def __bot_difficulte3(cases : list,turn : int):
     elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
         choice = "2"
     
-    elif cases[1-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[1-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[1-1] != "." :
         if turn == 1:
             choice = "9"
-    elif cases[9-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[9-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[9-1] != "." :
         if turn == 1:
             choice = "1"
-    elif cases[7-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[7-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[7-1] != "." :
         if turn == 1:
             choice = "3"
-    elif cases[3-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[3-1] == "O" and cases[4] == "X" and not cases[7-1] == "." and cases[3-1] != "." :
         if turn == 1:
             choice = "7"
-    elif cases[1-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[1-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[1-1] != "." :
         if turn == 2:
             choice = "9"
-    elif cases[9-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[9-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[9-1] != "." :
         if turn == 2:
             choice = "1"
-    elif cases[7-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[7-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[7-1] != "." :
         if turn == 2:
             choice = "3"
-    elif cases[3-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[1-1] == "." :
+    elif cases[3-1] == "X" and cases[4] == "O" and not cases[7-1] == "." and cases[3-1] != "." :
         if turn == 2:
             choice = "7"
     else:
@@ -358,7 +357,7 @@ def __bot_difficulte3(cases : list,turn : int):
             
 
     return str(choice)
-def __bot_difficulte2(cases : list):
+def __bot_difficulte2(cases : list,turn):
     """lance le bot difficulté 2
 
     Arguments :
@@ -386,7 +385,7 @@ def __bot_difficulte2(cases : list):
             elif choice == 8 and cases[7] == ".": bon = True
             elif choice == 9 and cases[8] == ".": bon = True
     else:
-        choice = str(__bot_difficulte3(cases))
+        choice = str(__bot_difficulte3(cases,turn))
     return str(choice)
 
 def __bot(cases : list, difficulte : int ,player : str,C : str,turn :int):
@@ -420,10 +419,9 @@ def __bot(cases : list, difficulte : int ,player : str,C : str,turn :int):
     elif difficulte == 2:
         print(C + player +  W + " choisi une case")
         time.sleep(0.5)
-        choice = __bot_difficulte2(cases)
+        choice = __bot_difficulte2(cases,turn)
     elif difficulte == 3:
         print(C + player +  W +" choisi une case")
-        print(turn)
         time.sleep(0.5)
         choice = __bot_difficulte3(cases,turn)
     return str(choice)
@@ -549,4 +547,4 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte
 
     #Retour
     return winner
-#LaunchGame_morpion("Nath","Jimm",0,[3,1])
+LaunchGame_morpion("Nath","Jimm",1,[3,3])
