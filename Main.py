@@ -199,13 +199,12 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
         i = 0
         while i < len(listJoueurs) and j1 == None:
             if(listJoueurs[i].getName() == j1_name): j1 = listJoueurs[i]
-            print(listJoueurs[i].getName(), i)
             i += 1
 
         if(j1 != None):
             print("--------------------------------------------------------------------")
             print("                             Profils :                              ")
-            print("             Bot 1 :                             Bot 2 :            ")
+            print("             Joueur 1 :                             Bot 2 :            ")
             print(35 * " " + "|  " + 35 * " ")
             print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name + (35 - len(j1_name)) * " ")
             print(35 * " " + "|  " + 35 * " ")
