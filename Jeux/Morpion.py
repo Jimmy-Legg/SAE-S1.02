@@ -204,7 +204,7 @@ def __affichageFin(cases : list[str], winType : int):
     print("---------------------------------------------")
 
    
-def __bot_difficulte3(cases : list,turn : int):
+def __bot_difficulte3(cases : list[str],turn : int):
     """lance le bot difficulté 3
 
     Arguments :
@@ -215,7 +215,6 @@ def __bot_difficulte3(cases : list,turn : int):
     """
     print(turn)
     bon : bool
-    choice : str
 
     choice = ""
     bon = False
@@ -354,10 +353,9 @@ def __bot_difficulte3(cases : list,turn : int):
             elif choice == 7 and cases[6] == ".": bon = True
             elif choice == 8 and cases[7] == ".": bon = True
             elif choice == 9 and cases[8] == ".": bon = True
-            
 
     return str(choice)
-def __bot_difficulte2(cases : list,turn):
+def __bot_difficulte2(cases : list[str], turn : int):
     """lance le bot difficulté 2
 
     Arguments :
@@ -365,7 +363,7 @@ def __bot_difficulte2(cases : list,turn):
 
     Retour : retourn le choix du bot
     """
-    choice : str
+
     a : int
     bon : bool
 
@@ -375,20 +373,20 @@ def __bot_difficulte2(cases : list,turn):
         bon = False
         while bon != True:
             choice = random.randint(1,9)
-            if choice == 1 and cases[0] == ".": bon = True
-            elif choice == 2 and cases[1] == ".": bon = True
-            elif choice == 3 and cases[2] == ".": bon = True
-            elif choice == 4 and cases[3] == ".": bon = True
-            elif choice == 5 and cases[4] == ".": bon = True
-            elif choice == 6 and cases[5] == ".": bon = True
-            elif choice == 7 and cases[6] == ".": bon = True
-            elif choice == 8 and cases[7] == ".": bon = True
-            elif choice == 9 and cases[8] == ".": bon = True
+            if(choice == 1 and cases[0] == "."): bon = True
+            elif(choice == 2 and cases[1] == "."): bon = True
+            elif(choice == 3 and cases[2] == "."): bon = True
+            elif(choice == 4 and cases[3] == "."): bon = True
+            elif(choice == 5 and cases[4] == "."): bon = True
+            elif(choice == 6 and cases[5] == "."): bon = True
+            elif(choice == 7 and cases[6] == "."): bon = True
+            elif(choice == 8 and cases[7] == "."): bon = True
+            elif(choice == 9 and cases[8] == "."): bon = True
     else:
-        choice = str(__bot_difficulte3(cases,turn))
+        choice = str(__bot_difficulte3(cases, turn))
     return str(choice)
 
-def __bot(cases : list, difficulte : int ,player : str,C : str,turn :int):
+def __bot(cases : list[str], difficulte : int ,player : str,C : str,turn :int):
     """lance le bot en fonction de la difficulté
 
     Arguments :
@@ -397,25 +395,23 @@ def __bot(cases : list, difficulte : int ,player : str,C : str,turn :int):
     Retour : retourn le choix du bot
     """
     bon : bool
-    choice : str
-    difficulte : int
-    choice = random.randint(1,9)
+    choice = str(random.randint(1,9))
     W  = '\033[0m'  # white (normal)
     if difficulte == 1:
         print(C + player +  W + " choisi une case")
         time.sleep(0.5)
         bon = False
-        while bon != True:
+        while(bon != True):
             choice = random.randint(1,9)
-            if choice == 1 and cases[0] == ".": bon = True
-            elif choice == 2 and cases[1] == ".": bon = True
-            elif choice == 3 and cases[2] == ".": bon = True
-            elif choice == 4 and cases[3] == ".": bon = True
-            elif choice == 5 and cases[4] == ".": bon = True
-            elif choice == 6 and cases[5] == ".": bon = True
-            elif choice == 7 and cases[6] == ".": bon = True
-            elif choice == 8 and cases[7] == ".": bon = True
-            elif choice == 9 and cases[8] == ".": bon = True
+            if(choice == 1 and cases[0] == "."): bon = True
+            elif(choice == 2 and cases[1] == "."): bon = True
+            elif(choice == 3 and cases[2] == "."): bon = True
+            elif(choice == 4 and cases[3] == "."): bon = True
+            elif(choice == 5 and cases[4] == "."): bon = True
+            elif(choice == 6 and cases[5] == "."): bon = True
+            elif(choice == 7 and cases[6] == "."): bon = True
+            elif(choice == 8 and cases[7] == "."): bon = True
+            elif(choice == 9 and cases[8] == "."): bon = True
     elif difficulte == 2:
         print(C + player +  W + " choisi une case")
         time.sleep(0.5)
@@ -530,7 +526,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte
                 print("égalité !")
             elif(turn == 2):
                 print(B + j1_name + W + " a gagné ")
-            elif(turn == 1): 
+            elif(turn == 1):
                 print(R + j2_name + W + " a gagné ")
             print("---------------------------------------------")
 
@@ -547,4 +543,4 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte
 
     #Retour
     return winner
-#LaunchGame_morpion("Nath","Jimm",1,[3,3])
+LaunchGame_morpion("Nath","Jimm",1,[3,3])
