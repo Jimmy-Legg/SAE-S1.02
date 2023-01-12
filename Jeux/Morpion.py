@@ -529,5 +529,4 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte
     elif(turn == 1):
         winner = j2_name
 
-    #Retour
     return winner
