@@ -464,7 +464,7 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
 
     #pyright: reportUnknownArgumentType=false
     for k in range(len(scores)-1, -1, -1):
-        if(scores[k][1] != 0):print(scores[k][0] + " : " + str(scores[k][1]))
+        if(scores[k][1] != 0):print(playerInformations[scores[k][0]])
     print("                     ")
     print("---------------------")
     os.system("pause")
