@@ -531,4 +531,3 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte
 
     #Retour
     return winner
-LaunchGame_morpion("Nath","Jimm",1,[3,3])
