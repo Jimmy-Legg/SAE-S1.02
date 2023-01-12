@@ -119,9 +119,10 @@ def getPlayerData()->list[str]:
         os.system("cls")
         data.append("0")
         data.append(input("Choisissez le nom du " + B + "joueur 1" + W + " : "))
-        while data[2] in ["Nerscylla", "Najarala", "Akantor"] or len(data[2]) > 15:
+        while data[2] in ["Nerscylla", "Najarala", "Akantor"] or len(data[2]) > 15 or len(data[2])<=0:
             os.system("cls")
             if(len(data[2]) > 15):print(R + "La taille maximum pour un pseudo est de 15 caractères" + W)
+            elif(len(data[2])<=0):print(R + "Le pseudo ne peut pas être vide" + W)
             else:print(R + "Ce nom est réservé ..." + W)
             del data[2]
             data.append(input("Choisissez le nom du " + B + "joueur 1" + W + " : "))
@@ -164,9 +165,10 @@ def getPlayerData()->list[str]:
         os.system("cls")
         data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
         #pyright: reportGeneralTypeIssues=false
-        while (data[4]==data[2] or len(data[4]) > 15):
+        while (data[4]==data[2] or len(data[4]) > 15) or len(data[4])<=0:
             os.system("cls")
             if(len(data[4]) > 15):print(R + "La taille maximum pour un pseudo est de 15 caractères" + W)
+            elif(len(data[4])<=0):print(R + "Le pseudo ne peut pas être vide" + W)
             else: print(R + "Impossible de mettre le même nom aux deux joueurs" + W)
             del data[4]
             data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
