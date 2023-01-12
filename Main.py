@@ -1,20 +1,23 @@
 import os
+from typing import Optional
 import Jeux.Morpion as Morpion
 import Jeux.Allumettes as Allumettes
 import Jeux.P4 as P4
 import Jeux.Devinette as Devinette
 from Classes.Joueur import joueur
 
-#----------------------------------------
-#Récupère dans le fichier donné en entrée les joueurs et en fait un liste
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : (fichier) str
-#
-#Sortie : list[joueur]
-#----------------------------------------
 def __getJoueurs(fichier : str)->list[joueur]:
+    """Récupère dans le fichier donné en entrée les joueurs et en fait un liste
+
+    Arguments :
+        Chemin du fichier : str
+
+    Retour : list[joueur]
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+
+    datas : list[str]
 
     listJoueurs : list[joueur]
 
@@ -25,23 +28,25 @@ def __getJoueurs(fichier : str)->list[joueur]:
 
     for _i in range(0,len(lines)):
         datas = lines[_i].split()
-        j = joueur(str(datas[0]), int(str(datas[1])), int(str(datas[2])), int(str(datas[3])), int(str(datas[4])))
-        listJoueurs.append(j)
+        if(len(datas)==5):
+            j = joueur(str(datas[0]), int(datas[1].split("|")[0]), int(datas[1].split("|")[1]), int(datas[2].split("|")[0]), int(datas[2].split("|")[1]), int(datas[3].split("|")[0]), int(datas[3].split("|")[1]), int(datas[4].split("|")[0]), int(datas[4].split("|")[1]))
+            listJoueurs.append(j)
+            j.showScoreAllumettes()
 
     f.close()
 
     return listJoueurs
 
-#----------------------------------------
-#Affiche le menu numéro 1
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
 def getPlayerData()->list[str]:
+    """Demandes les données des joueurs et les retourne sous la forme [nombre de joueurs humains, difficulté du bot 1, nom du bot 1, difficulté du bot 2, nom du bot 2]
+
+    Arguments :
+        Aucuns
+
+    Retour : list[str]
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     data : list[str]
     choice : str
@@ -72,13 +77,13 @@ def getPlayerData()->list[str]:
             print(R + "Choix impossible !" + W)
             os.system("pause")
 
-    if(int(choice) > 1):
+    if(int(data[0])==0):
         choice = ""
         while choice not in ["1","2","3"]:
 
             os.system("cls")
             print("---------------------")
-            print("     Difficulté :    ")
+            print("     Difficulté du bot 1 :")
             print("                     ")
             print("  1 - Facile         ")
             print("  2 - Moyen          ")
@@ -86,7 +91,6 @@ def getPlayerData()->list[str]:
             print("                     ")
             print("---------------------")
             choice = input("Choisissez la difficulté : ")
-
             if(choice == "1") : data.append("1")
             elif(choice == "2") : data.append("2")
             elif(choice == "3") : data.append("3")
@@ -94,65 +98,232 @@ def getPlayerData()->list[str]:
                 print(R + "Choix impossible !" + W)
                 os.system("pause")
 
-    os.system("cls")
-    if(data[0] == "0"):
-        if(data[1] == "1"): data.append("Zamite")
-        if(data[1] == "2"): data.append("Rajang")
-        if(data[1] == "3"): data.append("Kirin")
+        os.system("cls")
+        if(data[0] == "0"):
+            if(data[1] == "1"): data.append("Zamite")
+            if(data[1] == "2"): data.append("Rajang")
+            if(data[1] == "3"): data.append("Kirin")
 
-        print("Le bot 1 s'appellera " + B + data[2] + W)
+            print("Le bot 1 s'appellera " + B + data[2] + W)
+            os.system("pause")
+    else:
+        os.system("cls")
+        data.append("0")
+        data.append(input("Choisissez le nom du " + B + "joueur 1" + W + " : "))
+
+    if(int(data[0])<2):
+
+        choice = ""
+        while choice not in ["1","2","3"]:
+
+            os.system("cls")
+            print("---------------------")
+            if(data[0]=="1"):print("     Difficulté du bot :")
+            else: print("     Difficulté du bot 2 :")
+            print("                     ")
+            print("  1 - Facile         ")
+            print("  2 - Moyen          ")
+            print("  3 - Difficile      ")
+            print("                     ")
+            print("---------------------")
+            choice = input("Choisissez la difficulté : ")
+            if(choice == "1") : data.append("1")
+            elif(choice == "2") : data.append("2")
+            elif(choice == "3") : data.append("3")
+            else:
+                print(R + "Choix impossible !" + W)
+                os.system("pause")
+
+        os.system("cls")
+        if(data[3] == "1"): data.append("Najarala")
+        if(data[3] == "2"): data.append("Akantor")
+        if(data[3] == "3"): data.append("Nerscylla")
+
+        if(data[0] == "0"): print("Le bot 2 s'appellera " + R + data[4] + W)
+        if(data[0] == "1"): print("Le bot s'appellera " + R + data[4] + W)
         os.system("pause")
-    else: data.append(input("Choisissez le nom du " + B + "joueur 1" + W + " : "))
 
-    os.system("cls")
-    if(data[0] == "0" or data[0] == "1"):
-        if(data[1] == "1"): data.append("Najarala")
-        if(data[1] == "2"): data.append("Akantor")
-        if(data[1] == "3"): data.append("Nerscylla")
 
-        if(data[0] == "0"): print("Le bot 2 s'appellera " + R + data[3] + W)
-        if(data[0] == "1"): print("Le bot s'appellera " + R + data[3] + W)
-        os.system("pause")
-
-    else: data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
+    else:
+        data.append("0")
+        os.system("cls")
+        data.append(input("Choisissez le nom du" + R + " joueur 2" + W + " : "))
 
     return data
 
-#----------------------------------------
-#Affiche le menu numéro 1
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
-def __afficher_menu_1():
+def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueurs : list[joueur], difficulty : list[int]):
+    """Affiche les profils des joueurs actuels
+
+    Arguments :
+        Nom du joueur 1 : str
+        Nom du joueur 2 : str
+        Nombre de joueur humains : int (entre 0 et 2)
+        Liste des joueurs : list[joueur]
+        Difficulté : list[int] (en position 0 celle du joueur 1 et en position 1 celle du joueur 2)
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+
+    j1 : Optional[joueur]
+    j2 : Optional[joueur]
+
+    j1 = None
+    j2 = None
+
+    R  = '\033[91m' # red
+    W  = '\033[0m'  # white (normal)
+    G  = '\033[92m' # green
+    O  = '\033[93m' # yellow
 
     os.system("cls")
-    print("------------------------")
-    print("     Bienvenue !        ")
-    print("                        ")
-    print("  1 - Jouer             ")
-    print("  2 - Scores            ")
-    print("  3 - Règles            ")
-    print("  4 - Modifier Joueurs  ")
-    print("                        ")
-    print("  5 - Quitter           ")
-    print("                        ")
-    print("------------------------")
 
-#----------------------------------------
-#Affiche le menu numéro 2
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
+    if(nb_humans == 2):
+        i = 0
+        while i < len(listJoueurs) and not (j1 != None and j2 != None):
+            if(listJoueurs[i].getName() == j1_name): j1 = listJoueurs[i]
+            if(listJoueurs[i].getName() == j2_name): j2 = listJoueurs[i]
+            i += 1
+
+        if(j1 == None): j1 = joueur(j1_name, 0, 0, 0, 0, 0, 0, 0, 0)
+        if(j2 == None): j2 = joueur(j2_name, 0, 0, 0, 0, 0, 0, 0, 0)
+
+        print("--------------------------------------------------------------------")
+        print("                             Profils :                              ")
+        print("          Joueur 1 :                          Joueur 2 :            ")
+        print()
+        print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name)
+        print()
+        print("Scores :" + 27 * " " + "|  " + "Scores :" + 27 * " ")
+        print()
+
+        #afficher score devinette:
+        if(j1.getGameDevinette() == 0 and j2.getGameDevinette() == 0):
+            print("Devinettes :  " + G + str(j1.getScoreDevinette()) + W + "/" + R + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " " + O + "100%" + W + (21 - (len(str(j1.getScoreDevinette()) + "/" + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " 100%"))) * " " + "|  " + "Devinettes :  " + G + str(j2.getScoreDevinette()) + "/" + R + str(j2.getGameDevinette() - j2.getScoreDevinette()) + O + " 100%" + W)
+        elif(j1.getGameDevinette() == 0):
+            print("Devinettes :  " + G + str(j1.getScoreDevinette()) + W + "/" + R + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " " + O + "100%" + W +  (21 - (len(str(j1.getScoreDevinette()) + "/" + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " 100%"))) * " " + "|  " + "Devinettes :  " + G + str(j2.getScoreDevinette()) + "/" + R + str(j2.getGameDevinette() - j2.getScoreDevinette()) + O + " " + str(round((j2.getScoreDevinette()/j2.getGameDevinette()) * 100)) + "%" + W)
+        elif(j2.getGameDevinette() == 0):
+            print("Devinettes :  " + G + str(j1.getScoreDevinette()) + W + "/" + R + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " " + O + str(round((j1.getScoreDevinette()/j1.getGameDevinette()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreDevinette()) + "/" + str(j1.getGameDevinette() - j1.getScoreDevinette()) + str(round((j1.getScoreDevinette()/j1.getGameDevinette()) * 100)) + " %"))) * " " + "|  " + "Devinettes :  " + G + str(j2.getScoreDevinette()) + "/" + R + str(j2.getGameDevinette() - j2.getScoreDevinette()) + O + " 100%" + W)
+        else:
+            print("Devinettes :  " + G + str(j1.getScoreDevinette()) + W + "/" + R + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " " + O + str(round((j1.getScoreDevinette()/j1.getGameDevinette()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreDevinette()) + "/" + str(j1.getGameDevinette() - j1.getScoreDevinette()) + str(round((j1.getScoreDevinette()/j1.getGameDevinette()) * 100)) + " %"))) * " " + "|  " + "Devinettes :  " + G + str(j2.getScoreDevinette()) + "/" + R + str(j2.getGameDevinette() - j2.getScoreDevinette()) + " " + O + str(round((j2.getScoreDevinette()/j2.getGameDevinette()) * 100)) + "%" + W)
+
+        #afficher score devinette:
+        if(j1.getGameAllumettes() == 0 and j2.getGameAllumettes() == 0):
+            print("Allumettes :  " + G + str(j1.getScoreAllumettes()) + W + "/" + R + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " " + O + "100%" + W + (21 - (len(str(j1.getScoreAllumettes()) + "/" + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " 100%"))) * " " + "|  " + "Allumettes :  " + G + str(j2.getScoreAllumettes()) + "/" + R + str(j2.getGameAllumettes() - j2.getScoreAllumettes()) + O + " 100%" + W)
+        elif(j1.getGameAllumettes() == 0):
+            print("Allumettes :  " + G + str(j1.getScoreAllumettes()) + W + "/" + R + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " " + O + "100%" + W +  (21 - (len(str(j1.getScoreAllumettes()) + "/" + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " 100%"))) * " " + "|  " + "Allumettes :  " + G + str(j2.getScoreAllumettes()) + "/" + R + str(j2.getGameAllumettes() - j2.getScoreAllumettes()) + O + " " + str(round((j2.getScoreAllumettes()/j2.getGameAllumettes()) * 100)) + "%" + W)
+        elif(j2.getGameAllumettes() == 0):
+            print("Allumettes :  " + G + str(j1.getScoreAllumettes()) + W + "/" + R + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " " + O + str(round((j1.getScoreAllumettes()/j1.getGameAllumettes()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreAllumettes()) + "/" + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + str(round((j1.getScoreAllumettes()/j1.getGameAllumettes()) * 100)) + " %"))) * " " + "|  " + "Allumettes :  " + G + str(j2.getScoreAllumettes()) + "/" + R + str(j2.getGameAllumettes() - j2.getScoreAllumettes()) + O + " 100%" + W)
+        else:
+            print("Allumettes :  " + G + str(j1.getScoreAllumettes()) + W + "/" + R + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " " + O + str(round((j1.getScoreAllumettes()/j1.getGameAllumettes()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreAllumettes()) + "/" + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + str(round((j1.getScoreAllumettes()/j1.getGameAllumettes()) * 100)) + " %"))) * " " + "|  " + "Allumettes :  " + G + str(j2.getScoreAllumettes()) + "/" + R + str(j2.getGameAllumettes() - j2.getScoreAllumettes()) + " " + O + str(round((j2.getScoreAllumettes()/j2.getGameAllumettes()) * 100)) + "%" + W)
+
+        #afficher score morpion:
+        if(j1.getGameMorpion() == 0 and j2.getGameMorpion() == 0):
+            print("Morpion    :  " + G + str(j1.getScoreMorpion()) + W + "/" + R + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " " + O + "100%" + W + (21 - (len(str(j1.getScoreMorpion()) + "/" + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " 100%"))) * " " + "|  " + "Morpion    :  " + G + str(j2.getScoreMorpion()) + "/" + R + str(j2.getGameMorpion() - j2.getScoreMorpion()) + O + " 100%" + W)
+        elif(j1.getGameMorpion() == 0):
+            print("Morpion    :  " + G + str(j1.getScoreMorpion()) + W + "/" + R + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " " + O + "100%" + W +  (21 - (len(str(j1.getScoreMorpion()) + "/" + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " 100%"))) * " " + "|  " + "Morpion    :  " + G + str(j2.getScoreMorpion()) + "/" + R + str(j2.getGameMorpion() - j2.getScoreMorpion()) + O + " " + str(round((j2.getScoreMorpion()/j2.getGameMorpion()) * 100)) + "%" + W)
+        elif(j2.getGameMorpion() == 0):
+            print("Morpion    :  " + G + str(j1.getScoreMorpion()) + W + "/" + R + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " " + O + str(round((j1.getScoreMorpion()/j1.getGameMorpion()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreMorpion()) + "/" + str(j1.getGameMorpion() - j1.getScoreMorpion()) + str(round((j1.getScoreMorpion()/j1.getGameMorpion()) * 100)) + " %"))) * " " + "|  " + "Morpion    :  " + G + str(j2.getScoreMorpion()) + "/" + R + str(j2.getGameMorpion() - j2.getScoreMorpion()) + O + " 100%" + W)
+        else:
+            print("Morpion    :  " + G + str(j1.getScoreMorpion()) + W + "/" + R + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " " + O + str(round((j1.getScoreMorpion()/j1.getGameMorpion()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreMorpion()) + "/" + str(j1.getGameMorpion() - j1.getScoreMorpion()) + str(round((j1.getScoreMorpion()/j1.getGameMorpion()) * 100)) + " %"))) * " " + "|  " + "Morpion    :  " + G + str(j2.getScoreMorpion()) + "/" + R + str(j2.getGameMorpion() - j2.getScoreMorpion()) + " " + O + str(round((j2.getScoreMorpion()/j2.getGameMorpion()) * 100)) + "%" + W)
+
+        #afficher score puissance 4:
+        if(j1.getGamePuissance4() == 0 and j2.getGamePuissance4() == 0):
+            print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + "100%" + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + "100%"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + O + " 100%" + W)
+        elif(j1.getGamePuissance4() == 0):
+            print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + "100%" + W +  (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + "100%"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + O + " " + str(round((j2.getScorePuissance4()/j2.getGamePuissance4()) * 100)) + "%" + W)
+        elif(j2.getGamePuissance4() == 0):
+            print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + "%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + " %"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + O + " 100%" + W)
+        else:
+            print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + str(round(j1.getScorePuissance4()/j1.getGamePuissance4() * 100)) + "%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + " %"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + " " + O + str(round((j2.getScorePuissance4()/j2.getGamePuissance4()) * 100)) + "%" + W)
+
+        print()
+        print("--------------------------------------------------------------------")
+
+    if(nb_humans == 1):
+        i = 0
+        while i < len(listJoueurs) and j1 == None:
+            if(listJoueurs[i].getName() == j1_name): j1 = listJoueurs[i]
+            i += 1
+
+        if(j1 == None): j1 = joueur(j1_name, 0, 0, 0, 0, 0, 0, 0, 0)
+
+        print("--------------------------------------------------------------------")
+        print("                             Profils :                              ")
+        print("             Joueur 1 :                             Bot 2 :            ")
+        print()
+        print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name + (35 - len(j1_name)) * " ")
+        print()
+        print("Scores :" + 27 * " " + "|  " + "Difficulté : " + str(difficulty[1]) + (22 - len(str(difficulty[1]))) * " ")
+        print()
+
+        #afficher score devinette:
+        if(j1.getGameDevinette() == 0): print("Devinettes :  " + G + str(j1.getScoreDevinette()) + W + "/" + R + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " " + O + "100%" + W + (21 - (len(str(j1.getScoreDevinette()) + "/" + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " 100%"))) * " " + "|  " + 35 * " ")
+        else: print("Devinettes :  " + G + str(j1.getScoreDevinette()) + W + "/" + R + str(j1.getGameDevinette() - j1.getScoreDevinette()) + " " + O + str(round((j1.getScoreDevinette()/j1.getGameDevinette()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreDevinette()) + "/" + str(j1.getGameDevinette() - j1.getScoreDevinette()) + str(round((j1.getScoreDevinette()/j1.getGameDevinette()) * 100)) + " %"))) * " " + "|  " + 35 * " ")
+
+        #afficher score devinette:
+        if(j1.getGameAllumettes() == 0): print("Allumettes :  " + G + str(j1.getScoreAllumettes()) + W + "/" + R + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " " + O + "100%" + W + (21 - (len(str(j1.getScoreAllumettes()) + "/" + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " 100%"))) * " " + "|  " + 35 * " ")
+        else: print("Allumettes :  " + G + str(j1.getScoreAllumettes()) + W + "/" + R + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + " " + O + str(round((j1.getScoreAllumettes()/j1.getGameAllumettes()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreAllumettes()) + "/" + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + str(round((j1.getScoreAllumettes()/j1.getGameAllumettes()) * 100)) + " %"))) * " " + "|  " + 35 * " ")
+
+        #afficher score morpion:
+        if(j1.getGameMorpion() == 0): print("Morpion    :  " + G + str(j1.getScoreMorpion()) + W + "/" + R + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " " + O + "100%" + W + (21 - (len(str(j1.getScoreMorpion()) + "/" + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " 100%"))) * " " + "|  " + 35 * " ")
+        else: print("Morpion    :  " + G + str(j1.getScoreMorpion()) + W + "/" + R + str(j1.getGameMorpion() - j1.getScoreMorpion()) + " " + O + str(round((j1.getScoreMorpion()/j1.getGameMorpion()) * 100)) + "%"  + W + (21 - (len(str(j1.getScoreMorpion()) + "/" + str(j1.getGameMorpion() - j1.getScoreMorpion()) + str(round((j1.getScoreMorpion()/j1.getGameMorpion()) * 100)) + " %"))) * " " + "|  " + 35 * " ")
+
+        #afficher score puissance 4:
+        if(j1.getGamePuissance4() == 0): print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + str(round(j1.getScorePuissance4()/j1.getGamePuissance4() * 100)) + "%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + " %"))) * " " + "|  " + 35 * " ")
+        else: print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + str(round(j1.getScorePuissance4()/j1.getGamePuissance4() * 100)) + "%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + " %"))) * " " + "|  " + 35 * " ")
+        print()
+        print("--------------------------------------------------------------------")
+
+    if(nb_humans == 0):
+        print("--------------------------------------------------------------------")
+        print("                             Profils :                              ")
+        print("             Bot 1 :                             Bot 2 :            ")
+        print(35 * " " + "|  " + 35 * " ")
+        print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name + (35 - len(j1_name)) * " ")
+        print(35 * " " + "|  " + 35 * " ")
+        print("Difficulté : " + str(difficulty[0]) + (22 - len(str(difficulty[0]))) * " " + "|  " +"Difficulté : " + str(difficulty[1]) + (22 - len(str(difficulty[1]))) * " ")
+        print(35 * " " + "|  " + 35 * " ")
+        print("--------------------------------------------------------------------")
+
+    os.system("pause")
+
+def __afficher_menu_1():
+    """Affiche le menu numéro 1
+
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+
+    os.system("cls")
+    print("--------------------------")
+    print("        Bienvenue !       ")
+    print("                          ")
+    print("  1 - Jouer               ")
+    print("  2 - Scores              ")
+    print("  3 - Règles              ")
+    print("  4 - Profils des joueurs ")
+    print("  5 - Modifier Joueurs    ")
+    print("                          ")
+    print("  6 - Quitter             ")
+    print("                          ")
+    print("--------------------------")
+
 def __afficher_menu_2():
+    """Affiche le menu numéro 2
 
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     os.system("cls")
     print("---------------------")
     print("       Jouer :       ")
@@ -166,16 +337,17 @@ def __afficher_menu_2():
     print("                     ")
     print("---------------------")
 
-#----------------------------------------
-#Affiche le menu numéro 3
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
+
 def __afficher_menu_3():
+    """Affiche le menu numéro 3
+
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     os.system("cls")
     print("---------------------")
@@ -190,16 +362,16 @@ def __afficher_menu_3():
     print("                     ")
     print("---------------------")
 
-#----------------------------------------
-#Affiche le menu numéro 4
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : aucune
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_menu_4():
+    """Affiche le menu numéro 4
+
+    Arguments :
+        Aucuns
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     os.system("cls")
     print("---------------------")
@@ -214,16 +386,22 @@ def __afficher_menu_4():
     print("                     ")
     print("---------------------")
 
-#----------------------------------------
-#Affiche les scores d'un jeu pour tout les joueurs, classé dans l'ordre croissant
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : list[joueur], str (le nom du jeu souhaité)
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_scores(listJoueur : list[joueur], nom : str):
+    """Affiche les scores d'un jeu pour tout les joueurs, classé dans l'ordre croissant
+
+    Arguments :
+        Liste des joueurs : list[joueur]
+        Nom du jeu : str
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+
+    R  = '\033[91m' # red
+    W  = '\033[0m'  # white (normal)
+    G  = '\033[92m' # green
+    O  = '\033[93m' # yellow
 
     os.system("cls")
     print("---------------------")
@@ -231,12 +409,25 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
     print("                     ")
 
     scores = {}
+    playerInformations = {}
 
-    for j in listJoueurs:
-        if(nom == "devinette"): scores[j.getName()] = j.getScoreDevinette()
-        if(nom == "allumettes"): scores[j.getName()] = j.getScoreAllumettes()
-        if(nom == "morpion"): scores[j.getName()] = j.getScoreMorpion()
-        if(nom == "puissance4"): scores[j.getName()] = j.getScorePuissance4()
+    for j in listJoueur:
+        if(nom == "devinette"):
+            if(j.getGameDevinette() != 0):
+                scores[j.getName()] = j.getScoreDevinette()
+                playerInformations[j.getName()] = (W + j.getName() + " : " + "Victoires : " + G + str(j.getScoreDevinette()) + W + ", Défaites : " + R + str(j.getGameDevinette() - j.getScoreDevinette()) + W + ", Winrate : " + O + str(round(j.getScoreDevinette() / j.getGameDevinette() * 100)) + "%" + W)
+        if(nom == "allumettes"):
+            if(j.getGameAllumettes() != 0):
+                scores[j.getName()] = j.getScoreAllumettes()
+                playerInformations[j.getName()] = (W + j.getName() + " : " + "Victoires : " + G + str(j.getScoreAllumettes()) + W + ", Défaites : " + R + str(j.getGameAllumettes() - j.getScoreAllumettes()) + W + ", Winrate : " + O + str(round(j.getScoreAllumettes() / j.getGameAllumettes() * 100)) + "%" + W)
+        if(nom == "morpion"):
+            if(j.getGameMorpion() != 0):
+                scores[j.getName()] = j.getScoreMorpion()
+                playerInformations[j.getName()] = (W + j.getName() + " : " + "Victoires : " + G + str(j.getScoreMorpion()) + W + ", Défaites : " + R + str(j.getGameMorpion() - j.getScoreMorpion()) + W + ", Winrate : " + O + str(round(j.getScoreMorpion() / j.getGameMorpion() * 100)) + "%" + W)
+        if(nom == "puissance4"):
+            if(j.getGamePuissance4() != 0):
+                scores[j.getName()] = j.getScorePuissance4()
+                playerInformations[j.getName()] = (W + j.getName() + " : " + "Victoires : " + G + str(j.getScorePuissance4()) + W + ", Défaites : " + R + str(j.getGamePuissance4() - j.getScorePuissance4()) + W + ", Winrate : " + O + str(round(j.getScorePuissance4() / j.getGamePuissance4() * 100)) + "%" + W)
 
     #pyright: reportUnknownLambdaType=false
     #pyright: reportUnknownVariableType=false
@@ -244,21 +435,21 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
 
     #pyright: reportUnknownArgumentType=false
     for k in range(len(scores)-1, -1, -1):
-        if(scores[k][1] != 0):print(scores[k][0] + " : " + str(scores[k][1]))
+        print(playerInformations[scores[k][0]])
     print("                     ")
     print("---------------------")
     os.system("pause")
 
-#----------------------------------------
-#Affiche les règles d'un jeu
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str (le nom du jeu souhaité)
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficher_regles(nom : str):
+    """Affiche les règles d'un jeu
+
+    Arguments :
+        Nom du jeu : str
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     B  = '\033[94m' # blue
     R  = '\033[91m' # red
@@ -322,20 +513,31 @@ def __afficher_regles(nom : str):
     print("---------------------")
     os.system("pause")
 
-#----------------------------------------
-#Ajoute un point a un joueur souhaité, designé par son nom, dans le jeu souhaité
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str (le nom du joueur), str (le nom du jeu souhaité), list[joueur]
-#
-#Sortie : Modification du fichier texte en ajoutant un point au joueur souhaité
-#----------------------------------------
-def __ajouterScore(winner : str, jeu : str, listJoueur : list[joueur]):
+def __verifyIfPlayersExists(j1 : str, j2 : str, listJoueur : list[joueur]):
 
-    playerFound : bool
+    j1Found = False
+    j2Found = False
 
-    playerFound = False
+    for j in listJoueur:
+        if(j.getName() == j1_name): j1Found = True
+        if(j.getName() == j2_name): j2Found = True
+
+    if(not j1Found): listJoueurs.append(joueur(j1_name,0,0,0,0,0,0,0,0))
+    if(not j2Found): listJoueurs.append(joueur(j2_name,0,0,0,0,0,0,0,0))
+
+def __ajouterScore(winner : str, jeu : str, listJoueur : list[joueur], j1_name : str, j2_name : str):
+    """Ajoute un point a un joueur souhaité, designé par son nom, dans le jeu souhaité
+
+    Arguments :
+        Vainqueur : str
+        Nom du jeu : str
+        Liste de joueur : list[joueur]
+
+    Retour : Modification du fichier texte en fonction de la list de joueur
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+    __verifyIfPlayersExists(j1_name, j2_name, listJoueur)
 
     for j in listJoueur:
         if(j.getName() == winner):
@@ -344,29 +546,17 @@ def __ajouterScore(winner : str, jeu : str, listJoueur : list[joueur]):
             elif(jeu == "morpion"):j.setScoreMorpion(j.getScoreMorpion() + 1)
             elif(jeu == "puissance4"):j.setScorePuissance4(j.getScorePuissance4() + 1)
             else: print("Jeu inconnu")
-            playerFound = True
 
-    if(not playerFound):
-        if(jeu == "devinette"): listJoueurs.append(joueur(winner, 1, 0, 0, 0))
-        elif(jeu == "allumettes"): listJoueurs.append(joueur(winner, 0, 1, 0, 0))
-        elif(jeu == "morpion"): listJoueurs.append(joueur(winner, 0, 0, 1, 0))
-        elif(jeu == "puissance4"): listJoueurs.append(joueur(winner, 0, 0, 0, 1))
-        else: print("Jeu erreur")
-
-    __writePlayersData(listJoueurs)
-
-
-#----------------------------------------
-#Ecris les données des joueurs dans le fichier ./Scores/playersData.txt
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : list[joueur]
-#
-#Sortie : Modification du fichier texte en fonction de la list de joueur
-#----------------------------------------
 def __writePlayersData(listJoueur : list[joueur]):
+    """Ecris les données des joueurs dans le fichier ./Scores/playersData.txt
 
+    Arguments :
+        Liste de joueur : lis[joueur]
+
+    Retour : Modification du fichier texte en fonction de la list de joueur
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     _i : int
 
     lines : list[str]
@@ -374,11 +564,27 @@ def __writePlayersData(listJoueur : list[joueur]):
 
     f = open("./Scores/playersData.txt","w")
     for _i in range(0, len(listJoueur)):
-        if(_i == 0):lines.append(listJoueur[_i].getName() + " " + str(listJoueur[_i].getScoreDevinette()) + " " + str(listJoueur[_i].getScoreAllumettes()) + " " + str(listJoueur[_i].getScoreMorpion()) + " " + str(listJoueur[_i].getScorePuissance4()))
-        else: lines.append("\n" + listJoueur[_i].getName() + " " + str(listJoueur[_i].getScoreDevinette()) + " " + str(listJoueur[_i].getScoreAllumettes()) + " " + str(listJoueur[_i].getScoreMorpion()) + " " + str(listJoueur[_i].getScorePuissance4()))
+        if(_i == 0): lines.append(listJoueur[_i].getName() + " " + str(listJoueur[_i].getScoreDevinette()) + "|" + str(listJoueurs[_i].getGameDevinette()) + " " + str(listJoueur[_i].getScoreAllumettes()) + "|" + str(listJoueurs[_i].getGameAllumettes()) + " " + str(listJoueur[_i].getScoreMorpion()) + "|" + str(listJoueurs[_i].getGameMorpion()) + " " + str(listJoueurs[_i].getScorePuissance4()) + "|" + str(listJoueur[_i].getGamePuissance4()))
+        else: lines.append("\n" + listJoueur[_i].getName() + " " + str(listJoueur[_i].getScoreDevinette()) + "|" + str(listJoueurs[_i].getGameDevinette()) + " " + str(listJoueur[_i].getScoreAllumettes()) + "|" + str(listJoueurs[_i].getGameAllumettes()) + " " + str(listJoueur[_i].getScoreMorpion()) + "|" + str(listJoueurs[_i].getGameMorpion()) + " " + str(listJoueurs[_i].getScorePuissance4()) + "|" + str(listJoueur[_i].getGamePuissance4()))
 
     f.writelines(lines)
     f.close()
+
+def __ajouterGame(j1_name : str, j2_name : str, game : str, nb_humans : int, listJoueur : list[joueur]):
+
+    for j in listJoueur :
+        if(j.getName() == j1_name):
+            if(nb_humans>0):
+                if(game=="devinette"):j.setGameDevinnette(j.getGameDevinette() + 1)
+                if(game=="allumettes"):j.setGameAllumettes(j.getGameAllumettes() + 1)
+                if(game=="morpion"):j.setGameMorpion(j.getGameMorpion() + 1)
+                if(game=="puissance4"):j.setGamePuissance4(j.getGamePuissance4() + 1)
+        elif(j.getName() == j2_name):
+            if(nb_humans==2):
+                if(game=="devinette"):j.setGameDevinnette(j.getGameDevinette() + 1)
+                if(game=="allumettes"):j.setGameAllumettes(j.getGameAllumettes() + 1)
+                if(game=="morpion"):j.setGameMorpion(j.getGameMorpion() + 1)
+                if(game=="puissance4"):j.setGamePuissance4(j.getGamePuissance4() + 1)
 
 if __name__ == "__main__":
 
@@ -388,7 +594,7 @@ if __name__ == "__main__":
     j2_name : str
     data : list[str]
     nb_humans : int
-    difficulty : int
+    difficulty : list[int]
     WantToQuit : bool
 
     B  = '\033[94m' # blue
@@ -399,9 +605,11 @@ if __name__ == "__main__":
     data = getPlayerData()
 
     nb_humans = int(data[0])
-    difficulty = int(data[1])
+    difficulty = []
+    difficulty.append(int(data[1]))
+    difficulty.append(int(data[3]))
     j1_name = data[2]
-    j2_name = data[3]
+    j2_name = data[4]
 
 
     listJoueurs = __getJoueurs("./Scores/playersData.txt")
@@ -412,7 +620,7 @@ if __name__ == "__main__":
 
         __afficher_menu_1()
 
-        choice = str(input("Choisissez le jeu : "))
+        choice = str(input("Où voulez vous aller ? "))
 
         match choice:
 
@@ -429,21 +637,31 @@ if __name__ == "__main__":
 
                         case "1":
                             winner = Devinette.LaunchGame_devinettes(j1_name,j2_name, nb_humans, difficulty)
-                            if(not winner == ""): __ajouterScore(winner, "devinette", listJoueurs)
+                            if(not winner == ""):
+                                __ajouterScore(winner, "devinette", listJoueurs, j1_name, j2_name)
+                                __ajouterGame(j1_name, j2_name,"devinette", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "2":
-                            winner = Allumettes.LaunchGame_allumettes(j1_name, j2_name)
-                            if(not winner == ""): __ajouterScore(winner, "allumettes", listJoueurs)
+                            winner = Allumettes.LaunchGame_allumettes(j1_name, j2_name, nb_humans, difficulty)
+                            if(not winner == ""):
+                                __ajouterScore(winner, "allumettes", listJoueurs, j1_name, j2_name)
+                                __ajouterGame(j1_name, j2_name,"allumettes", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "3":
                             winner = Morpion.LaunchGame_morpion(j1_name, j2_name,nb_humans,difficulty)
-                            if(not winner == ""): __ajouterScore(winner, "morpion", listJoueurs)
+                            if(not winner == ""):
+                                __ajouterScore(winner, "morpion", listJoueurs, j1_name, j2_name)
+                                __ajouterGame(j1_name, j2_name,"morpion", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "4":
-
                             winner = P4.LaunchGame_puissance4(j1_name, j2_name, nb_humans, difficulty)
-
-                            if(not winner == ""): __ajouterScore(winner, "puissance4", listJoueurs)
+                            if(not winner == ""):
+                                __ajouterScore(winner, "puissance4", listJoueurs, j1_name, j2_name)
+                                __ajouterGame(j1_name, j2_name,"puissance4", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "5":
                             WantToGoBack = True
@@ -511,14 +729,19 @@ if __name__ == "__main__":
                             os.system("pause")
 
             case "4":
+                __afficher_profils(j1_name, j2_name, nb_humans, listJoueurs, difficulty)
+
+            case "5":
                 data = getPlayerData()
 
                 nb_humans = int(data[0])
-                j1_name = data[1]
-                j2_name = data[2]
-                difficulty = int(data[3])
+                difficulty = []
+                difficulty.append(int(data[1]))
+                difficulty.append(int(data[3]))
+                j1_name = data[2]
+                j2_name = data[4]
 
-            case "5":
+            case "6":
                 WantToQuit = True
 
             case other:

@@ -2,17 +2,17 @@ import os
 import random
 import time
 
-#----------------------------------------
-# Demande au deuxième joueur les hypothèses sur le nombre entré par le premier
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : int, str, str, int, int
-#
-#Sortie : temps qu'il a pris à trouver : float
-#----------------------------------------
 def __AskVerification(state : int, proposition : int):
+    """Procédure qui demande au deuxième joueur les hypothèses sur le nombre entré par le premier
 
+    Arguments :
+        State : int (résultat de la vérification : 1 si le nombre est trop grand, 2 s'il est trop petit et 3 s'il est bon)
+        Proposition : int
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     W  = '\033[0m'  # white (normal)
     R  = '\033[91m' # red
     O  = '\033[93m' # yellow
@@ -46,7 +46,24 @@ def __AskVerification(state : int, proposition : int):
     os.system("cls")
 
 def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name : str, p_name : str, mini:int, maxi:int, difficulty : int, playAgainstHuman : bool)->float:
+    """Fonction qui lance un tour d'un bot
 
+    Arguments :
+        Nombre a trouver : int
+        Couleur du joueur a qui est le tour : str
+        Couleur de son adversaire : str
+        Nom du joueur a qui est le tour : str
+        Nom de son adversaire : str
+        Borne minimum : int
+        Borne maximum : int
+        Difficulté du bot : int (compris entre 1 et 3)
+        Joue contre un humain : bool
+
+
+    Retour : temps pris : float
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     choix : str
     temps : float
     tempsTotal : float
@@ -95,7 +112,7 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
     while nombre != nombre_a_trouver:
 
         if(nombre > nombre_a_trouver):
-            
+
             os.system("cls")
             print(couleur1 + p_name + W + " dit que c'est un nombre plus petit que " + O + str(nombre) + W + " : ")
             print(couleur + j_name + W + " est en train de choisir une hypothèse ...")
@@ -166,7 +183,23 @@ def __LaunchTurnBot(nombre_a_trouver : int, couleur : str, couleur1 : str, j_nam
     return tempsTotal
 
 def __LaunchTurn(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name : str, p_name : str, mini:int, maxi:int, nb_humans : int)->float:
+    """Fonction qui lance le tour d'un joueur
 
+    Arguments :
+        Nombre a trouver : int
+        Couleur du joueur a qui est le tour : str
+        Couleur de son adversaire : str
+        Nom du joueur a qui est le tour : str
+        Nom de son adversaire : str
+        Borne minimum : int
+        Borne maximum : int
+        Nombre de joueur humains : int (compris entre 0 et 2)
+
+
+    Retour : temps pris : float
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     choix : str
     temps : float
     tempsTotal : float
@@ -272,18 +305,19 @@ def __LaunchTurn(nombre_a_trouver : int, couleur : str, couleur1 : str, j_name :
 
     return tempsTotal
 
-
-#----------------------------------------
-#Demande le nombre que l'autre joueur doit trouver
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str, str, int, int
-#
-#Sortie : nombre choisi : int
-#----------------------------------------
 def __askNombreATrouver(couleur : str, j_name : str, mini : int, maxi : int)->int:
+    """Fonction qui demande le nombre que l'adversaire du joueur devra trouver
 
+    Arguments :
+        Couleur : str
+        Nom du joueur : str
+        Borne minimum : int
+        Borne maximum : int
+
+    Retour : Nombre a trouver : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     choix : str
 
     W  = '\033[0m'  # white (normal)
@@ -302,17 +336,19 @@ def __askNombreATrouver(couleur : str, j_name : str, mini : int, maxi : int)->in
 
     return int(choix)
 
-#----------------------------------------
-#Demande le nombre que l'autre joueur doit trouver
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str, str, int, int
-#
-#Sortie : nombre choisi : int
-#----------------------------------------
 def __askBotNombreATrouver(couleur : str, j_name : str, mini : int, maxi : int)->int:
+    """Fonction qui demande le nombre que l'adversaire du bot devra trouver
 
+    Arguments :
+        couleur : str
+        Nom du joueur : str
+        Borne minimum : int
+        Borne maximum : int
+
+    Retour : Nombre a trouver : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     W  = '\033[0m'  # white (normal)
 
     os.system("cls")
@@ -321,16 +357,21 @@ def __askBotNombreATrouver(couleur : str, j_name : str, mini : int, maxi : int)-
 
     return random.randint(mini, maxi)
 
-#----------------------------------------
-#Affiche le temps des deux joueurs et le joueur qui a gagné en comparant le temps des deux joueurs
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : float, float, str, str
-#
-#Sortie : Gagnant : str
-#----------------------------------------
 def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str, nb_humans : int)->str:
+    """Fonction qui affiche le temps des deux joueurs et deduit le joueur qui a gagné en les comparant
+
+    Arguments :
+        Temps joueur 1 : float
+        Temps joueur 2 : float
+        Nom joueur 1 : str
+        Nom joueur 2 : str
+        Nombre de joueurs humains : int (compris entre 0 et 2)
+
+    Retour : Vainqueur : str (Si le joueur est un bot, retourne "" pour ne pas ajouter de scores)
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+
 
     os.system("cls")
 
@@ -384,17 +425,16 @@ def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str, nb_human
 
     return winner
 
-
-#----------------------------------------
-# Demande le nombre Max que les joueurs vont pouvoir entrer
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : None
-#
-#Sortie : Max : int
-#----------------------------------------
 def __askForMaxi(mini : int):
+    """Fonction qui demande le nombre maximum que les joueurs vont pouvoir entrer, forcément supérieur a la Borne minimum
+
+    Arguments :
+        Borne minimum : int
+
+    Retour : Borne max : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     maxi : str
     maxi_ok : bool
@@ -427,17 +467,16 @@ def __askForMaxi(mini : int):
     return int(maxi)
 
 
-#----------------------------------------
-# Demande le nombre Min que les joueurs vont pouvoir entrer
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : None
-#
-#Sortie : Max : int
-#----------------------------------------
 def __askForMini():
+    """Fonction qui demande le nombre minimum que les joueurs vont pouvoir entrer
 
+    Arguments :
+        Aucun
+
+    Retour : Borne max : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     mini : str
 
     W  = '\033[0m'  # white (normal)
@@ -458,7 +497,19 @@ def __askForMini():
 
     return int(mini)
 
-def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficulty : int)->str:
+def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficulty : list[int])->str:
+    """Fonction qui lance la partie de devinettes
+
+    Arguments :
+        Nom du joueur 1 : str
+        Nom du joueur 2 : str
+        Nombre de joueur humains : int (compris entre 0 et 2)
+        Difficulté : list[int] (en position 0 la difficulté du joueur 1 et en position 1 celle du joueur 2)
+
+    Retour : Vainqueur : str
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     nombre_a_trouver : int
     temps1 : float
@@ -485,7 +536,7 @@ def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficu
     elif(nb_humans == 1):
         nombre_a_trouver = __askNombreATrouver(B, j1_name, mini, maxi)
 
-        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty, True)
+        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty[0], True)
 
         nombre_a_trouver = __askBotNombreATrouver(R, j2_name, mini, maxi)
 
@@ -493,12 +544,12 @@ def LaunchGame_devinettes(j1_name : str, j2_name : str, nb_humans : int, difficu
     else:
         nombre_a_trouver = __askBotNombreATrouver(B, j1_name, mini, maxi)
 
-        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty, False)
+        temps2 = __LaunchTurnBot(nombre_a_trouver, R, B, j2_name, j1_name, mini, maxi, difficulty[0], False)
 
         nombre_a_trouver = __askBotNombreATrouver(R, j2_name, mini, maxi)
 
 
-        temps1 = __LaunchTurnBot(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, difficulty, False)
+        temps1 = __LaunchTurnBot(nombre_a_trouver, B, R, j1_name, j2_name, mini, maxi, difficulty[1], False)
 
     #check et retour du vainqueur
     return __checkWin(temps1, temps2, j1_name, j2_name, nb_humans)

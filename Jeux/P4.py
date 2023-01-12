@@ -2,16 +2,19 @@ import os
 import random
 import time
 
-#----------------------------------------
-#retourne la couleur d'un symbole sous forme str
-#
-#private : cette fonction n'est utile que pour ce script
-#
-#Entrée : str
-#
-#Sortie : str
-#----------------------------------------
+
 def __couleur(symbole : str, index : int, winCases: list[int])->str:
+    """Fonction qui va retourner la couleur d'un symbole en fonction de son identité et de s'il est une case gagnantes.
+
+    Arguments :
+        Symbole : str
+        Index : int (numéro de la case)
+        Cases gagnantes : list[int]
+
+    Retour : Code couleur associé : str
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     W  = '\033[0m'  # white (normal)
     R  = '\033[91m' # red
@@ -24,12 +27,29 @@ def __couleur(symbole : str, index : int, winCases: list[int])->str:
     else: return W
 
 def __changeTurn(turn : int)->int:
+    """Fonction qui va regarder le tour actuel et retourner la valeur du tour suivant
+
+    Arguments :
+        Tour : int (soit 1 soit 2)
+
+    Retour : Tour suivant : int (soit 1 soit 2)
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     if(turn == 1): turn = 2
     else: turn = 1
     return turn
 
 def __checkWin(cases : list[list[str]])->list[int]:
+    """Fonction qui va regarder si il y a une victoire puis retourner les cases gagnantes si victoire il y a
 
+    Arguments :
+        Cases : list[list[str]]
+
+    Retour : Cases gagnantes : list[int]
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     winCases : list[int]
 
     winCases = []
@@ -72,17 +92,17 @@ def __checkWin(cases : list[list[str]])->list[int]:
 
     return winCases
 
-
-#----------------------------------------
-#Affiche l'interface de jeu
-#
-#private : cette fonction n'est utile que pour ce script
-#
-#Entrée : j1_name : str, j2_name : str, score_j1 : int, score_j2 : int, cases : list[str]
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficherMenu(cases : list[list[str]], winCases : list[int]):
+    """Procédure qui va afficher l'interface de jeu
+
+    Arguments :
+        Cases : list[int]
+        Cases gagnantes : list[int]
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     W  = '\033[0m'  # white (normal)
 
@@ -92,17 +112,17 @@ def __afficherMenu(cases : list[list[str]], winCases : list[int]):
     print("          " + __couleur(cases[0][0], 0, winCases) + cases[0][0] + W + " | " + __couleur(cases[0][1], 1, winCases) + cases[0][1] + W + " | " + __couleur(cases[0][2], 2, winCases) + cases[0][2] + W + " | " + __couleur(cases[0][3], 3, winCases) + cases[0][3] + W + " | " + __couleur(cases[0][4], 4, winCases) + cases[0][4] + W + " | " + __couleur(cases[0][5], 5, winCases) + cases[0][5] + W +  " | " + __couleur(cases[0][6], 6, winCases) + cases[0][6] + W)
     __afficherPartie(cases, winCases)
 
-#----------------------------------------
-#Affiche la partie en cours
-#
-#private : cette fonction n'est utile que pour ce script
-#
-#Entrée : cases : list[list[str]], winCases : list[int]
-#
-#Sortie : affichage
-#----------------------------------------
 def __afficherPartie(cases : list[list[str]], winCases : list[int]):
+    """Procédure qui va afficher la partie en cours et colorer les cases en fonction de leur joueur ou de si elles sont gagnantes
 
+    Arguments :
+        Cases : list[int]
+        Cases gagnantes : list[int]
+
+    Retour : affichage
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     W  = '\033[0m'  # white (normal)
 
     print("---------------------------------------------")
@@ -113,11 +133,20 @@ def __afficherPartie(cases : list[list[str]], winCases : list[int]):
 
     print("---------------------------------------------")
 
-def completeFourLine(cases : list[list[str]], symbol : str)->int:
+def __completeFourLine(cases : list[list[str]], symbol : str)->int:
+    """Fonction qui va regarder si le joueur peut gagner et retourne le choix gagnant s'il existe, sinon retourne 0
 
-#i : lines ; j : columns
+    Arguments :
+        Cases : list[int]
+        Symbole du joueur : str
 
-#check the possibility to win with verticals lines
+    Retour : choix : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+    #i : lines ; j : columns
+
+    #check the possibility to win with verticals lines
     for i in range(1,4):
         for j in range(0,7):
 
@@ -139,7 +168,7 @@ def completeFourLine(cases : list[list[str]], symbol : str)->int:
             if(isPut == 3 and canPut == 1):
                 return j+1
 
-#check the possibility to win with horizontals lines
+    #check the possibility to win with horizontals lines
     for i in range(1,7):
         for j in range(0,4):
 
@@ -170,6 +199,7 @@ def completeFourLine(cases : list[list[str]], symbol : str)->int:
             if(isPut == 3 and canPut == 1):
                 return choice
 
+    #check the possibility to win with descendant diagonals
     for i in range(1,4):
         for j in range(0,4):
 
@@ -200,6 +230,7 @@ def completeFourLine(cases : list[list[str]], symbol : str)->int:
             if(isPut == 3 and canPut == 1):
                 return choice
 
+    #check the possibility to win with ascendant diagonals
     for i in range(4,7):
         for j in range(0,4):
 
@@ -232,9 +263,18 @@ def completeFourLine(cases : list[list[str]], symbol : str)->int:
 
     return 0
 
-def completeWiningMove(cases : list[list[str]], symbol : str)->int:
+def __completeWiningMove(cases : list[list[str]], symbol : str)->int:
+    """Fonction qui va regarder si un coup gagnant (c'est a dire un coup qui entraine une victoire sur le tour suivant, soit la création de deux lignes de 3 qui peuvent être complétée au tour suivant) est faisable et le retourne s'il existe, sinon retourne 0
 
-#check the possibility to win with horizontals lines
+    Arguments :
+        Cases : list[int]
+        Symbole du joueur : str
+
+    Retour : choix : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+    #check the possibility to win with horizontals lines
     for i in range(1,7):
         for j in range(1,4):
 
@@ -331,8 +371,21 @@ def completeWiningMove(cases : list[list[str]], symbol : str)->int:
                 return choice
     return 0
 
-def tryMenace(cases : list[list[str]], line : int, column : int, symbol : str):
+def __tryMenace(cases : list[list[str]], line : int, column : int, symbol : str)->int:
+    """Regarde si un coup est possible pour un joueur qui permettrait de menacer de gagner en placant un autre pion sur une case donnée
+    En d'autres termes : regarde si il est possible de faire des lignes de 3 pions autour d'une case donnée, case donnée non-comprise
+    Retourne le choix s'il existe sinon retourne 0
 
+    Arguments :
+        Cases : list[int]
+        Ligne : int (entre 1 et 6, 6 étant celle du bas)
+        Colonne : int (entre 0 et 6, 6 étant celle de droite)
+        Symbole du joueur : str
+
+    Retour : choix : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     if(cases[line][column]!="."): return 0
     for i in range(-1, 2):
         for j in range(-1, 2):
@@ -350,26 +403,58 @@ def tryMenace(cases : list[list[str]], line : int, column : int, symbol : str):
                 return choice
     return 0
 
-def completeWinningPattern(cases : list[list[str]], mySymbol : str, oponentSymbol : str)->int:
+def __completeWinningPattern(cases : list[list[str]], mySymbol : str, oponentSymbol : str)->int:
+    """Fonction qui va regarder si un "patern gagnant" (deux coup gagnant sur des lignes consécutives et sur une même colonne) est faisable et le retourne s'il existe, sinon retourne 0
+
+    Arguments :
+        Cases : list[int]
+        Symbole du joueur : str
+        Symbole de l'adversaire : str
+
+    Retour : choix : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     choice = 0
     for i in range(1,7):
         for j in range(0,7):
-            if(isThisCaseWinnable(cases, i, j, mySymbol)):
-                if(i > 1): choice = tryMenace(cases, i-1, j, mySymbol)
-                if(choice == 0 and i < 6 and cases[i+1][j] == "."): choice = tryMenace(cases, i+1, j, mySymbol)
-                if(choice != 0 and not isASuicideMove(cases, choice, oponentSymbol)): return choice
+            if(__isThisCaseWinnable(cases, i, j, mySymbol)):
+                if(i > 1): choice = __tryMenace(cases, i-1, j, mySymbol)
+                if(choice == 0 and i < 6 and cases[i+1][j] == "."): choice = __tryMenace(cases, i+1, j, mySymbol)
+                if(choice != 0 and not __isASuicideMove(cases, choice, oponentSymbol)): return choice
     return 0
 
-def makeAThreeLine(cases : list[list[str]], symbol : str, oponentSymbol : str)->int:
+def __makeAThreeLine(cases : list[list[str]], symbol : str, oponentSymbol : str)->int:
+    """Fonction qui va regarder si une ligne de trois symbole est possible et si elle n'est pas un coup perdant et retourner le choix en question s'il existe, sinon retourne 0
+
+    Arguments :
+        Cases : list[int]
+        Symbole du joueur : str
+        Symbole de l'adversaire : str
+
+    Retour : choix : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     choice = 0
     for i in range(1,7):
         for j in range(0,7):
-            choice = tryMenace(cases, i, j, symbol)
-            if(choice != 0 and not isASuicideMove(cases, choice, oponentSymbol)): return choice
+            choice = __tryMenace(cases, i, j, symbol)
+            if(choice != 0 and not __isASuicideMove(cases, choice, oponentSymbol)): return choice
     return 0
 
-def isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str):
+def __isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str)->bool:
+    """Fonction qui va regarder si un choix est perdant pour un joueur donné
 
+    Arguments :
+        Cases : list[int]
+        Choix : int
+        Symbole de l'adversaire : str
+
+    Retour : isAsuicideMoove : bool
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     column = choice - 1
 
     #trouve la ligne associée
@@ -436,8 +521,20 @@ def isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str):
 
     return False
 
-def isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symbol : str):
-    if(cases[line][column] != "."): return 0
+def __isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symbol : str)->bool:
+    """Fonction qui va regarder si une case donnée est gagante pour un joueur donné
+
+    Arguments :
+        Cases : list[int]
+        Ligne : int (entre 1 et 6, 6 étant celle du bas)
+        Colonne : int (entre 0 et 6, 6 étant celle du droite)
+        Symbole du joueur : str
+
+    Retour : Case gagnante : bool
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
+    if(cases[line][column] != "."): return False
     for i in range(-1, 2):
         for j in range(-1, 2):
             isPut = 0
@@ -449,15 +546,35 @@ def isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symbol
             if(isPut == 3): return True
     return False
 
-def hasAWinningColumn(cases : list[list[str]], symbol : str, oponentSymbol : str):
+def __hasAWinningColumn(cases : list[list[str]], symbol : str, oponentSymbol : str)->int:
+    """Fonction qui va regarder si le joueur possède une "colonne gagnante" (c'est a dire une colonne où le joueur peut gagner sur deux lignes consécutives) et retourne cette colonne
+
+    Arguments :
+        Cases : list[int]
+        Symbole du joueur : str
+        Symbole de l'adversaire : str
+
+    Retour : colonne : int (entre 1 et 7, 7 étant celle du droite)
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     for j in range(0,7):
         for i in range(6, 1, -1):
-            if(cases[i][j] == "." and isThisCaseWinnable(cases, i, j, symbol) and cases[i+1][j] == "." and isThisCaseWinnable(cases, i+1, j, symbol) and not isASuicideMove(cases, j, oponentSymbol)):
+            if(cases[i][j] == "." and __isThisCaseWinnable(cases, i, j, symbol) and cases[i+1][j] == "." and __isThisCaseWinnable(cases, i+1, j, symbol) and not __isASuicideMove(cases, j, oponentSymbol)):
                 return j+1
     return 0
 
-def isMovePossible(cases : list[list[str]], choice : int):
+def __isMovePossible(cases : list[list[str]], choice : int)->bool:
+    """Fonction qui va regarder si un pion est placable sur la colonne désignée
 
+    Arguments :
+        Cases : list[int]
+        choice : int (doit être entre 1 et 7)
+
+    Retour : isMovePossible : int
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     column = choice - 1
 
     #trouve la ligne associée
@@ -474,45 +591,67 @@ def isMovePossible(cases : list[list[str]], choice : int):
         else: choiceIsOk = True
     return True
 
-def putRandom(cases : list[list[str]], oponentSymbol : str):
+def __putRandom(cases : list[list[str]], oponentSymbol : str)->int:
+    """Fonction qui va choisir une colonne au hasard en évitant les colonnes perdantes ou impossibles
+
+    Arguments :
+        Cases : list[int]
+        Symbole de l'adversaire
+
+    Retour : choix : int (entre 1 et 7)
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
     choices = [1,2,3,4,5,6,7]
     random.shuffle(choices)
 
     for choice in choices:
-        if(isMovePossible(cases, choice) and not isASuicideMove(cases, choice, oponentSymbol)): return choice
+        if(__isMovePossible(cases, choice) and not __isASuicideMove(cases, choice, oponentSymbol)): return choice
 
     return choice
 
-def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol : str, oponentSymbol : str, difficulty : int)->list[int]:
+def __askForIAAction(cases : list[list[str]], mySymbol : str, oponentSymbol : str, difficulty : int)->list[int]:
+    """Fonction qui génère le choix d'un bot en fonction de sa difficulté et de la partie en cours
+
+    Arguments :
+        Cases : list[int]
+        Symbole du bot : str
+        Symbole de l'adversaire : str
+        Difficulté du bot : int
+
+    Retour : choix du joueur (sous forme [colonne, ligne], avec colonne entre 1 et 6 et ligne entre 1 et 7) : list[int]
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     choice:int
 
     if(difficulty == 1):
-        choice = completeFourLine(cases, mySymbol)
-        if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
+        choice = __completeFourLine(cases, mySymbol)
+        if(choice == 0):choice = __completeFourLine(cases, oponentSymbol)
         if(choice == 0): choice = random.randint(1,7)
 
     if(difficulty == 2):
-        choice = completeFourLine(cases, mySymbol)
-        if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
-        if(choice == 0): choice = completeWiningMove(cases, mySymbol)
-        if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
-        if(choice == 0): choice = putRandom(cases, oponentSymbol)
+        choice = __completeFourLine(cases, mySymbol)
+        if(choice == 0):choice = __completeFourLine(cases, oponentSymbol)
+        if(choice == 0): choice = __completeWiningMove(cases, mySymbol)
+        if(choice == 0): choice = __completeWiningMove(cases, oponentSymbol)
+        if(choice == 0): choice = __putRandom(cases, oponentSymbol)
 
     if(difficulty == 3):
-        choice = completeFourLine(cases, mySymbol)
-        if(choice == 0):choice = completeFourLine(cases, oponentSymbol)
-        if(choice == 0): choice = completeWiningMove(cases, mySymbol)
-        if(choice == 0): choice = completeWiningMove(cases, oponentSymbol)
-        if(choice == 0): choice = hasAWinningColumn(cases, mySymbol, oponentSymbol)
-        if(choice == 0): choice = completeWinningPattern(cases, oponentSymbol, mySymbol)
-        if(choice == 0): choice = completeWinningPattern(cases, mySymbol, oponentSymbol)
-        if(choice == 0): choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
-        if(choice == 0): choice = makeAThreeLine(cases, oponentSymbol, mySymbol)
-        if(choice == 0): choice = putRandom(cases, oponentSymbol)
+        choice = __completeFourLine(cases, mySymbol)
+        if(choice == 0):choice = __completeFourLine(cases, oponentSymbol)
+        if(choice == 0): choice = __completeWiningMove(cases, mySymbol)
+        if(choice == 0): choice = __completeWiningMove(cases, oponentSymbol)
+        if(choice == 0): choice = __hasAWinningColumn(cases, mySymbol, oponentSymbol)
+        if(choice == 0): choice = __completeWinningPattern(cases, oponentSymbol, mySymbol)
+        if(choice == 0): choice = __completeWinningPattern(cases, mySymbol, oponentSymbol)
+        if(choice == 0): choice = __makeAThreeLine(cases, mySymbol, oponentSymbol)
+        if(choice == 0): choice = __makeAThreeLine(cases, oponentSymbol, mySymbol)
+        if(choice == 0): choice = __putRandom(cases, oponentSymbol)
 
     if(difficulty == 4):
-        choice = makeAThreeLine(cases, mySymbol, oponentSymbol)
+        choice = __makeAThreeLine(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = int(input("Choix du bot : "))
 
     lignes = 6
@@ -528,16 +667,19 @@ def __askForIAAction(cases : list[list[str]], bot_name : str, R : str, mySymbol 
 
     return [choice, lignes]
 
-#----------------------------------------
-#Demande a l'utilisateur d'entrer dans quelle colonne il veut placer son pion, si l'entrée n'est pas bonne le lui redemande
-#
-#private : cette fonction n'est utile que pour ce script
-#
-#Entrée : cases : list[list[str]], j_name : str, couleur : str
-#
-#Sortie : list[int]
-#----------------------------------------
+
 def __askForPlayerAction(cases : list[list[str]], j_name : str, couleur : str)->list[int]:
+    """Fonction qui demande a l'utilisateur d'entrer dans quelle colonne il veut placer son pion, si l'entrée n'est pas bonne le lui redemande
+
+    Arguments :
+        Cases : list[int]
+        Nom du joueur : str
+        Code couleur associé au joueur : str
+
+    Retour : choix du joueur sous forme (sous forme [colonne, ligne], avec colonne entre 1 et 6 et ligne entre 1 et 7) : list[int]
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     R  = '\033[91m' # red
     W  = '\033[0m'  # white (normal)
@@ -580,17 +722,21 @@ def __askForPlayerAction(cases : list[list[str]], j_name : str, couleur : str)->
 
     return[int(choice), lignes] #pyright: reportUnboundVariable=false
 
+def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, cases : list[list[str]], winCases : list[int], humans : int)->str:
+    """Fonction qui affiche l'ecran de fin de partie et retourne le gagnant de la partie
 
-#----------------------------------------
-#Affiche l'ecran de fin de partie et retourne le gagnant de la partie
-#
-#private : cette fonction n'est utile que pour ce script
-#
-#Entrée : equality : bool, turn : int, j1_name : str, j2_name : str, cases : list[list[str]], winCases : list[int]
-#
-#Sortie : str
-#----------------------------------------
-def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, cases : list[list[str]], winCases : list[int])->str:
+    Arguments :
+        IsEquality : bool
+        Tour : int
+        Nom du joueur 1 : str
+        Nom du joueur 2 : str
+        Cases : list[list[str]]
+        Cases gagnantes : list[int]
+
+    Retour : Vainqueur : str (si le joueur est un bot, il ne sera pas renvoyé comme vainqueur afin de ne pas lui ajouter de score)
+
+    Private : Cette fonction n'est utile que pour ce script
+    """
 
     W  = '\033[0m'  # white (normal)
     R  = '\033[91m' # red
@@ -612,22 +758,27 @@ def __affichageFin(equality : bool, turn : int, j1_name : str, j2_name : str, ca
         winner = ""
     elif(turn == 2 and not equality):
         print(B + j1_name + W + " a gagné ")
-        winner = j1_name
+        if(humans > 0): winner = j1_name
+        else: winner = ""
     elif(turn == 1 and not equality):
         print(R + j2_name + W + " a gagné ")
-        winner = j2_name
+        if(humans == 2): winner = j2_name
+        else: winner = ""
         print("---------------------------------------------")
 
     return winner
 
-#----------------------------------------
-#Lance la partie de puissance 4 et retourne le vainqueur de la partie
-#
-#Entrée : j1_name : str, j2_name : str
-#
-#Sortie : str
-#----------------------------------------
-def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficulty : int)->str:
+def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficulty : list[int])->str:
+    """Fonction qui  demande a l’utilisateur le nombre de bots et d’humain et leur difficultés dans le cas d’un bot ou leur nom dans le cas d’un joueur
+
+    Arguments :
+        Nom du joueur 1 : str
+        Nom du joueur 2 : str
+        Nombre de joueurs humains : int
+        Difficultés : list[int]
+
+    Retour : Vainqueur : str
+    """
 
     cases : list[list[str]]
 
@@ -674,13 +825,13 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
             __afficherMenu(cases, winCases)
 
             if(nb_humans == 0):
-                if(turn == 1): listChoices = listChoices = __askForIAAction(cases, j1_name, B, "0", "O", difficulty)
-                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty)
+                if(turn == 1): listChoices = __askForIAAction(cases, "0", "O", difficulty[0])
+                else:listChoices = __askForIAAction(cases, "O", "0", difficulty[1])
             elif(nb_humans == 1):
-                if(turn == 1): listChoices = listChoices = __askForPlayerAction(cases, j1_name, B)
-                else:listChoices = __askForIAAction(cases, j2_name, R, "O", "0", difficulty)
+                if(turn == 1): listChoices = __askForPlayerAction(cases, j1_name, B)
+                else:listChoices = __askForIAAction(cases, "O", "0", difficulty[1])
             else:
-                if(turn == 1): listChoices = listChoices = __askForPlayerAction(cases, j1_name, B)
+                if(turn == 1): listChoices = __askForPlayerAction(cases, j1_name, B)
                 else:listChoices = __askForPlayerAction(cases, j2_name, R)
 
         choice = listChoices[0]
@@ -713,7 +864,7 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
 
         #Fin de Partie:
         if(gameFinished):
-            winner = __affichageFin(equality, turn, j1_name, j2_name, cases, winCases)
+            winner = __affichageFin(equality, turn, j1_name, j2_name, cases, winCases, nb_humans)
 
     os.system("pause")
     return winner
