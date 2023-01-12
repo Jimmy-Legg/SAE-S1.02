@@ -594,7 +594,7 @@ def __writePlayersData(listJoueur : list[joueur]):
     f = open("./Scores/playersData.txt","w")
     for _i in range(0, len(listJoueur)):
         if(_i == 0): lines.append(listJoueur[_i].getName() + " " + str(listJoueur[_i].getScoreDevinette()) + "|" + str(listJoueurs[_i].getGameDevinette()) + " " + str(listJoueur[_i].getScoreAllumettes()) + "|" + str(listJoueurs[_i].getGameAllumettes()) + " " + str(listJoueur[_i].getScoreMorpion()) + "|" + str(listJoueurs[_i].getGameMorpion()) + " " + str(listJoueurs[_i].getScorePuissance4()) + "|" + str(listJoueur[_i].getGamePuissance4()))
-        else: lines.append(listJoueur[_i].getName() + " " + str(listJoueur[_i].getScoreDevinette()) + "|" + str(listJoueurs[_i].getGameDevinette()) + " " + str(listJoueur[_i].getScoreAllumettes()) + "|" + str(listJoueurs[_i].getGameAllumettes()) + " " + str(listJoueur[_i].getScoreMorpion()) + "|" + str(listJoueurs[_i].getGameMorpion()) + " " + str(listJoueurs[_i].getScorePuissance4()) + "|" + str(listJoueur[_i].getGamePuissance4()))
+        else: lines.append("\n" + listJoueur[_i].getName() + " " + str(listJoueur[_i].getScoreDevinette()) + "|" + str(listJoueurs[_i].getGameDevinette()) + " " + str(listJoueur[_i].getScoreAllumettes()) + "|" + str(listJoueurs[_i].getGameAllumettes()) + " " + str(listJoueur[_i].getScoreMorpion()) + "|" + str(listJoueurs[_i].getGameMorpion()) + " " + str(listJoueurs[_i].getScorePuissance4()) + "|" + str(listJoueur[_i].getGamePuissance4()))
 
     f.writelines(lines)
     f.close()

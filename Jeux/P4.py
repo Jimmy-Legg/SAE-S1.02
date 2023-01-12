@@ -602,8 +602,15 @@ def __putRandom(cases : list[list[str]], oponentSymbol : str)->int:
 
     Private : Cette fonction n'est utile que pour ce script
     """
-    choices = [1,2,3,4,5,6,7]
-    random.shuffle(choices)
+    l1 : list[int]
+    l2 : list[int]
+    choices : list[int]
+
+    l1 = [3,4,5]
+    l2 = [1,2,6,7]
+    random.shuffle(l1)
+    random.shuffle(l2)
+    choices = l1 + l2
 
     for choice in choices:
         if(__isMovePossible(cases, choice) and not __isASuicideMove(cases, choice, oponentSymbol)): return choice
@@ -653,6 +660,7 @@ def __askForIAAction(cases : list[list[str]], mySymbol : str, oponentSymbol : st
     if(difficulty == 4):
         choice = __makeAThreeLine(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = int(input("Choix du bot : "))
+        
 
     lignes = 6
     choiceIsOk = False
@@ -868,3 +876,4 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
 
     os.system("pause")
     return winner
+
