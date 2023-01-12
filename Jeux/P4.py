@@ -868,4 +868,3 @@ def LaunchGame_puissance4(j1_name : str, j2_name : str, nb_humans : int, difficu
 
     os.system("pause")
     return winner
-
