@@ -252,7 +252,6 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
 
         #afficher score puissance 4:
         if(j1.getGamePuissance4() == 0 and j2.getGamePuissance4() == 0):
-<<<<<<< HEAD
             print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + "100%" + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " 100%"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + O + " 100%" + W)
         elif(j1.getGamePuissance4() == 0):
             print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + "100%" + W +  (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " 100%"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + O + " " + str(round((j2.getScorePuissance4()/j2.getGamePuissance4()) * 100)) + "%" + W)
@@ -260,15 +259,6 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
             print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + str(round(j1.getScorePuissance4()/j1.getGamePuissance4() * 100)) + "%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + " %"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + O + " 100%" + W)
         else:
             print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + str(round(j1.getScorePuissance4()/j1.getGamePuissance4() * 100)) + "%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + " %"))) * " " + "|  " + "Puissance4 :  " + G + str(j2.getScorePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getScorePuissance4()) + " " + O + str(round((j2.getScorePuissance4()/j2.getGamePuissance4()) * 100)) + "%" + W)
-=======
-            print("Puissance 4 : " + G + str(j1.getGamePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + " " + O + "100%" + W + (16 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4())))) * " " + "|  " + "Puissance 4 : " + G + str(j2.getGamePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getGamePuissance4()) + O + " 100%" + W)
-        elif(j1.getGamePuissance4() == 0):
-            print("Puissance 4 : " + G + str(j1.getGamePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + " " + O + "100%" + W +  (16 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4())))) * " " + "|  " + "Puissance 4 : " + G + str(j2.getGamePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getGamePuissance4()) + O + " " + str(round((j2.getGamePuissance4()/j2.getGamePuissance4()) * 100)) + "%" + W)
-        elif(j2.getGamePuissance4() == 0):
-            print("Puissance 4 : " + G + str(j1.getGamePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + " " + O + str(round((j1.getGamePuissance4()/j1.getGamePuissance4()) * 100)) + "%"  + W + (16 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4())))) * " " + "|  " + "Puissance 4 : " + G + str(j2.getGamePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getGamePuissance4()) + O + " 100%" + W)
-        else:
-            print("Puissance 4 : " + G + str(j1.getGamePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + " " + O + str(round((j1.getGamePuissance4()/j1.getGamePuissance4()) * 100)) + "%"  + W + (16 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4())))) * " " + "|  " + "Puissance 4 : " + G + str(j2.getGamePuissance4()) + "/" + R + str(j2.getGamePuissance4() - j2.getGamePuissance4()) + " " + O + str(round((j2.getGamePuissance4()/j2.getGamePuissance4()) * 100)) + "%" + W)
->>>>>>> e25e6b8b6c2a56be26b9a80474de332286894755
 
         print()
         print("--------------------------------------------------------------------")
@@ -288,7 +278,6 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
         print(j1_name + (35 - len(j1_name)) * " " + "|  "  + j2_name + (35 - len(j1_name)) * " ")
         print(35 * " " + "|  " + 35 * " ")
         print("Scores :" + 27 * " " + "|  " + "Difficulté : " + str(difficulty[1]) + (22 - len(str(difficulty[1]))) * " ")
-<<<<<<< HEAD
         print()
 
         #afficher score devinette:
@@ -307,14 +296,7 @@ def __afficher_profils(j1_name : str, j2_name : str, nb_humans : int, listJoueur
         if(j1.getGamePuissance4() == 0): print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + "100%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + " 100%"))) * " " + "|  ")
         else: print("Puissance4 :  " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + " " + O + str(round(j1.getScorePuissance4()/j1.getGamePuissance4() * 100)) + "%"  + W + (21 - (len(str(j1.getGamePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getGamePuissance4()) + str(round((j1.getScorePuissance4()/j1.getGamePuissance4()) * 100)) + " %"))) * " " + "|  " + 35 * " ")
         print()
-=======
-        print(35 * " " + "|  " + 35 * " ")
-        print("Devinettes :  " + G + str(j1.getScoreDevinette()) + W + "/" + R + str(j1.getGameDevinette() - j1.getScoreDevinette()) + W + (21 - (len(str(j1.getScoreDevinette()) + "/" + str(j1.getGameDevinette() - j1.getScoreDevinette())))) * " " + "|  " + 35 * " ")
-        print("Allumettes :  " + G + str(j1.getScoreAllumettes()) + W + "/" + R + str(j1.getGameAllumettes() - j1.getScoreAllumettes()) + W + (21 - len(G + str(j1.getScoreAllumettes()) + "/" + str(j1.getGameAllumettes() - j1.getScoreAllumettes()))) * " " + "|  " + 35 * " ")
-        print("Morpion :     " + G + str(j1.getScoreMorpion()) + W + "/" + R + str(j1.getScoreMorpion() - j1.getScoreMorpion()) + W + (21 - len(str(j1.getScoreMorpion()) + "/" + str(j1.getScoreMorpion() - j1.getScoreMorpion()))) * " " + "|  " + 35 * " ")
-        print("Puissance 4 : " + G + str(j1.getScorePuissance4()) + W + "/" + R + str(j1.getGamePuissance4() - j1.getScorePuissance4()) + W + (21 - len(str(j1.getScorePuissance4()) + "/" + str(j1.getGamePuissance4() - j1.getScorePuissance4()))) * " " + "|  " + 35 * " ")
-        print(35 * " " + "|  " + 35 * " ")
->>>>>>> e25e6b8b6c2a56be26b9a80474de332286894755
+
         print("--------------------------------------------------------------------")
 
     if(nb_humans == 0):
@@ -440,6 +422,12 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
 
     Private : Cette fonction n'est utile que pour ce script
     """
+
+    W  = '\033[0m'  # white (normal)
+    R  = '\033[91m' # red
+    G  = '\033[92m' # green
+    O  = '\033[93m' # yellow
+
     os.system("cls")
     print("---------------------")
     print("Scores : " + nom)
@@ -448,9 +436,9 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
     print()
 
     scores = {}
+    playerInformations = {}
 
     for j in listJoueur:
-<<<<<<< HEAD
         if(nom == "devinette"):
             if(j.getGameDevinette() != 0):
                 scores[j.getName()] = j.getScoreDevinette()
@@ -467,12 +455,6 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
             if(j.getGamePuissance4() != 0):
                 scores[j.getName()] = j.getScorePuissance4()
                 playerInformations[j.getName()] = (W + j.getName() + (15 - len(j.getName())) * " " + " " + G + str(j.getScorePuissance4()) + W + "/" + R + str(j.getGamePuissance4() - j.getScorePuissance4()) + W + "  " + O + str(round(j.getScorePuissance4() / j.getGamePuissance4() * 100)) + "%" + W)
-=======
-        if(nom == "devinette"): scores[j.getName()] = j.getScoreDevinette()
-        if(nom == "allumettes"): scores[j.getName()] = j.getScoreAllumettes()
-        if(nom == "morpion"): scores[j.getName()] = j.getScoreMorpion()
-        if(nom == "puissance4"): scores[j.getName()] = j.getScorePuissance4()
->>>>>>> e25e6b8b6c2a56be26b9a80474de332286894755
 
     #pyright: reportUnknownLambdaType=false
     #pyright: reportUnknownVariableType=false
