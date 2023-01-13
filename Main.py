@@ -576,8 +576,6 @@ def __ajouterScore(winner : str, jeu : str, listJoueur : list[joueur]):
         elif(jeu == "puissance4"): listJoueur.append(joueur(winner, 0, 0, 0, 0, 0, 0, 1, 1))
         else: print("Jeu erreur")
 
-    __writePlayersData(listJoueurs)
-
 def __writePlayersData(listJoueur : list[joueur]):
     """Ecris les données des joueurs dans le fichier ./Scores/playersData.txt
 
@@ -671,24 +669,28 @@ if __name__ == "__main__":
                             if(not winner == ""):
                                 __ajouterScore(winner, "devinette", listJoueurs)
                                 __ajouterGame(j1_name, j2_name,"devinette", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "2":
                             winner = Allumettes.LaunchGame_allumettes(j1_name, j2_name, nb_humans, difficulty)
                             if(not winner == ""):
                                 __ajouterScore(winner, "allumettes", listJoueurs)
                                 __ajouterGame(j1_name, j2_name,"allumettes", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "3":
                             winner = Morpion.LaunchGame_morpion(j1_name, j2_name,nb_humans,difficulty)
                             if(not winner == ""):
                                 __ajouterScore(winner, "morpion", listJoueurs)
                                 __ajouterGame(j1_name, j2_name,"morpion", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "4":
                             winner = P4.LaunchGame_puissance4(j1_name, j2_name, nb_humans, difficulty)
                             if(not winner == ""):
                                 __ajouterScore(winner, "puissance4", listJoueurs)
                                 __ajouterGame(j1_name, j2_name,"puissance4", nb_humans, listJoueurs)
+                                __writePlayersData(listJoueurs)
 
                         case "5":
                             WantToGoBack = True
