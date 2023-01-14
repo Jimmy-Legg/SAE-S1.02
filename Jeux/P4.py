@@ -2,7 +2,6 @@ import os
 import random
 import time
 
-
 def __couleur(symbole : str, index : int, winCases: list[int])->str:
     """Fonction qui va retourner la couleur d'un symbole en fonction de son identité et de s'il est une case gagnantes.
 
