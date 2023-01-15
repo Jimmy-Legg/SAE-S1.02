@@ -394,33 +394,17 @@ def __bot_difficulte3(cases : list[str],turn : int):
     elif cases[0] == wincases and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] != wincases and cases[4] != "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == wincases:
         choice = "5"
 
-    elif cases[1-1] == "O" and cases[5-1] == "X" and cases[9-1] == ".":
-        if turn == 1:
-            choice = "9"
-    elif cases[9-1] == "O" and cases[5-1] == "X" and cases[1-1] == ".":
-        if turn == 1:
-            choice = "1"
-    elif cases[7-1] == "O" and cases[5-1] == "X" and cases[3-1] == ".":
-        if turn == 1:
-            choice = "3"
-    elif cases[3-1] == "O" and cases[5-1] == "X" and cases[7-1] == ".":
-        if turn == 1:
-            choice = "7"
-    elif cases[1-1] == "X" and cases[5-1] == "O" and cases[9-1] == ".":
-        if turn == 2:
-            choice = "9"
-    elif cases[9-1] == "X" and cases[5-1] == "O" and cases[1-1] == ".":
-        if turn == 2:
-            choice = "1"
-    elif cases[7-1] == "X" and cases[5-1] == "O" and cases[3-1] == ".":
-        if turn == 2:
-            choice = "3"
-    elif cases[3-1] == "X" and cases[5-1] == "O" and cases[7-1] == ".":
-        if turn == 2:
-            choice = "7"
+    
+    elif cases[1-1] == wincases and cases[5-1] != wincases and cases[5-1] != "." and cases[9-1] == ".":
+        choice = "9"
+    elif cases[9-1] == wincases and cases[5-1] != wincases and cases[5-1] != "." and cases[1-1] == ".":
+        choice = "1"
+    elif cases[7-1] == wincases and cases[5-1] != wincases and cases[5-1] != "." and cases[3-1] == ".":
+        choice = "3"
+    elif cases[3-1] == wincases and cases[5-1] != wincases and cases[5-1] != "." and cases[7-1] == ".":
+        choice = "7"
+
     chancemax = 0
-
-
     for i in range(len(winchoices)):
         if int(winchoices[i]) > int(chancemax):
             chancemax = winchoices[i]
