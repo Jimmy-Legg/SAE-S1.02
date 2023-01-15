@@ -213,80 +213,151 @@ def __bot_difficulte3(cases : list[str],turn : int):
 
     Retour : retourn le choix du bot
     """
-
-    wincase = bool
+    choice : str
+    chancemax : int
     choice = ""
-    bon = False
-    choice = ""
-    wincase = False
+    wincases : str
+    winchoices : list[int]
+    winchoices = [0,0,0,0,0,0,0,0,0]
+    if turn == 1:
+        wincases = "X"
+    elif turn == 2:
+        wincases = "O"
     #si joue sur la diagonal op
     if cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
         choice = "1"
     #Lignes 1-2-3
-    elif cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." :
-        if cases[7-1] == "X" and turn == 1:
-            wincase = True
-            choice = "1"
-        elif cases[7-1] == "O" and turn == 2:
-            wincase = False
-            choice = "1"
-    elif cases[8-1] == cases[5-1] and not cases[8-1] == "." and cases[2-1] == "." :
-        choice = "2"
-    elif cases[9-1] == cases[6-1] and not cases[9-1] == "." and cases[3-1] == "." :
-        choice = "3"
+    if cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." :
+        if cases[7-1] == wincases:
+            winchoices[0] = 99
+        elif cases[7-1] != wincases and winchoices[0] != 99:
+            winchoices[0] = -99
+    if cases[8-1] == cases[5-1] and not cases[8-1] == "." and cases[2-1] == "." :
+        if cases[8-1] == wincases:
+            winchoices[1] = 99
+        elif cases[8-1] != wincases and winchoices[1] != 99:
+            winchoices[1] = -99
+    if cases[9-1] == cases[6-1] and not cases[9-1] == "." and cases[3-1] == "." :
+        if cases[9-1] == wincases:
+            winchoices[2] = 99
+        elif cases[9-1] != wincases and winchoices[2] != 99:
+            winchoices[2] = -99
     #Lignes 4-5-6
-    elif cases[7-1] == cases[1-1] and not cases[1-1] == "." and cases[4-1] == "." :
-        choice = "4"
-    elif cases[8-1] == cases[2-1] and not cases[2-1] == "." and cases[5-1] == "." :
-        choice = "5"
-    elif cases[9-1] == cases[3-1] and not cases[3-1] == "." and cases[6-1] == "." :
-        choice = "6"
+    if cases[7-1] == cases[1-1] and not cases[1-1] == "." and cases[4-1] == "." :
+        if cases[7-1] == wincases:
+            winchoices[3] = 99
+        elif cases[7-1] != wincases and winchoices[3] != 99:
+            winchoices[3] = -99
+    if cases[8-1] == cases[2-1] and not cases[2-1] == "." and cases[5-1] == "." :
+        if cases[8-1] == wincases:
+            winchoices[4] = 99
+        elif cases[8-1] != wincases and winchoices[4] != 99:
+            winchoices[4] = -99
+    if cases[9-1] == cases[3-1] and not cases[3-1] == "." and cases[6-1] == "." :
+        if cases[9-1] == wincases:
+            winchoices[5] = 99
+        elif cases[9-1] != wincases and winchoices[5] != 99:
+            winchoices[5] = -99
     #Lignes 7-8-9
-    elif cases[4-1] == cases[1-1] and not cases[1-1] == "." and cases[7-1] == "." :
-        choice = "7"
-    elif cases[5-1] == cases[2-1] and not cases[5-1] == "." and cases[8-1] == "." :
-        choice = "8"
-    elif cases[3-1] == cases[6-1] and not cases[6-1] == "." and cases[9-1] == "." :
-        choice = "9"
+    if cases[4-1] == cases[1-1] and not cases[1-1] == "." and cases[7-1] == "." :
+        if cases[4-1] == wincases:
+            winchoices[6] = 99
+        elif cases[4-1] != wincases and winchoices[6] != 99:
+            winchoices[6] = -99
+    if cases[5-1] == cases[2-1] and not cases[5-1] == "." and cases[8-1] == "." :
+        if cases[5-1] == wincases:
+            winchoices[7] = 99
+        elif cases[5-1] != wincases and winchoices[7] != 99:
+            winchoices[7] = -99
+    if cases[3-1] == cases[6-1] and not cases[6-1] == "." and cases[9-1] == "." :
+        if cases[3-1] == wincases:
+            winchoices[8] = 99
+        elif cases[3-1] != wincases and winchoices[8] != 99:
+            winchoices[8] = -99
     #Colonnes 8-5-2
-    elif cases[7-1] == cases[9-1] and not cases[7-1] == "." and cases[8-1] == "." :
-        choice = "8"
-    elif cases[6-1] == cases[4-1] and not cases[6-1] == "." and cases[5-1] == "." :
-        choice = "5"
-    elif cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == ".":
-        choice = "2"
+    if cases[7-1] == cases[9-1] and not cases[7-1] == "." and cases[8-1] == "." :
+        if cases[7-1] == wincases:
+            winchoices[7] = 99
+        elif cases[7-1] != wincases and winchoices[7] != 99:
+            winchoices[7] = -99
+    if cases[6-1] == cases[4-1] and not cases[6-1] == "." and cases[5-1] == "." :
+        if cases[6-1] == wincases:
+            winchoices[4] = 99
+        elif cases[6-1] != wincases and winchoices[4] != 99:
+            winchoices[4] = -99
+    if cases[3-1] == cases[1-1] and not cases[3-1] == "." and cases[2-1] == ".":
+        if cases[3-1] == wincases:
+            winchoices[1] = 99
+        elif cases[3-1] != wincases and winchoices[1] != 99:
+            winchoices[1] = -99
     #Colonnes 7-4-1
-    elif cases[8-1] == cases[9-1] and not cases[9-1] == "." and cases[7-1] == "." :
-        choice = "7"
-    elif cases[6-1] == cases[5-1] and not cases[5-1] == "." and cases[4-1] == "." :
-        choice = "4"
-    elif cases[2-1] == cases[3-1] and not cases[2-1] == "." and cases[1-1] == "." :
-        choice = "1"
+    if cases[8-1] == cases[9-1] and not cases[9-1] == "." and cases[7-1] == "." :
+        if cases[8-1] == wincases:
+            winchoices[6] = 99
+        elif cases[8-1] != wincases and winchoices[6] != 99:
+            winchoices[6] = -99
+    if cases[6-1] == cases[5-1] and not cases[5-1] == "." and cases[4-1] == "." :
+        if cases[6-1] == wincases:
+            winchoices[3] = 99
+        elif cases[6-1] != wincases and winchoices[3] != 99:
+            winchoices[3] = -99
+    if cases[2-1] == cases[3-1] and not cases[2-1] == "." and cases[1-1] == "." :
+        if cases[2-1] == wincases:
+            winchoices[0] = 99
+        elif cases[2-1] != wincases and winchoices[0] != 99:
+            winchoices[0] = -99
     #Colonnes 9-6-3
-    elif cases[7-1] == cases[8-1] and not cases[8-1] == "." and cases[9-1] == "." :
-        choice = "9"
-    elif cases[4-1] == cases[5-1] and not cases[5-1] == "." and cases[6-1] == "." :
-        choice = "6"
-    elif cases[1-1] == cases[2-1] and not cases[2-1] == "." and cases[3-1] == "." :
-        choice = "3"
-    #Diagonales 7-5-3
-    elif cases[7-1] == cases[5-1] and not cases[5-1] == "." and cases[3-1] == "." :
-        choice = "3"
-    elif cases[7-1] == cases[3-1] and not cases[3-1] == "." and cases[5-1] == "." :
-        choice = "5"
-    elif cases[5-1] == cases[3-1] and not cases[3-1] == "." and cases[7-1] == "." :
-        choice = "7"
+    if cases[7-1] == cases[8-1] and not cases[8-1] == "." and cases[9-1] == "." :
+        if cases[7-1] == wincases:
+            winchoices[8] = 99
+        elif cases[7-1] != wincases and winchoices[8] != 99:
+            winchoices[8] = -99
+    if cases[4-1] == cases[5-1] and not cases[5-1] == "." and cases[6-1] == "." :
+        if cases[4-1] == wincases:
+            winchoices[5] = 99
+        elif cases[4-1] != wincases and winchoices[5] != 99:
+            winchoices[5] = -99
+    if cases[1-1] == cases[2-1] and not cases[2-1] == "." and cases[3-1] == "." :
+        if cases[1-1] == wincases:
+            winchoices[2] = 99
+        elif cases[1-1] != wincases and winchoices[2] != 99:
+            winchoices[2] = -99
+    #Diagonales 3-5-7
+    if cases[7-1] == cases[5-1] and not cases[5-1] == "." and cases[3-1] == "." :
+        if cases[7-1] == wincases:
+            winchoices[2] = 99
+        elif cases[7-1] != wincases and winchoices[2] != 99:
+            winchoices[2] = -99
+    if cases[7-1] == cases[3-1] and not cases[3-1] == "." and cases[5-1] == "." :
+        if cases[7-1] == wincases:
+            winchoices[4] = 99
+        elif cases[7-1] != wincases and winchoices[4] != 99:
+            winchoices[4] = -99
+    if cases[5-1] == cases[3-1] and not cases[3-1] == "." and cases[7-1] == "." :
+        if cases[5-1] == wincases:
+            winchoices[6] = 99
+        elif cases[5-1] != wincases and winchoices[6] != 99:
+            winchoices[6] = -99
     #Diagonales 1-5-9
-    elif cases[9-1] == cases[5-1] and not cases[5-1] == "." and cases[1-1] == "." :
-        choice = "1"
-    elif cases[9-1] == cases[1-1] and not cases[1-1] == "." and cases[5-1] == "." :
-        choice = "5"
-    elif cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." :
-        choice = "9"
+    if cases[9-1] == cases[5-1] and not cases[5-1] == "." and cases[1-1] == "." :
+        if cases[9-1] == wincases:
+            winchoices[0] = 99
+        elif cases[9-1] != wincases and winchoices[0] != 99:
+            winchoices[0] = -99
+    if cases[9-1] == cases[1-1] and not cases[1-1] == "." and cases[5-1] == "." :
+        if cases[9-1] == wincases:
+            winchoices[4] = 99
+        elif cases[9-1] != wincases and winchoices[4] != 99:
+            winchoices[4] = -99
+    if cases[5-1] == cases[1-1] and not cases[1-1] == "." and cases[9-1] == "." :
+        if cases[5-1] == wincases:
+            winchoices[8] = 99
+        elif cases[5-1] != wincases and winchoices[8] != 99:
+            winchoices[8] = -99
 
 
-    elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "5"
+    elif cases[0] != wincases and cases[0] != "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
+        choice = 5
     elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
         choice = "5"
     elif cases[0] == "." and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
@@ -318,42 +389,60 @@ def __bot_difficulte3(cases : list[str],turn : int):
     elif cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
         choice = "5"
     
-    elif cases[0] == "X" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "O" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "X":
-        choice = "2"
-    elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "X" and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == "O":
-        choice = "2"
-    elif cases[1-1] == "O" and cases[5-1] == "X" and not cases[-1] == ".":
+    elif cases[0] == wincases and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] != wincases and cases[4] != "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == wincases:
+        choice = "5"
+
+    elif cases[1-1] == "O" and cases[5-1] == "X" and cases[9-1] == ".":
         if turn == 1:
             choice = "9"
-    elif cases[9-1] == "O" and cases[5-1] == "X" and not cases[1-1] == ".":
+    elif cases[9-1] == "O" and cases[5-1] == "X" and cases[1-1] == ".":
         if turn == 1:
             choice = "1"
-    elif cases[7-1] == "O" and cases[5-1] == "X" and not cases[3-1] == ".":
+    elif cases[7-1] == "O" and cases[5-1] == "X" and cases[3-1] == ".":
         if turn == 1:
             choice = "3"
-    elif cases[3-1] == "O" and cases[5-1] == "X" and not cases[7-1] == ".":
+    elif cases[3-1] == "O" and cases[5-1] == "X" and cases[7-1] == ".":
         if turn == 1:
             choice = "7"
-    elif cases[1-1] == "X" and cases[5-1] == "O" and not cases[9-1] == ".":
+    elif cases[1-1] == "X" and cases[5-1] == "O" and cases[9-1] == ".":
         if turn == 2:
             choice = "9"
-    elif cases[9-1] == "X" and cases[5-1] == "O" and not cases[1-1] == ".":
+    elif cases[9-1] == "X" and cases[5-1] == "O" and cases[1-1] == ".":
         if turn == 2:
             choice = "1"
-    elif cases[7-1] == "X" and cases[5-1] == "O" and not cases[3-1] == ".":
+    elif cases[7-1] == "X" and cases[5-1] == "O" and cases[3-1] == ".":
         if turn == 2:
             choice = "3"
-    elif cases[3-1] == "X" and cases[5-1] == "O" and not cases[7-1] == ".":
+    elif cases[3-1] == "X" and cases[5-1] == "O" and cases[7-1] == ".":
         if turn == 2:
             choice = "7"
-    
+    chancemax = 0
+
+
+    for i in range(len(winchoices)):
+        if int(winchoices[i]) > int(chancemax):
+            chancemax = winchoices[i]
+    if chancemax == 99:
+        for i in range(len(winchoices)):
+            if winchoices[i] == 99:
+                choice = str(i + 1)
+                print(choice)
+    else:
+        for i in range(len(winchoices)):
+            if winchoices[i] == -99:
+                choice = str(i + 1)
+                print(choice)
+
+
+
     if choice == "":
         choices = [0,1,2,3,4,5,6,7,8]
         for _i in choices:
             if cases[choices[_i]] == ".":
                 choice = choices[_i]+1
                 break
-    print(choice)    
+    print(winchoices)
+    os.system('pause')
     return str(choice)
 def __bot_difficulte2(cases : list[str], turn : int):
     """lance le bot difficulté 2
@@ -531,3 +620,4 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte
 
     #Retour
     return winner
+LaunchGame_morpion("Nath","Jimm",1,[3,3])
