@@ -2,9 +2,13 @@ class joueur:
 
     name : str
     win_devinette : int
+    game_devinette : int
     win_allumettes : int
+    game_allumettes : int
     win_morpion : int
+    game_morpion : int
     win_puissance4 : int
+    game_puissance4 : int
 
     def __init__(self, name : str, win_devinette : int, game_devinette : int, win_allumettes : int, game_allumettes : int, win_morpion : int, game_morpion : int, win_puissance4 : int, game_puissance4 : int):
 
@@ -83,4 +87,3 @@ class joueur:
 
     def showScorepuissance4(self):
         print(self.getName(), " : " , self.win_puissance4)
-
