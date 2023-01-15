@@ -214,18 +214,20 @@ def __bot_difficulte3(cases : list[str],turn : int):
     Retour : retourn le choix du bot
     """
     choice : str
+    start :list[str]
     chancemax : int
-    choice = ""
     wincases : str
     winchoices : list[int]
+    start = ["1","3","7","9"]
     winchoices = [0,0,0,0,0,0,0,0,0]
+    choice = ""
     if turn == 1:
         wincases = "X"
     elif turn == 2:
         wincases = "O"
     #si joue sur la diagonal op
     if cases[0] == "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = "1"
+        choice = random.choice(start)
     #Lignes 1-2-3
     if cases[7-1] == cases[4-1] and not cases[7-1] == "." and cases[1-1] == "." :
         if cases[7-1] == wincases:
@@ -426,12 +428,10 @@ def __bot_difficulte3(cases : list[str],turn : int):
         for i in range(len(winchoices)):
             if winchoices[i] == 99:
                 choice = str(i + 1)
-                print(choice)
     else:
         for i in range(len(winchoices)):
             if winchoices[i] == -99:
                 choice = str(i + 1)
-                print(choice)
 
 
 
@@ -441,8 +441,7 @@ def __bot_difficulte3(cases : list[str],turn : int):
             if cases[choices[_i]] == ".":
                 choice = choices[_i]+1
                 break
-    print(winchoices)
-    os.system('pause')
+
     return str(choice)
 def __bot_difficulte2(cases : list[str], turn : int):
     """lance le bot difficulté 2
