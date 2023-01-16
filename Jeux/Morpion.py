@@ -55,17 +55,20 @@ def __checkEquality(cases : list[str])->bool:
     if(equality):return True
     else: return False
 
-#----------------------------------------
-#Vérifie le type de victoire si victoire il ya
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : list[str]
-#
-#Sortie : list[bool | int]
-#----------------------------------------
-def __checkWin(cases : list[str])->list[bool | int]:
 
+def __checkWin(cases : list[str])->list[bool | int]:
+    """
+    ----------------------------------------
+    Vérifie le type de victoire si victoire il y a
+    
+    private : variable accessible uniquement dans le script actuel
+    
+    Arguments :
+    Morpion : list[str] 
+
+    Sortie : list[bool | int]
+    ----------------------------------------
+    """
     winType : int
     gameFinished : bool
 
@@ -101,16 +104,7 @@ def __checkWin(cases : list[str])->list[bool | int]:
 
     return [gameFinished, winType]
 
-#----------------------------------------
-#Affiche l'interface de jeu
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str, str, int, int, list[str]
-#
-#Sortie : affichage
-#----------------------------------------
-def __afficherMenu(j1_name : str, j2_name : str, cases : list[str]):
+def __afficherMenu(cases : list[str]):
     """Affiche l'interface de jeu
 
     Arguments :
@@ -216,6 +210,7 @@ def __bot_difficulte3(cases : list[str],turn : int):
     choice : str
     start :list[str]
     chancemax : int
+    turn : int
     wincases : str
     winchoices : list[int]
     start = ["1","3","7","9"]
@@ -417,8 +412,6 @@ def __bot_difficulte3(cases : list[str],turn : int):
             if winchoices[i] == -99:
                 choice = str(i + 1)
 
-
-
     if choice == "":
         choices = [0,1,2,3,4,5,6,7,8]
         for _i in choices:
@@ -437,6 +430,7 @@ def __bot_difficulte2(cases : list[str], turn : int):
     """
 
     a : int
+    choice : str
     choices = list[int]
     choice = ""
     a = random.randint(1,2)
@@ -459,6 +453,7 @@ def __bot(cases : list[str], difficulte : int ,player : str,C : str,turn :int):
 
     Retour : retourn le choix du bot
     """
+    choices = list[int]
     choice = ""
     W  = '\033[0m'  # white (normal)
     if difficulte == 1:
@@ -527,7 +522,7 @@ def LaunchGame_morpion(j1_name : str, j2_name : str, nb_joueurs : int,difficulte
         while not choiceIsOk:
 
             #affiche le menu
-            __afficherMenu(j1_name, j2_name, cases)
+            __afficherMenu(cases)
 
             #demande le choix de l'utilisateur
             if nb_joueurs == 2:
