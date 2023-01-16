@@ -31,13 +31,11 @@ def __getJoueurs(fichier : str)->list[joueur]:
 
     for _i in range(0,len(lines)):
         datas = lines[_i].split()
-        if(len(datas)>=5 and len(datas[0])<15 and len(datas[1].split("|")) == 2 and len(datas[2].split("|")) == 2 and len(datas[3].split("|")) == 2 and len(datas[4].split("|")) == 2 and datas[1].split("|")[0].isdigit() and datas[1].split("|")[1].isdigit() and datas[2].split("|")[0].isdigit() and datas[2].split("|")[1].isdigit() and datas[3].split("|")[0].isdigit() and datas[3].split("|")[1].isdigit() and datas[4].split("|")[0].isdigit() and datas[4].split("|")[1].isdigit() and datas[1].split("|")[0] <= datas[1].split("|")[1] and datas[2].split("|")[0] <= datas[2].split("|")[1] and datas[3].split("|")[0] <= datas[3].split("|")[1] and datas[4].split("|")[0] <= datas[4].split("|")[1]):
+        if(len(datas)>=5 and len(datas[0])<15 and len(datas[1].split("|")) == 2 and len(datas[2].split("|")) == 2 and len(datas[3].split("|")) == 2 and len(datas[4].split("|")) == 2 and datas[1].split("|")[0].isdigit() and datas[1].split("|")[1].isdigit() and datas[2].split("|")[0].isdigit() and datas[2].split("|")[1].isdigit() and datas[3].split("|")[0].isdigit() and datas[3].split("|")[1].isdigit() and datas[4].split("|")[0].isdigit() and datas[4].split("|")[1].isdigit() and datas[1].split("|")[0] <= datas[1].split("|")[1] and datas[2].split("|")[0] <= datas[2].split("|")[1] and datas[3].split("|")[0] <= datas[3].split("|")[1] and datas[4].split("|")[0] <= datas[4].split("|")[1] and int(datas[1].split("|")[0])>=0 and int(datas[1].split("|")[1])>=0 and int(datas[2].split("|")[0])>=0 and int(datas[2].split("|")[1])>=0 and int(datas[3].split("|")[0])>=0 and int(datas[3].split("|")[1])>=0 and int(datas[4].split("|")[0])>=0 and int(datas[4].split("|")[1])>=0):
             j = joueur(str(datas[0]), int(datas[1].split("|")[0]), int(datas[1].split("|")[1]), int(datas[2].split("|")[0]), int(datas[2].split("|")[1]), int(datas[3].split("|")[0]), int(datas[3].split("|")[1]), int(datas[4].split("|")[0]), int(datas[4].split("|")[1]))
             listJoueurs.append(j)
         else:
             errorInPlayerData = True
-            print(datas[0])
-            os.system("pause")
 
     if(errorInPlayerData):
         os.system("cls")
