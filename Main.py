@@ -649,7 +649,7 @@ if __name__ == "__main__":
 
         __afficher_menu_1()
 
-        choice = str(input("Choisissez le jeu : "))
+        choice = str(input("Où voulez vous aller : "))
 
         match choice:
 

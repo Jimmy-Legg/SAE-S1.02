@@ -462,8 +462,6 @@ def __isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str)
     while not choiceIsOk:
 
         if(line <= 0):
-            print("error")
-            os.system("pause")
             return False
 
         elif(cases[line][int(column)] == "0" or cases[line][int(column)] == "O"):
@@ -653,13 +651,11 @@ def __askForIAAction(cases : list[list[str]], mySymbol : str, oponentSymbol : st
         if(choice == 0): choice = __completeWinningPattern(cases, oponentSymbol, mySymbol)
         if(choice == 0): choice = __completeWinningPattern(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = __makeAThreeLine(cases, mySymbol, oponentSymbol)
-        if(choice == 0): choice = __makeAThreeLine(cases, oponentSymbol, mySymbol)
         if(choice == 0): choice = __putRandom(cases, oponentSymbol)
 
     if(difficulty == 4):
         choice = __makeAThreeLine(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = int(input("Choix du bot : "))
-        
 
     lignes = 6
     choiceIsOk = False
