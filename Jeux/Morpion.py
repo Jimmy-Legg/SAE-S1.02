@@ -437,7 +437,6 @@ def __bot_difficulte2(cases : list[str], turn : int):
     """
 
     a : int
-    bon : bool
     choices = list[int]
     choice = ""
     a = random.randint(1,2)
@@ -471,7 +470,6 @@ def __bot(cases : list[str], difficulte : int ,player : str,C : str,turn :int):
             for _i in choices:
                 if cases[choices[_i]] == ".":
                     choice = choices[_i]+1
-                    break
     elif difficulte == 2:
         print(C + player +  W + " choisi une case")
         time.sleep(0.5)
