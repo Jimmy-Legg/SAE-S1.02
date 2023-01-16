@@ -50,6 +50,8 @@ def __checkWin(cases : list[list[str]])->list[int]:
     Private : Cette fonction n'est utile que pour ce script
     """
     winCases : list[int]
+    i : int
+    j : int
 
     winCases = []
 
@@ -122,6 +124,9 @@ def __afficherPartie(cases : list[list[str]], winCases : list[int]):
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    
+    i : int
+
     W  = '\033[0m'  # white (normal)
 
     print("---------------------------------------------")
@@ -146,6 +151,13 @@ def __completeFourLine(cases : list[list[str]], symbol : str)->int:
     #i : lines ; j : columns
 
     #check the possibility to win with verticals lines
+
+    i : int
+    j : int
+    isPut : int
+    canPut : int
+    choice : int
+
     for i in range(1,4):
         for j in range(0,7):
 
@@ -273,6 +285,13 @@ def __completeWiningMove(cases : list[list[str]], symbol : str)->int:
 
     Private : Cette fonction n'est utile que pour ce script
     """
+
+    i : int
+    j : int
+    isPut : int
+    canPut : int
+    choice : int
+    
     #check the possibility to win with horizontals lines
     for i in range(1,7):
         for j in range(1,4):
@@ -385,6 +404,13 @@ def __tryMenace(cases : list[list[str]], line : int, column : int, symbol : str)
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    
+    i : int
+    j : int
+    isPut : int
+    canPut : int
+    choice : int
+    
     if(cases[line][column]!="."): return 0
     for i in range(-1, 2):
         for j in range(-1, 2):
@@ -414,6 +440,11 @@ def __completeWinningPattern(cases : list[list[str]], mySymbol : str, oponentSym
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    
+    i : int
+    j : int
+    choice : int
+
     choice = 0
     for i in range(1,7):
         for j in range(0,7):
@@ -435,6 +466,11 @@ def __makeAThreeLine(cases : list[list[str]], symbol : str, oponentSymbol : str)
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    
+    i : int
+    j : int
+    choice : int
+    
     choice = 0
     for i in range(1,7):
         for j in range(0,7):
@@ -454,6 +490,11 @@ def __isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str)
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    line : int
+    choiceIsOk : bool
+    j : int
+    column : int
+
     column = choice - 1
 
     #trouve la ligne associée
@@ -462,8 +503,6 @@ def __isASuicideMove(cases : list[list[str]], choice : int, oponentSymbol : str)
     while not choiceIsOk:
 
         if(line <= 0):
-            print("error")
-            os.system("pause")
             return False
 
         elif(cases[line][int(column)] == "0" or cases[line][int(column)] == "O"):
@@ -533,6 +572,11 @@ def __isThisCaseWinnable(cases : list[list[str]], line : int, column : int, symb
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    
+    i : int
+    j : int
+    isPut : int
+    
     if(cases[line][column] != "."): return False
     for i in range(-1, 2):
         for j in range(-1, 2):
@@ -557,6 +601,10 @@ def __hasAWinningColumn(cases : list[list[str]], symbol : str, oponentSymbol : s
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    
+    i : int
+    j : int
+
     for j in range(0,7):
         for i in range(6, 1, -1):
             if(cases[i][j] == "." and __isThisCaseWinnable(cases, i, j, symbol) and cases[i+1][j] == "." and __isThisCaseWinnable(cases, i+1, j, symbol) and not __isASuicideMove(cases, j, oponentSymbol)):
@@ -574,6 +622,11 @@ def __isMovePossible(cases : list[list[str]], choice : int)->bool:
 
     Private : Cette fonction n'est utile que pour ce script
     """
+    
+    line : int
+    column : int
+    choiceIsOk : bool
+
     column = choice - 1
 
     #trouve la ligne associée
@@ -630,7 +683,9 @@ def __askForIAAction(cases : list[list[str]], mySymbol : str, oponentSymbol : st
     Private : Cette fonction n'est utile que pour ce script
     """
 
-    choice:int
+    choice : int
+    lignes : int
+    choiceIsOk : int
 
     if(difficulty == 1):
         choice = __completeFourLine(cases, mySymbol)
@@ -653,13 +708,11 @@ def __askForIAAction(cases : list[list[str]], mySymbol : str, oponentSymbol : st
         if(choice == 0): choice = __completeWinningPattern(cases, oponentSymbol, mySymbol)
         if(choice == 0): choice = __completeWinningPattern(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = __makeAThreeLine(cases, mySymbol, oponentSymbol)
-        if(choice == 0): choice = __makeAThreeLine(cases, oponentSymbol, mySymbol)
         if(choice == 0): choice = __putRandom(cases, oponentSymbol)
 
     if(difficulty == 4):
         choice = __makeAThreeLine(cases, mySymbol, oponentSymbol)
         if(choice == 0): choice = int(input("Choix du bot : "))
-        
 
     lignes = 6
     choiceIsOk = False

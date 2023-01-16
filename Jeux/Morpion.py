@@ -214,13 +214,16 @@ def __bot_difficulte3(cases : list[str],turn : int):
     """
     choice : str
     start :list[str]
+    choices : list[int]
     chancemax : int
-    turn : int
     wincases : str
     winchoices : list[int]
+
     start = ["1","3","7","9"]
     winchoices = [0,0,0,0,0,0,0,0,0]
     choice = ""
+    wincases = ""
+
     if turn == 1:
         wincases = "X"
     elif turn == 2:
@@ -359,7 +362,7 @@ def __bot_difficulte3(cases : list[str],turn : int):
 
 
     elif cases[0] != wincases and cases[0] != "." and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
-        choice = 5
+        choice = "5"
     elif cases[0] == "O" and cases[1] == "." and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
         choice = "5"
     elif cases[0] == "." and cases[1] == "X" and cases[2] == "." and cases[3] == "." and cases[4] == "." and cases[5] == "." and cases[6] == "." and cases[7] == "." and cases[8] == ".":
@@ -423,7 +426,7 @@ def __bot_difficulte3(cases : list[str],turn : int):
 
         while len(choices) >= 1 and choice == "":
             if cases[choices[0] - 1] == ".":
-                choice = choices[0]
+                choice = str(choices[0])
             else:
                 del choices[0]
 
@@ -438,8 +441,8 @@ def __bot_difficulte2(cases : list[str], turn : int):
     """
 
     a : int
+    choices : list[int]
     choice : str
-    choices = list[int]
     choice = ""
     a = random.randint(1,2)
     if a == 1:
@@ -448,7 +451,7 @@ def __bot_difficulte2(cases : list[str], turn : int):
 
         while len(choices) >= 1 and choice == "":
             if cases[choices[0] - 1] == ".":
-                choice = choices[0]
+                choice = str(choices[0])
             else:
                 del choices[0]
     else:
@@ -463,7 +466,10 @@ def __bot(cases : list[str], difficulte : int ,player : str,C : str,turn :int):
 
     Retour : retourn le choix du bot
     """
-    choices = list[int]
+
+    choices : list[int]
+    choice : str
+
     choice = ""
     W  = '\033[0m'  # white (normal)
     if difficulte == 1:
@@ -476,7 +482,7 @@ def __bot(cases : list[str], difficulte : int ,player : str,C : str,turn :int):
 
             while len(choices) >= 1 and choice == "":
                 if cases[choices[0] - 1] == ".":
-                    choice = choices[0]
+                    choice = str(choices[0])
                 else:
                     del choices[0]
     elif difficulte == 2:
