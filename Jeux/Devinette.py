@@ -21,6 +21,7 @@ def __AskVerification(state : int, proposition : int):
 
     choix : str
     insulte : list[str]
+
     insulte = ["Ne triche pas petit filou", "Essaye plutot de ne pas mentir","Apprend à compter !"," Réfléchies avant d'agir","Des problèmes de mémoires ?","Bien tenté ... mais non."]
     choix = ""
 
@@ -372,12 +373,13 @@ def __checkWin(temps1:float,temps2:float, j1_name : str, j2_name : str, nb_human
     Private : Cette fonction n'est utile que pour ce script
     """
 
-
-    os.system("cls")
+    winner : str
 
     B  = '\033[94m' # blue
     W  = '\033[0m'  # white (normal)
     R  = '\033[91m' # r
+
+    os.system("cls")
 
     if temps1 < temps2 :
         print("---------------------------")

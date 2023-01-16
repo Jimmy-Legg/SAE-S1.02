@@ -430,6 +430,8 @@ def __afficher_scores(listJoueur : list[joueur], nom : str):
     G  = '\033[92m' # green
     O  = '\033[93m' # yellow
 
+    #Dictionnaires scores et playerInformations non mentionnés dans le glossaires car on n'as pas vu comment les déclarer lors des TPs
+
     os.system("cls")
     print("---------------------")
     print("Scores : " + nom)
