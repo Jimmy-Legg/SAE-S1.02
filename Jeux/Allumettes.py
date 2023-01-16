@@ -62,20 +62,14 @@ def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
     if dif == 1:
         choix = random.randint(1,3)
     if dif == 2:
-        perdu = random.randint(1,3)
-        if perdu == 1 or perdu == 2:
-            choix = random.randint(1,3)
+        if len(table) == 3:
+            choix = 2
+        elif len(table) == 2:
+            choix = 1
+        elif len(table) == 4:
+            choix = 3
         else:
-            if len(table) == 3:
-                choix = 2
-            elif len(table) == 2:
-                choix = 1
-            elif len(table) == 4:
-                choix = 3
-            elif len(table) == 5:
-                choix = 1
-            else:
-                choix = random.randint(1,3)
+            choix = random.randint(1,3)
     if dif == 3:
         perdu = random.randint(1,4)
         if perdu == 1:
@@ -123,7 +117,7 @@ def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
             elif len(table) == 20:
                 choix = 3
     print("il choisi : " + str(choix))
-    time.sleep(0.65)
+    time.sleep(.65)
     return int(choix)
 
 
@@ -238,8 +232,8 @@ def LaunchGame_allumettes(j1_name : str, j2_name : str,nb_humans : int, difficul
             if(turn == 1): amount = __getAmount(table, j1_name, B)
             else: amount = __getAmountbot(j2_name,table,difficulty[1],R)
         elif nb_humans == 0:
-            if(turn == 1): amount = __getAmountbot(j1_name,table,int(difficulty[1]),B)
-            else: amount = __getAmountbot(j2_name,table,int(difficulty[0]),R)
+            if(turn == 1): amount = __getAmountbot(j1_name,table,int(difficulty[0]),B)
+            else: amount = __getAmountbot(j2_name,table,int(difficulty[1]),R)
         for _i in range(0, amount):
             if(len(table) >= 1):
                 table.remove("|")
