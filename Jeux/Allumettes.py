@@ -62,20 +62,14 @@ def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
     if dif == 1:
         choix = random.randint(1,3)
     if dif == 2:
-        perdu = random.randint(1,3)
-        if perdu == 1 or perdu == 2:
-            choix = random.randint(1,3)
+        if len(table) == 3:
+            choix = 2
+        elif len(table) == 2:
+            choix = 1
+        elif len(table) == 4:
+            choix = 3
         else:
-            if len(table) == 3:
-                choix = 2
-            elif len(table) == 2:
-                choix = 1
-            elif len(table) == 4:
-                choix = 3
-            elif len(table) == 5:
-                choix = 1
-            else:
-                choix = random.randint(1,3)
+            choix = random.randint(1,3)
     if dif == 3:
         perdu = random.randint(1,4)
         if perdu == 1:
