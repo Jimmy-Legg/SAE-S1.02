@@ -135,6 +135,7 @@ def __getAmount(table : list[str], j_name : str, couleur :str)->int:
     """
     mot : str
     _i : int
+    choix = str
 
     W  = '\033[0m'  # white (normal)
     R = '\033[91m' # red
