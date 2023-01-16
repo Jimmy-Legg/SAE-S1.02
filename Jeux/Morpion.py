@@ -2,30 +2,33 @@ import os
 import random
 import time
 
-#----------------------------------------
-#change le tour
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : int
-#
-#Sortie : int
-#----------------------------------------
+
 def __changeTurn(turn : int)->int:
+    """
+    ----------------------------------------
+    change le tour
+
+    private : variable accessible uniquement dans le script actuel
+
+    Entrée : tour du joueur : int
+
+    Sortie : tour suivant : int
+    ----------------------------------------"""
     if(turn == 1): return 2
     else: return 1
 
-#----------------------------------------
-#retourne le code couleur d'un symbole sous forme str
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : str
-#
-#Sortie : str
-#----------------------------------------
-def __couleur(symbole : str)->str:
 
+def __couleur(symbole : str)->str:
+    """----------------------------------------
+    retourne le code couleur d'un symbole sous forme str
+
+    private : variable accessible uniquement dans le script actuel
+
+    Entrée : 
+    symbole du joueur : str
+
+    Sortie : couleur du joueur : str
+    ----------------------------------------"""
     B  = '\033[94m' # blue
     R  = '\033[91m' # red
     W  = '\033[0m'  # white (normal)
@@ -34,17 +37,19 @@ def __couleur(symbole : str)->str:
     elif(symbole == "O"): return R
     else: return W
 
-#----------------------------------------
-#Vérifie le type de victoire si victoire il ya
-#
-#private : variable accessible uniquement dans le script actuel
-#
-#Entrée : list[str]
-#
-#Sortie : object (object[bool, int]) avec object[0] -> victoire ?; object[1] -> type de victoire
-#----------------------------------------
-def __checkEquality(cases : list[str])->bool:
 
+def __checkEquality(cases : list[str])->bool:
+    """
+    ----------------------------------------
+    Vérifie le type de victoire si victoire il ya
+    
+    private : variable accessible uniquement dans le script actuel
+    
+    Entrée : cases ed jeux : list[str]
+    
+    Sortie : vrai ou faux en fonction de si il y a égalité ou non : object (object[bool, int]) avec object[0] -> victoire ?; object[1] -> type de victoire
+    ----------------------------------------
+    """
     i : int
     equality : bool
     equality = True
@@ -64,9 +69,9 @@ def __checkWin(cases : list[str])->list[bool | int]:
     private : variable accessible uniquement dans le script actuel
     
     Arguments :
-    Morpion : list[str] 
+    Cases Morpion : list[str] 
 
-    Sortie : list[bool | int]
+    Sortie : liste des cases de victoir : list[bool | int]
     ----------------------------------------
     """
     winType : int
@@ -413,11 +418,14 @@ def __bot_difficulte3(cases : list[str],turn : int):
                 choice = str(i + 1)
 
     if choice == "":
-        choices = [0,1,2,3,4,5,6,7,8]
-        for _i in choices:
-            if cases[choices[_i]] == ".":
-                choice = choices[_i]+1
-                break
+        choices = [1,2,3,4,5,6,7,8,9]
+        random.shuffle(choices)
+
+        while len(choices) >= 1 and choice == "":
+            if cases[choices[0] - 1] == ".":
+                choice = choices[0]
+            else:
+                del choices[0]
 
     return str(choice)
 def __bot_difficulte2(cases : list[str], turn : int):
@@ -435,12 +443,14 @@ def __bot_difficulte2(cases : list[str], turn : int):
     choice = ""
     a = random.randint(1,2)
     if a == 1:
-        if choice == "":
-            choices = [0,1,2,3,4,5,6,7,8]
-            for _i in choices:
-                if cases[choices[_i]] == ".":
-                    choice = choices[_i]+1
-                    break
+        choices = [1,2,3,4,5,6,7,8,9]
+        random.shuffle(choices)
+
+        while len(choices) >= 1 and choice == "":
+            if cases[choices[0] - 1] == ".":
+                choice = choices[0]
+            else:
+                del choices[0]
     else:
         choice = str(__bot_difficulte3(cases, turn))
     return str(choice)
@@ -460,11 +470,15 @@ def __bot(cases : list[str], difficulte : int ,player : str,C : str,turn :int):
         choice = str(random.randint(1,9))
         print(C + player +  W + " choisi une case")
         time.sleep(0.5)
-        if choice == "":
-            choices = [0,1,2,3,4,5,6,7,8]
-            for _i in choices:
-                if cases[choices[_i]] == ".":
-                    choice = choices[_i]+1
+        if choice == "" :
+            choices = [1,2,3,4,5,6,7,8,9]
+            random.shuffle(choices)
+
+            while len(choices) >= 1 and choice == "":
+                if cases[choices[0] - 1] == ".":
+                    choice = choices[0]
+                else:
+                    del choices[0]
     elif difficulte == 2:
         print(C + player +  W + " choisi une case")
         time.sleep(0.5)
