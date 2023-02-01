@@ -2,7 +2,7 @@ import os
 import random
 import time
 
-def __afficherFin(winner : str, couleur : str):
+def __afficherFin(winner: str, couleur: str):
     """Fonction qui affiche l'ecran de fin
 
     Arguments :
@@ -58,64 +58,16 @@ def __getAmountbot(bot : str,table : list[str], dif : int,C : str):
     print("")
     print(C + bot  + W + " choisi un nombre...")
     time.sleep(0.5)
-    
+    choices = [1,2,3,2,1,2,3,2,1,2,3,2,1,2,3,2,1,2,3]
     if dif == 1:
-        choix = random.randint(1,3)
-    if dif == 2:
-        if len(table) == 3:
-            choix = 2
-        elif len(table) == 2:
-            choix = 1
-        elif len(table) == 4:
-            choix = 3
-        else:
-            choix = random.randint(1,3)
-    if dif == 3:
-        perdu = random.randint(1,4)
-        if perdu == 1:
-            if len(table) == 2:
-                choix = 1
-            else:
-                choix = random.randint(1,3)
-        else:
-            if len(table) == 2:
-                choix = 1
-            elif len(table) == 3:
-                choix = 2
-            elif len(table) == 4:
-                choix = 3
-            elif len(table) == 5:
-                choix = random.randint(1,3)
-            elif len(table) == 6:
-                choix = 1
-            elif len(table) == 7:
-                choix = 2
-            elif len(table) == 8:
-                choix = 3
-            elif len(table) == 9:
-                choix = random.randint(1,3)
-            elif len(table) == 10:
-                choix = 1
-            elif len(table) == 11:
-                choix = 2
-            elif len(table) == 12:
-                choix = 3
-            elif len(table) == 13:
-                choix = random.randint(1,3)
-            elif len(table) == 14:
-                choix = 1
-            elif len(table) == 15:
-                choix = 2
-            elif len(table) == 16:
-                choix = 3
-            elif len(table) == 17:
-                choix = random.randint(1,3)
-            elif len(table) == 18:
-                choix = 1
-            elif len(table) == 19:
-                choix = 2
-            elif len(table) == 20:
-                choix = 3
+        choix = random.randint(1, 3)
+    elif dif == 2:
+        choix = choices[len(table) - 2]
+    elif dif == 3:
+        choix = choices[len(table) - 2]
+        if random.randint(1, 4) == 1:
+            choix = random.randint(1, 3)
+
     print("il choisi : " + str(choix))
     time.sleep(.65)
     return int(choix)
